@@ -32,10 +32,10 @@ print(auth.text)
 # Get id from submitter_id
 query_txt = """query Test { %s (first:0, project_id: "%s") {id}} """ % (args.node, args.project)
 query = {'query': query_txt}
-print graphql_url
+print(graphql_url)
 output = requests.post(graphql_url, headers={'Authorization': 'bearer ' + auth.json()['access_token']}, json=query).text
 data = json.loads(output)
-print data
+print(data)
 
 list_ids = ""
 count = 0
@@ -46,12 +46,12 @@ for id in data['data'][args.node]:
     if count >= chunk:
         url = project_url + 'entities/' + list_ids[0:-1]
         tsv_text = requests.delete(url, headers={'Authorization': 'bearer ' + auth.json()['access_token']})
-        print tsv_text
+        print(tsv_text)
         count = 0
         list_ids = ""
 
 url = project_url + 'entities/' + list_ids[0:-1]
 tsv_text = requests.delete(url, headers={'Authorization': 'bearer ' + auth.json()['access_token']})
-print tsv_text
+print(tsv_text)
 
-#command line: python delete.py -a https://niaid.bionimbus.org/api/v0/submission/ -p ndh-dmid-LHV -n aliquot -k niaid_api.json -l 30
+# command line: python delete.py -a https://niaid.bionimbus.org/api/v0/submission/ -p ndh-dmid-LHV -n aliquot -k niaid_api.json -l 30
