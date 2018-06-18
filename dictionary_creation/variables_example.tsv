@@ -1,0 +1,21 @@
+Description	Options	Node	Field	Type	Required
+Name or identifier		subject	cohort_name	string	No
+Free text to expand upon details		protocol	protocol_description	string	No
+Number of subjects enrolled in the study		study	number_subjects	integer	No
+Age unit used in this study	Days|Hours|Minutes|Months|Not Specified|Seconds|Weeks|Years|d.p.c.	study	age_unit	enum	No
+Flag that indicates whether this is a clinical trial study	N|Y	study	is_clinical_trial	boolean	No
+Description of data status. 0=Descriptive data and results as originally received from the data provider. 1=Includes updates to the original data submission short of completeness.2=Complete set of descriptive data and results, as ascertained by curator.	0|1|2	study	study_completeness	enum	No
+Digital object identifier (DOI) is a type of persistent identifier used to uniquely identify objects		study	study_doi	string	No
+Latest date when the study was shared		study	study_release_date	string	No
+Latest version of study shared		study	study_release_version	string	No
+Name of the primary organization that oversees implementation of the study		study	organization	string	No
+Category		study	study_setup	string	No
+Free text to expand upon details		supplementary_file	file_description	string	No
+File name		supplementary_file	file_name	string	No
+Study file type	Adverse Events|Assessment Results|Case Report Form|Concomitant Medications|Data Dictionary|Demographics|Interventions|Lab Test Results|Study Data|Study Medication|Study Summary Description|Substance Use	supplementary_file	data_type	enum	No
+Description of the keyword.		keyword	keyword_definition	string	No
+list of authors of the article		publication	authors	string	No
+Journal issue in which the article was published		publication	issue	string	No
+Publication in which the article appears		publication	journal	string	No
+Title of the article as it appears in Pubmed		publication	title	string	No
+Year that the article was published		publication	doi	integer	No
