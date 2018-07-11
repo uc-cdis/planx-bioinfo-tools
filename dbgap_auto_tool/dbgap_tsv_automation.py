@@ -17,10 +17,10 @@ def parse_dictionary_mapping(raw_file, mapping_file):
                 skip_header = False
             else:
                 columns = line.strip('\n').split('\t')
-                node = columns[5]
+                node = columns[5].strip()
                 if node != 'NA':
-                    dbGap_variable = columns[0]
-                    gen3_variable = columns[6]
+                    dbGap_variable = columns[0].strip()
+                    gen3_variable = columns[6].strip()
                     gen3_data.setdefault(node, {})
                     gen3_data[node].setdefault('variable_mapping', [])
                     gen3_data[node]['variable_mapping'].append({dbGap_variable: gen3_variable})
@@ -38,12 +38,13 @@ def parse_dictionary_mapping(raw_file, mapping_file):
     with open(raw_file, 'r') as raw_file:
         for line in raw_file:
             columns = line.strip('\n').split('\t')
+            columns = map(lambda x: x.strip(), columns)
             if columns[0][0] == '#':
                 continue
             else:
                 for node in gen3_data.keys():
-                    for varialbe_mapping in gen3_data[node]['variable_mapping']:
-                        index = [i for i, x in enumerate(columns) if x == varialbe_mapping.keys()[0]]
+                    for variable_mapping in gen3_data[node]['variable_mapping']:
+                        index = [i for i, x in enumerate(columns) if x == variable_mapping.keys()[0]]
                         if index:
                             index = index[0]
                             gen3_data[node].setdefault('index', [])
@@ -65,23 +66,26 @@ def parse_value(raw_file, gen3_data):
                 skip_header = False
             else:
                 for node in gen3_data.keys():
+                    print(node)
                     values = ''
-                    for i in range(len(gen3_data[node]['index'])):
-                        index = gen3_data[node]['index'][i]
-                        if index < len(columns):
-                            if gen3_data[node]['convertable'][i] == True:
-                                code = columns[index]
-                                if code:
-                                    gen3_variable = gen3_data[node]['variable_mapping'][i].values()
-                                    gen3_variable = gen3_variable[0]
-                                    value = gen3_data[node]['code_mapping'][gen3_variable].get(code)
+                    if 'index' in gen3_data[node].keys():
+                        for i in range(len(gen3_data[node]['index'])):
+                            index = gen3_data[node]['index'][i]
+                            if index < len(columns):
+                                if gen3_data[node]['convertable'][i] == True:
+                                    code = columns[index]
+                                    if code:
+                                        gen3_variable = gen3_data[node]['variable_mapping'][i].values()
+                                        gen3_variable = gen3_variable[0]
+                                        code = code.strip()
+                                        value = gen3_data[node]['code_mapping'][gen3_variable].get(code)
+                                    else:
+                                        value = ""
                                 else:
-                                    value = ""
+                                    value = columns[index]
                             else:
-                                value = columns[index]
-                        else:
-                            value = ""
-                        values = values + value + '\t'
+                                value = ""
+                            values = values + value + '\t'
                     gen3_data[node].setdefault('value', [])
                     gen3_data[node]['value'].append(values)
         return gen3_data
