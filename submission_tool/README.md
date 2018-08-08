@@ -26,3 +26,24 @@ python submitter.py -f case.tsv \
 ```
 
 ### 2. Deletion tool:
+
+This tool (see [delete.py](delete.py)) helps to remove a list of entities from the data commons or an entire node. Arguments:
+
+* `-a/--apiurl` URL for data commons where the metadata is submitted. E.g. https://niaid.bionimbus.org
+* `-p/--project` Project ID where the metadata is submitted. E.g. ndh-CHARLIE
+* `-n/--node` Node from where entities will be removed.
+* `-k/--authfile` JSON file containing the credentials/keys.
+* `-l/--length` Length of the chunk to use for paginated deletion (default: 20).
+* `-e/--nentities` Total number of entities to remove (default: 10000).
+* `-f/--file` (OPTIONAL) File with a list of ids (submitter_id) to remove from the selected node.
+
+Usage Example:
+
+```python
+python delete.py -a https://niaid.bionimbus.org \
+        -p ndh-CHARLIE \
+        -n case \
+        -k credentials.json \
+        -l 20 \
+        -e 10000 \
+```
