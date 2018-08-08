@@ -43,7 +43,6 @@ submitter_ids = []
 if args.file != '':
    table = pd.read_table(args.file,  sep="\t")
    submitter_ids = list(table['submitter_id'])
-   print(submitter_ids)
 
 # Remove all ids from one node by chunks
 list_ids = ""
@@ -55,11 +54,10 @@ for id in data['data'][args.node]:
        count += 1
     if count >= chunk:
         url = project_url + 'entities/' + list_ids[0:-1]
-        print(url)
         itime = datetime.datetime.now()
-        tsv_text = requests.delete(url, headers={'Authorization': 'bearer ' + auth.json()['access_token']}).text
+        response = requests.delete(url, headers={'Authorization': 'bearer ' + auth.json()['access_token']}).text
         etime = datetime.datetime.now()
-        print(tsv_text)
+        print(response)
         print("Processed time: %s" % (etime-itime))
         count = 0
         total += chunk
@@ -70,7 +68,7 @@ for id in data['data'][args.node]:
 
 url = project_url + 'entities/' + list_ids[0:-1]
 print(url)
-tsv_text = requests.delete(url, headers={'Authorization': 'bearer ' + auth.json()['access_token']})
-print(tsv_text)
+response = requests.delete(url, headers={'Authorization': 'bearer ' + auth.json()['access_token']})
+print(response)
 
 
