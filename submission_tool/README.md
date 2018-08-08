@@ -4,7 +4,7 @@ Collection of Python scripts to manage submissions and deletions in any Gen3 Dat
 
 ### 1. Submission tool:
 
-This tool helps to submit large metadata TSVs node by node using pagination. Arguments:
+This tool (see [submitter.py](submitter.py)) helps to submit large metadata TSVs node by node using pagination. Arguments:
 
 * `-f/--file` TSV file for submission in specific node.
 * `-a/--apiurl` URL for data commons where the metadata is submitted. E.g. https://niaid.bionimbus.org
