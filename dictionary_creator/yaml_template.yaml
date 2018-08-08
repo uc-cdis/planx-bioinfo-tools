@@ -1,0 +1,37 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "<node>"
+title: <title>
+type: object
+namespace: <namespace>
+category: <category>
+program: '*'
+project: '*'
+description: >
+  <description>
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: <link_name>
+    backref: <backref>
+    label: <label>
+    target_type: <target>
+    multiplicity: <multiplicity>
+    required: <link_required>
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
