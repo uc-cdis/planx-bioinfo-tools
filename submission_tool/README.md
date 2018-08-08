@@ -14,6 +14,8 @@ This tool (see [submitter.py](submitter.py)) helps to submit large metadata TSVs
 * `-r/--row` Initial row from where to start submission.
 * `-o/--output` (OPTIONAL) Output folder to containg output logs (default: `./output/`)
 
+The output logs for each paginated submission are stored in text files at the indicated `--output` folder. If submission fails, these logs can be checked to know the output message error and determine the reason.
+
 Usage example:
 
 ```python
