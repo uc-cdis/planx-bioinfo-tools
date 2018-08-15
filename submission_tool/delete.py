@@ -23,7 +23,7 @@ args = parser.parse_args()
 # Get needed URLs
 token_url   = args.apiurl + "/user/credentials/cdis/access_token"
 graphql_url = args.apiurl + "/api/v0/submission/graphql/"
-project_url = args.apiurl + "/api2/v0/submission/" + args.project.replace('-', '/', 1) + '/'
+project_url = args.apiurl + "/api/v0/submission/" + args.project.replace('-', '/', 1) + '/'
 chunk = args.length
 
 # get keys
