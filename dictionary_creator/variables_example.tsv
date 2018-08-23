@@ -1,21 +1,43 @@
-Description	Options	Node	Field	Type	Required
-Name or identifier		subject	cohort_name	string	No
-Free text to expand upon details		protocol	protocol_description	string	No
-Number of subjects enrolled in the study		study	number_subjects	integer	No
-Age unit used in this study	Days|Hours|Minutes|Months|Not Specified|Seconds|Weeks|Years|d.p.c.	study	age_unit	enum	No
-Flag that indicates whether this is a clinical trial study	N|Y	study	is_clinical_trial	boolean	No
-Description of data status. 0=Descriptive data and results as originally received from the data provider. 1=Includes updates to the original data submission short of completeness.2=Complete set of descriptive data and results, as ascertained by curator.	0|1|2	study	study_completeness	enum	No
-Digital object identifier (DOI) is a type of persistent identifier used to uniquely identify objects		study	study_doi	string	No
-Latest date when the study was shared		study	study_release_date	string	No
-Latest version of study shared		study	study_release_version	string	No
-Name of the primary organization that oversees implementation of the study		study	organization	string	No
-Category		study	study_setup	string	No
-Free text to expand upon details		supplementary_file	file_description	string	No
-File name		supplementary_file	file_name	string	No
-Study file type	Adverse Events|Assessment Results|Case Report Form|Concomitant Medications|Data Dictionary|Demographics|Interventions|Lab Test Results|Study Data|Study Medication|Study Summary Description|Substance Use	supplementary_file	data_type	enum	No
-Description of the keyword.		keyword	keyword_definition	string	No
-list of authors of the article		publication	authors	string	No
-Journal issue in which the article was published		publication	issue	string	No
-Publication in which the article appears		publication	journal	string	No
-Title of the article as it appears in Pubmed		publication	title	string	No
-Year that the article was published		publication	doi	integer	No
+Node	Field	Description	Type	Options	Required	Term
+laboratory_test	test_type	Classification type for this test	enum	"Abnormal Laboratory Test","Blood Test Panel","Metabolomics"	No	
+laboratory_test	test_method	Methodology followed to perform this laboratory test	enum	"ELISA","ESSI-MRM Profiling","Flow Cytometry","Enzyme Activity Assay","PS-MRM Profiling","SAVE Imaging","qRT-PCR","Expression Analysis"	No	
+laboratory_result	test_analyte_type	Type of the collected	enum	"3-methoxytyramine","Alanine Aminotransferase","Alpha-synuclein","Alpha-tocopherol 4 Weeks After Treatment","Alpha-tocopherol Baseline","Alpha-tocopherol On Treatment","Amyloid-Beta","Anti-Alpha-synuclein Antibody","Biopterin","Blood Urea Nitrogen","Chloride","Circulating Brain-Enriched miRNA","CRP40 Expression","Dihydroxyphenylacetic Acid","Dopamine-3-sulfate","Dopamine","GBA Enzymatic Activity","Hemoglobin","Homovanillic Acid","Homovanillol","Immune Markers","Inflammatory Cytokines","LRRK2 Enzymatic Activity","Lysosomal Enzyme Activity","Met-Enkephelin","Metabolites","MRM Combination","mtDNA85","N-acetylspermidine","Neopterin","Phosphorylated Tau Protein (p-tau)","Red Blood Cells","RNA","Ser(P)-1292 LRRK2","Somatostatin","Total Glucose","Total Protein","Total Tau Protein (t-tau)","Urate Purine","White Blood Cells","Alanine Aminotransferase (ALT)","Carbon Dioxide","Creatinine","Hematocrit","Hemoglobin","Platelet","Potassium","Red Blood Cells","Sodium","White Blood Cells","Tocopherol"	No	
+laboratory_test	test_sample_type	Type of the collected sample	enum	"Cerebrospinal Fluid","Plasma","Saliva","Serum","Whole Blood","Urine"	No	
+laboratory_result	test_units	Units used for this value	enum	"mM","nM","copies/µL","cells/µl","Cell Count","pg/mL","ng/mL","mg/mL","µg/mL","Units of Activity","katal","µmol/g/h"	No	
+laboratory_result	test_result	Laboratory Test Result	enum	"Positive","Negative","Normal","Abnormal","Too Low","Too High","Yes","No","Clinically Significant Abnormal","Yes","No"	No	
+laboratory_test	test_status	Test Status	enum	"Active","Inactive"	No	
+laboratory_test	abnormal_test_action_taken	Action Taken Following Abnormal Laboratory Results	enum	"Observe","Reduction In Dosage","Change In Dosing Schedule","Discontinuation of Experimental Drugs"	No	
+laboratory_test	abnormal_test_exp_meds	Abnormal Laboratory Test Related To Experimental Medication	enum	"Probably Not Related","Possibly Related","Definitely Related","Probably Related"	No	
+laboratory_test	abnormal_test_nonexp_meds	Abnormal Laboratory Test Related To Non-Experimental Medication	enum	"Probably Not Related","Possibly Related","Definitely Related","Probably Related"	No	
+laboratory_test	abnormal_test_severity	Severity of the Abnormal Laboratory Test	enum	"Mild","Moderate","Severe"	No	
+laboratory_test	acceptable_sample	Is this sample acceptable?	enum	"Yes","No"	No	
+complication	symptom	Symptom of the complication	enum	"Vomiting","Nausea","Significant Back Pain","Orthostatic Light Head","Anxiety","Headache","Other"	No	
+complication	hospitalization_required	Foregoing Complication Requiring Hospitalization	enum	"Yes","No"	No	
+complication	lasting_over_7_days	Foregoing Complication Lasting For More Than 7 Days	enum	"Yes","No"	No	
+complication	associated_procedure	Procedure associated to this complication	enum	"Lumbar Puncture","Blood Draw"	No	
+laboratory_test	needle_gauge	Needle Size	enum	"22","20","19","18","Other"	No	
+laboratory_test	reason_sample_unnacceptable	Reason why the sample was unacceptable	enum	"Inadequate Flow","Blood In Sample","Deviations From Collection","Other","More Than One"	No	
+laboratory_result	test_value	Value measured from this laboratory test 	number		No	
+laboratory_result	slope	Slope	number		No	
+laboratory_test	test_name	Laboratory Test Name	string		No	
+laboratory_test	days_to_sample_collection	Days from Index Date to the Sample CollectionDate	integer		No	
+laboratory_test	days_to_abnormal_test	Days to an abnormal Laboratory Test	integer		No	
+laboratory_test	year_of_abnormal_test	Year of the Abnormal Laboratory Test	integer		No	
+laboratory_test	year_of_test_form	Year Of Form 6003 for Abnormal Laboratory Test	integer		No	
+laboratory_test	test_code	Laboratory Test Code	string		No	
+laboratory_result	high_range	Laboratory Test High Range	number		No	
+laboratory_result	low_range	Laboratory Test Low Range	number		No	
+laboratory_result	blood_test_result_flag	Blood Chemistry And Hematology Test Result Flag	string		No	
+laboratory_test	days_to_test	Days From Index Date To Laboratory Test Date	integer		No	
+laboratory_result	lab_result_changed	Result Has Changed From The Value Reported On The 1st Visit (DELTA)	string		No	
+laboratory_result	test_out_of_range_alert	Out Of Range Alert in a laboratory test value	string		No	
+laboratory_test	test_panel	Laboratory Test Panel	string		No	
+laboratory_test	text_if_repeated	Laboratory text If Repeated	string		No	
+complication	lumbar_puncture_code	Lumbar Puncture Code	string		No	
+laboratory_test	lumbar_puncture_hour	Lumbar Puncture Time (Hour)	integer		No	
+laboratory_test	lumbar_puncture_year	Lumbar Puncture Year	integer		No	
+laboratory_test	comments	Blood Chemistry And Hematology Test Specific Comments	string		No	
+laboratory_test	which_visit_being_performed	Blood Chemistry And Hematology Test: Which Visit Being Performed	string		No	
+laboratory_test	year_tests_obtained	Year Laboratory Tests Obtained	integer		No	
+laboratory_result	metabolite_below_limit_of_detection	Non-Targeted Global Metabolomic Profiling Data Info Test Name - Below LOD	string		No	
+laboratory_result	metabolite_test_run	Non-Targeted Global Metabolomic Profiling Data Info  (Median Scaled wo Imputes) Test Run First Or Second	string		No	
