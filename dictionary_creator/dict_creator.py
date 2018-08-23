@@ -6,11 +6,15 @@ def parseOptions():
     parser.add_argument("--variables", required=true, help="TSV with variables to include in the dictionary")
     parser.add_argument("--nodes", required=true, help="TSV with ndes to include in the dictionary")    
     parser.add_argument("--schema", default="yaml_template.yaml", help="Template with the schema to create the node YAML") 
-    parser.add_argument("--output_path", default="./", help="Path to the output directory") 
+    parser.add_argument("--link", default="link_template.yaml", help="Template with the schema to create links in YAML") 
+    parser.add_argument("--output_path", default="./", help="Path to the output directory")
+    parser.add_argument("--separator", default='","', help="Separator used for list of options")
 
     args = parser.parse_args()
 
     return args
+
+links_props = ['<link_name>', '<backref>', '<label>', '<target>', '<multiplicity>', '<link_required>']
 
 def read_tsv(filename):
 
@@ -32,7 +36,7 @@ def read_tsv(filename):
 				if '<node>' in dictionary:
 					node = dictionary['<node>']
 				else:
-					node = dictionary['node']
+					node = dictionary['Node']
 
 				rows.setdefault(node, [])
 				rows[node].append(dictionary)
@@ -51,9 +55,27 @@ def createSchemas(args):
 		with open(args.schema, 'r') as schemaFile:
 			content = schemaFile.read()
 
+		# Read link template
+		with open(args.link, 'r') as linkFile:
+			link = linkFile.read()
+
+		# Check number of links
+		nlinks = len(nodes[node][0][links_props[0]].split(','))
+
+		# Get links
+		link = nlinks * [link]
+		for prop in links_props:
+			linkprops = nodes[node][0][prop].split(',')
+			for n in range(0,nlinks):
+				link[n] = link[n].replace(prop, linkprops[n])
+
+		# Add links to schema template
+		content = content.replace('<link>', ''.join(link))
+
 		# Fill node properties in schema
 		for prop in nodes[node][0]:
-			content = content.replace(prop, nodes[node][0][prop])
+			if prop not in links_props:
+				content = content.replace(prop, nodes[node][0][prop])
 
 		# Write output
 		outFile = args.output_path + node + '.yaml'
@@ -64,25 +86,37 @@ def createSchemas(args):
 			output.write('\n')
 			output.write('  - %s\n' % nodes[node][0]['<link_name>'])
 			for v in variables[node]:
-				if v['required'] == 'Yes':
-					output.write('  - %s\n' % v['variable'])
+				if v['Required'] == 'Yes':
+					output.write('  - %s\n' % v['Field'])
 
 			# Write variables in schema
 			output.write('\n')
 			output.write('properties:\n')
 			output.write('  $ref: "_definitions.yaml#/ubiquitous_properties"\n')
 			for v in variables[node]:
+				
+				# Add description
 				output.write('\n')
-				output.write('  %s:\n' % v['variable'])
+				output.write('  %s:\n' % v['Field'])
 				output.write('    description: >\n')
-				output.write('      %s\n' % v['description'])
-				if v['type'] == 'enum':
+				output.write('      %s\n' % v['Description'])
+				
+				# Add type
+				if v['Type'] == 'enum':
 					output.write('    enum:\n')
-					options = v['options'].split('|')
+					# Remove initial and final `"` characters if used as separator
+					if '"' in args.separator:
+						v['Options'] = v['Options'][1:-1]
+					options = v['Options'].split(args.separator)
 					for op in options:
 						output.write('      - "%s"\n' % op)
 				else:
-					output.write('    type: %s\n' % v['type'])
+					output.write('    type: %s\n' % v['Type'])
+
+				# Add ontology term if existing
+				if v['Term'] != "":
+					output.write('    termDef:\n')
+					output.write('       type: %s\n' % v['Term'])
 
 			output.write('\n')
 			output.write('  %s:\n' % nodes[node][0]['<link_name>'])
