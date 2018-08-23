@@ -115,8 +115,9 @@ def createSchemas(args):
 
 				# Add ontology term if existing
 				if v['Term'] != "":
-					output.write('    termDef:\n')
-					output.write('       type: %s\n' % v['Term'])
+					output.write('    term:\n')
+					output.write('       termDef:\n')
+					output.write('          cde_id: %s\n' % v['Term'])
 
 			output.write('\n')
 			output.write('  %s:\n' % nodes[node][0]['<link_name>'])
