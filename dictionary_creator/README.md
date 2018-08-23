@@ -5,6 +5,9 @@ Python script to help creating new nodes in any data dictionary in YAML format. 
 * `--variables` List of varibles and their characteristics in TSV format to add to the new dictionary nodes (see [a example here](variables_example.tsv))
 * `--nodes` List of new nodes and their characteristics in TSV format (see [a example here](nodes_example.tsv))
 * `--schema` YAML template to create dictionary nodes (see [a example here](yaml_template.yaml))
+* `--link` YAML template to create multiple links in the schemas (see [a example here](link_template.yaml)) 
+* `--separator` Indicates the separator used for enumerations in the variable list file. `","` by default.
+
 
 Usage example:
 
