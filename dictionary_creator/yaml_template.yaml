@@ -3,7 +3,7 @@ $schema: "http://json-schema.org/draft-04/schema#"
 id: "<node>"
 title: <title>
 type: object
-namespace: <namespace>
+namespace: http://www.gen3.org
 category: <category>
 program: '*'
 project: '*'
@@ -21,12 +21,7 @@ systemProperties:
   - updated_datetime
 
 links:
-  - name: <link_name>
-    backref: <backref>
-    label: <label>
-    target_type: <target>
-    multiplicity: <multiplicity>
-    required: <link_required>
+<link>
 
 uniqueKeys:
   - [id]

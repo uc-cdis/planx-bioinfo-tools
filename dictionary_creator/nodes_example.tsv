@@ -1,10 +1,4 @@
-<node>	<title>	<category>	<description>	<link_name>	<backref>	<label>	<target>	<multiplicity>	<link_required>	<namespace>
-subject	Subject	administrative	Subject	studies	subjects	describes	study	many_to_one	true	https://niaid.bionimbus.org
-protocol	Protocol	administrative	Protocol	studies	protocol	describes	study	many_to_one	true	https://niaid.bionimbus.org
-study	Study	administrative	Study	studies	study	describes	study	many_to_one	true	https://niaid.bionimbus.org
-supplementary_file	Supplementary File	administrative	Supplementary files associated to any study	studies	suplementary_files	describes	study	many_to_one	true	https://niaid.bionimbus.org
-keyword	Keyword	administrative	Keyword	studies	keywords	describes	study	many_to_one	true	https://niaid.bionimbus.org
-publication	Publication	administrative	Publication	studies	publications	describes	study	many_to_one	true	https://niaid.bionimbus.org
-elisa_assay	ELISA Assay	notation	Results obtained from an ELISA assay	experiments	elisa_assays	data_from	experiment	many_to_one	true	https://niaid.bionimbus.org
-experiment	Experiment	notation	Experiment performed over an aliquot	aliquots	experiments	performed_on	aliquot	many_to_one	true	https://niaid.bionimbus.org
-aliquot	Aliquot	biospecimen	Aliquot	samples	aliquots	data_from	sample	many_to_one	true	https://niaid.bionimbus.org
+<node>	<title>	<category>	<description>	<link_name>	<backref>	<label>	<target>	<multiplicity>	<link_required>
+laboratory_test	Laboratory Test	Biomarkers	Collection of parameters associated to the Laboratory Test 	cases,samples	laboratory_tests,laboratory_tests	performed_on,data_from	case,sample	many_to_one,one_to_one	true,false
+laboratory_result	Laboratory Result	Biomarkers	Measurements obtained for the specific Laboratory Test	laboratory_tests	laboratory_results	measured_from	laboratory_test	one_to_one	true
+complication	Complication	Biomarkers	Complications associated to the Laboratory Test	laboratory_tests	complications	related_to	laboratory_test	many_to_one	true
