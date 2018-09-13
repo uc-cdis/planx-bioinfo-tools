@@ -1,0 +1,14 @@
+<node>	<title>	<category>	<description>	<link_name>	<backref>	<label>	<target>	<multiplicity>	<link_required>	<link_group_required>	<group_exclusive>
+summary_socio_demographic	Socio Demographic Summary	clinical	Summary of socio-demographic information including drug use, sex partners, race background, income, insurance, etc asked to a patient at each of the recurrent visit.	[subjects,samples],follow_ups	summary_socio_demographics	[performed_on,performed_on],performed_at	[subject,sample],follow_up	[one_to_one,one_to_one],one_to_one	[FALSE,FALSE],FALSE	TRUE	TRUE
+diagnosis	Diagnosis	clinical	Data from the investigation	subjects	diagnoses	describes	subject	many_to_one	TRUE
+imaging_study	Imaging Study	clinical	tests performed with a variety of techniques that produce pictures of the inside of a patient's body.	subjects,follow_ups	imaging_studies	performed_on,performed_at	subject,follow_up	many_to_one,one_to_one	TRUE,FALSE
+imaging_report	Imaging Report	clinical	Documentation and communication of the results of a image study	imaging_study	imaging_reports	describes	imaging_study	one_to_one	TRUE
+imaging_file	Imaging File	data_file	Data file containing raw imaging data	imaging_study	imaging_files	data_for	imaing_file	many_to_one	TRUE
+summary_tb_result	TB Result Summary	clinical	Summary of tuberculosis test values obtained from microscopy or other laboratory tests required by a medical professional and performed at one of the recurrent patient visit	subjects	summary_tb_results	performed_on	subject	one_to_one	TRUE
+tb_result	TB Result	clinical	Tuberculosis test Values obtained from laboratory tests	subjects	tb_results	performed_on	subject	many_to_one	TRUE
+treatment	Treatment	clinical	Record of the administration and intention of therapeutic agents provided to a patient to alter the course of a pathologic process.	diagnoses	treatments	describes	diagnosis	many_to_one	TRUE
+summary_drug_use	Drug Use Summary	clinical	Summary of drugs used by the patient at each of the recurrent visit.	follow_ups	summary_drug_uses	performed_at	follow_up	one_to_one	TRUE
+sequencing_result	Sequencing Result	data_file	Data file containing different sequencing results	submitted_unaligned_reads_files	sequencing_results	data_from	submitted_unaligned_reads	many_to_many	FALSE
+sample	Sample	biospecimen	Any material sample taken from a biological entity for testing	subjects	samples	derived_from	subject	many_to_one	TRUE
+summary_mutation_panel	Mutation Panel Summary	notation	Summary of a panel of mutations for each gene	subjects	summary_mutation_panels	performed_on	subject	many_to_one	TRUE
+demographic	Demographic	clinical	Data for the characterization of the patient by means of segementing the population	subjects	demographics	describes	subject	one_to_one	TRUE
