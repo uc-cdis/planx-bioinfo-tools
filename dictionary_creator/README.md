@@ -38,4 +38,4 @@ Links are specified in another TSV named `nodes.tsv` with the following columns 
 * `<multiplicity>`: Comma separated list of multiplicities for each link - e.g., `[one_to_one,one_to_one],one_to_one`
 * `<link_required>`: Comma separated list of boolean values indicating whether each link for this node is required or not - e.g., `[false,false],false`
 * `<link_group_required>`: Comma separated list of boolean values indicating whether each node group is required - e.g., if there were two link groups specified, then `false,true`. If no link groups are specified, then leave blank.
-* `<group_exclusive>`: Same as format as `<link_group_required>`, though each boolean value corresponds to whether each group is exclusive or not
+* `<group_exclusive>`: Same format as `<link_group_required>`, though each boolean value corresponds to whether each group is exclusive or not
