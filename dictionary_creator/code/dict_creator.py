@@ -91,7 +91,7 @@ def write_file(node, content):
     # encapsulate a lot of these writing segments into functions
     global nodes, variables, args
 
-    out_file = '../' + args.dir + '_dict/' + node + '.yaml'
+    out_file = '../output_yaml/' + args.dir + '_dict/' + node + '.yaml'
 
     with open(out_file, 'w') as output:
         output.write(content)
@@ -325,7 +325,9 @@ def create_node_schema(node):
 def create_schemas():
     global content_template, link_template, group_template, group_link_template, nodes, variables, args
 
-    mkdir('../' + args.dir + '_dict')
+    mkdir('../output_yaml')
+
+    mkdir('../output_yaml/' + args.dir + '_dict')
 
     nodes, variables = get_data(args.dir)
 
