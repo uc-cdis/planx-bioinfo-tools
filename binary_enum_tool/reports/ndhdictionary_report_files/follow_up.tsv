@@ -1,4 +1,0 @@
-Node	Property	Type	Enum_Values	Description	Flags
-follow_up	drug_used	enum	['No', 'Yes', 'Refusal', 'Unknown']	Ever used any medical or recreational drugs since last visit	['no', 'yes', 'ever']
-Node	Property	Type	Enum_Values	Description	Flags
-follow_up	ever_transferred	enum	['Never transferred', 'Transferred']	Participant ever transferred sites (changed ids)	['ever', 'never', 'ever']

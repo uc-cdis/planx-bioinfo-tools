@@ -1,4 +1,0 @@
-Node	Property	Type	Enum_Values	Description	Flags
-diagnosis	progression_or_recurrence	enum	['yes', 'no', 'unknown', 'not reported', 'Not Allowed To Collect']	Yes/No/Unknown indicator to identify whether a patient has had a new tumor event after initial treatment.	['yes', 'no', 'yes', 'whether']
-Node	Property	Type	Enum_Values	Description	Flags
-diagnosis	prior_treatment	enum	['Yes', 'No', 'Unknown', 'Not Reported', 'Not Allowed To Collect']	A yes/no/unknown/not applicable indicator related to the administration of therapeutic agents received before the body specimen was collected.	['yes', 'no', 'yes']
