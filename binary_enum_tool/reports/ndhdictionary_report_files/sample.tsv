@@ -1,0 +1,2 @@
+Node	Property	Type	Enum_Values	Description	Flags
+sample	diagnosis_pathologically_confirmed	enum	['Yes', 'No', 'Unknown']	The histologic description of tissue or cells confirmed by a pathology review of frozen or formalin fixed slide(s) completed after the diagnostic pathology review of the tumor sample used to extract analyte(s).	['yes', 'no']

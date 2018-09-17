@@ -1,0 +1,10 @@
+Node	Property	Type	Enum_Values	Description	Flags
+gynecological_exam	trichomonas_test	enum	['positive', 'negative', 'unclear', 'not obtanied', 'not read', 'Refusal', 'Unknown']	Trichomonas wet prep test	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+gynecological_exam	increased_wbcs	enum	['positive', 'negative', 'unclear', 'not obtanied', 'not read', 'Refusal', 'Unknown']	Increased wbcs	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+gynecological_exam	clue_cells_test	enum	['positive', 'negative', 'unclear', 'not obtanied', 'not read', 'Refusal', 'Unknown']	Clue cells wet prep test	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+gynecological_exam	amine_odor_koh_test	enum	['positive', 'negative', 'unclear', 'not obtanied', 'not read', 'Refusal', 'Unknown']	Amine odor KOH mount test	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+gynecological_exam	yeast_koh_test	enum	['positive', 'negative', 'unclear', 'not obtanied', 'not read', 'Refusal', 'Unknown']	Yeast KOH mount test	['positive', 'negative']

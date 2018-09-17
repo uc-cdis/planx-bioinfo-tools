@@ -1,0 +1,64 @@
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	marstat	enum	['Legally/common-law married', 'Not married but living with partner', 'Widowed', 'Divorced/Annulled', 'Separated', 'Never married', 'Other', 'NA (Skipped)', 'Refusal', 'Unknown', 'Missing']	Marital status (F21/MAR_SD)	['ever', 'never']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	recrxuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use of prescription drugs in a way not prescribed (methadone, amphetamines (V21+ ), Other Narcotic use (V21+), tranquilizers (V39+)	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basesbxnrx	enum	['Yes', 'No', 'Not asked at B/L for 1994/95, 2001/02, 2011-13 recruits', 'Refusal', 'Unknown', 'Missing']	Ever in suboxone maintenance program (V39+) or reported prescribed use of suboxone at baseline visit	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	baseher	enum	['Yes', 'No', 'Not asked separately for 1994/95 recruits (see BASECCH)']	Ever used heroin (baseline visit, not asked separately of 1994/95 recruits)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basetran	enum	['Yes', 'No', 'NA (Skipped)', 'Refusal', 'Unknown', 'Missing']	Blood transfusion between 1975-1985 (baseline visit)	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	crackuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use crack/freebase cocaine since last visit	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	smkgrp	enum	['Never smoker', 'Current smoker', 'Former smoker (SMKHIST>0 and CURSMOKE=0 or 10)', 'Cannot determine']	History of Smoking cigarettes status	['ever', 'never']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	sbxnrxuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	In suboxone maintenance program (V39+) or reported prescribed use of suboxone since last visit (F22s4/ F22MEDs4, F22s6/F22MEDs6)	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	odrguse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use amphetamines (pre-V21), narcotics (pre-V21), hallucinogens, other drugs (V39+) since last visit	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basemhiv	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever had sex with HIV+ male (baseline visit)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	cocuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use cocaine since last visit	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	v20evndl	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Participant ever used a needle AFTER another user (Reported vis 20)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basemhem	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever had sex with male hemophiliac (baseline visit)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basecoc	enum	['Yes', 'No', 'Not asked separately for 1994/95 recruits (see BASECCH)']	Ever used cocaine (baseline visit, not asked separately of 1994/95 recruits)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basemdonrx	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever in methadone maintenance program or reported prescribed use of methadone at baseline visit	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	paidsex	enum	['Yes', 'No', 'NA (Skipped)', 'Refusal', 'Unknown', 'Missing']	Ever had sex for drugs,money, shelter (baseline visit)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	mdonrxuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	In methadone maintenance program or reported prescribed use of methadone since last visit (F04/F24/ F24BEH,F22/F22MED,Drug2)	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	insurance	enum	['Yes', 'No', 'NA (Skipped)', 'Refusal', 'Unknown', 'Missing']	Participant currently has insurance	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	employ	enum	['Yes', 'No', 'NA (Skipped)', 'Refusal', 'Unknown', 'Missing']	Participant currently employed (F21/EMP_SD)	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basemman	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever sex w/male who had sex w/ male (baseline visit)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	drink_status	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Current Alcohol Use (If > 0 drinks then Yes)	['yes', 'no', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basefhiv	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever had sex with HIV+ woman (baseline visit)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	potuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use marijuana/hash since last visit	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	v24idu	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Participant ever injected drugs (Reported visit 24)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	heruse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use heroin since last visit	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	nidu	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Non-injected recreational drugs used since last visit. Includes CCH use, any marijuana use, hallucinogens, club drugs, methamphetamines.	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basecrack	enum	['Yes', 'No', 'Not asked separately for 1994/95 recruits (see BASECCH)']	Ever used crack/freebase cocaine (baseline visit, not asked separately of 1994/95 recruits)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	basefinj	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever had sex with woman who injected (baseline visit)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	idu	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Injected drugs since last visit (based on self-report, INJEBH, INJCBH)	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	mdonuse	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Use (illicit) Methadone since last visit	['yes', 'no']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	v17idu	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Participant ever injected drugs (Reported visit 17)	['yes', 'no', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+summary_socio_demographic	baseminj	enum	['Yes', 'No', 'Refusal', 'Unknown', 'Missing']	Ever had sex with male who injected (baseline visit)	['yes', 'no', 'ever']

@@ -1,0 +1,22 @@
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltba	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for bathing or dressing.	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltbe	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for bending, kneeling or stooping.	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltst	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for climbing several flights of stairs.	['yes', 'yes', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltva	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for vigorous activities such as running, lifting heavy objects, participating in strenuous sports..	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltli	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for lifting or carrying groceries.	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hlts1	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for climbing one flight of stairs.	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltw1	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for walking one block.	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	bodpn	enum	['None', 'Very mild', 'Mild', 'Moderate', 'Severe', 'Very severe']	Amount of bodily pain during the past four weeks.	['ever', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltma	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for moderate activities such as moving a table, pushing a vacuum cleaner, bowling or playing golf..	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltwm	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for walking more than one mile.	['yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+health_questionnaire	hltwb	enum	['Yes a lot', 'Yes a little', 'No at all']	Health limitation for walking several blocks.	['yes', 'yes', 'ever']

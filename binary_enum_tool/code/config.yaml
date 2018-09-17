@@ -1,0 +1,22 @@
+ignore_schemas: ['_definitions.yaml', '_terms.yaml', '_settings.yaml', 'projects', 'README.md', 'project.yaml']
+
+output:
+  node: null
+  property: null
+  type: null
+  enum_values: null
+  description: null
+  flags: []
+  collect_me: false
+
+
+# presently searching for 'no' with a slightly alternative method in order to avoid producing excessive and unnecessary output
+# for example, 'no' is substring of 'node' and 'acknowledgement', and so will produce more output than desired if we search
+# 'no' as a substring, as we are doing with the other keywords listed here.
+keywords:
+  - 'yes' # must be in quotes here to indicate string type instead of boolean
+  - ever
+  - never
+  - positive
+  - negative
+  - whether

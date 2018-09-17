@@ -1,0 +1,6 @@
+Node	Property	Type	Enum_Values	Description	Flags
+hiv_history	status	enum	['Negative', 'Prevalent', 'Converter', 'Converter identified at death']	Summarized HIV sero-status	['negative']
+Node	Property	Type	Enum_Values	Description	Flags
+hiv_history	bshbvstat	enum	['HBV negative', 'HBV positive', 'missing/unknown']	Baseline HBV serostatus (based on 1st 3 visits)	['negative', 'positive']
+Node	Property	Type	Enum_Values	Description	Flags
+hiv_history	bshcvstat	enum	['HCV negative', 'HCV positive', 'missing/unknown']	Baseline HCV serostatus (based on 1st 3 visits)	['negative', 'positive']

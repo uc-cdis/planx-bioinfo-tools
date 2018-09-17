@@ -1,0 +1,6 @@
+Node	Property	Type	Enum_Values	Description	Flags
+mental_health_questionnaire	worth_feeling	enum	['Always true', 'Often true', 'Sometimes true', 'Rarely true', 'Never true']	Feeling about being a person of worth, at least as much as others	['ever', 'never']
+Node	Property	Type	Enum_Values	Description	Flags
+mental_health_questionnaire	freq_fresh_rested	enum	['None', 'Rarely', 'Less than half the time', 'Fairly often', 'Mostly every data', 'Every day']	Frequency waking up fresh and rested during the past month	['ever', 'ever']
+Node	Property	Type	Enum_Values	Description	Flags
+mental_health_questionnaire	freq_effort	enum	['Rarely', 'Some', 'Occasionally', 'Most']	Frequency everything effort.	['ever']

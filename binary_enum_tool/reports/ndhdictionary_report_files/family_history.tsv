@@ -1,0 +1,2 @@
+Node	Property	Type	Enum_Values	Description	Flags
+family_history	relative_with_hiv_history	enum	['yes', 'no', 'unknown', 'not reported']	Indicator to signify whether or not an individual's biological relative has been diagnosed with HIV.	['yes', 'no', 'whether']

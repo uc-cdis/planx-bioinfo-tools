@@ -1,0 +1,8 @@
+Node	Property	Type	Enum_Values	Description	Flags
+neurocognitive_test	left_vibration_perception	enum	['No', 'Yes (normal)', 'Yes (mild loss)', 'Yes (moderate loss)', 'Unable to evaluate', 'Refused']	Perception of vibration in great toe (left side) using a 128 Hz tuning fork	['no', 'yes', 'yes', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+neurocognitive_test	left_ankle_reflexes	enum	['No', 'Yes', 'Unable to evaluate', 'Refused']	Deep tendon reflexes at left ankle	['no', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+neurocognitive_test	right_ankle_reflexes	enum	['No', 'Yes', 'Unable to evaluate', 'Refused']	Deep tendon reflexes at right ankle	['no', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+neurocognitive_test	right_vibration_perception	enum	['No', 'Yes (normal)', 'Yes (mild loss)', 'Yes (moderate loss)', 'Unable to evaluate', 'Refused']	Perception of vibration at great toe (right side) using a 128 Hz tuning fork	['no', 'yes', 'yes', 'yes']

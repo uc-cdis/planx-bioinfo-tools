@@ -1,0 +1,14 @@
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	mphivf	enum	['Positive', 'Negative', 'Unknown']	HIV status of main female partner	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	hivstat1	enum	['Positive', 'Negative', 'Unknown']	Main male partner status when had unprotected anal sex	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	mphivm	enum	['Positive', 'Negative', 'Unknown']	HIV status of main male partner	['positive', 'negative']
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	propexp	enum	['No', 'Yes', "Don't remember", 'Not applicable (HIV infected)']	Took anti-HIV medications to prevent getting infected either beforee being exposed to HIV or following a possible exposure.	['no', 'yes']
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	drnk6	enum	['Never', 'Less than monthly', 'Monthly', 'Weekly', 'Daily or almost daily']	Frequency drinking six or more drinks containing alcohol in the past 6 months	['ever', 'never']
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	fadrnk	enum	['Never', 'Less than monthly', 'Monthly', 'Weekly', 'Daily or almost daily']	Frequency drinking alcohol in the last 6 months	['ever', 'never']
+Node	Property	Type	Enum_Values	Description	Flags
+behavior_questionnaire	smokn	enum	['Yes', 'No', 'Occasionally']	Currently smoking cigarettes	['yes', 'no']

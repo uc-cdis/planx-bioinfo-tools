@@ -1,0 +1,2 @@
+Node	Property	Type	Enum_Values	Description	Flags
+summary_tb_result	culture	enum	['Negative', 'Unknown result', 'Study in progress', 'Not done', 'Nonspecific microflora', 'MOTT', '1 to 19', 'Positive', '20 to 100', '100 to 200', 'More than 200']	Result of culture. Examples include positive growth of mycobacterium, more than 200 colonies, not done, study in progress, results not entered, nonspecific microflora, and more	['negative', 'positive', 'positive']
