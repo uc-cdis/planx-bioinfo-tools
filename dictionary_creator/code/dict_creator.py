@@ -6,15 +6,30 @@ import os
 all_link_props = ['<link_name>', '<backref>', '<label>', '<target>', '<multiplicity>', '<link_required>', '<link_group_required>', '<group_exclusive>']
 single_link_props = ['<link_name>', '<backref>', '<label>', '<target>', '<multiplicity>', '<link_required>']
 
-def parse_options():
-    global args
+def create_schemas():
+    global content_template, link_template, group_template, group_link_template, nodes, variables, args
 
-    parser = argparse.ArgumentParser(description="Introduce variables and nodes files to generate dictionary schemas")
-    parser.add_argument("-d", "--directory", dest="dir", required=True, help="Directory containing target nodes.tsv and variables.tsv files")
+    mkdir('../output_yaml')
 
-    args = parser.parse_args()
+    mkdir('../output_yaml/' + args.dir + '_dict')
+
+    nodes, variables = get_data(args.dir)
+
+    content_template, link_template, group_template = get_templates()
+
+    for node in nodes:
+
+        create_node_schema(node)
+
+def get_data(directory):
+
+    path = '../input_tsv/' + directory + '/'
+    nodes_file = path + 'nodes.tsv'
+    var_file = path + 'variables.tsv'
+    return read_tsv(nodes_file), read_tsv(var_file)
 
 def read_tsv(filename):
+    'Read in a .tsv file - used to read the nodes.tsv and variables.tsv files.'
 
     headers = []
     rows = {}
@@ -52,14 +67,71 @@ def read_tsv(filename):
                 rows.setdefault(node, [])
                 rows[node].append(dictionary)
 
+                # print json.dumps(rows, indent=2)
+
     return rows
 
-def get_data(directory):
+def create_node_schema(node):
 
-    path = '../input_tsv/' + directory + '/'
-    nodes_file = path + 'nodes.tsv'
-    var_file = path + 'variables.tsv'
-    return read_tsv(nodes_file), read_tsv(var_file)
+    content = content_template
+
+    # Populate namespace
+    content = content.replace('<namespace>', args.namespace)
+
+    # Get links
+    link_block = return_link_block(node)
+
+    # Add links to schema template
+    content = content.replace('<link>', ''.join(link_block))
+
+    # Fill node properties in schema
+    for prop in nodes[node][0]:
+        if prop not in all_link_props:
+            content = content.replace(prop, nodes[node][0][prop])
+
+    # Write output
+    write_file(node, content)
+
+def parse_entry(input_str):
+
+    if '[' not in input_str:
+        out = input_str.split(',')
+        return out
+
+    out = []
+
+    temp = input_str.split('[')
+
+    for part in temp:
+
+        if ']' in part:
+            group_temp = part.split(']')
+            group = group_temp[0]
+            entry = group.split(',')
+            out.append(entry)
+
+            non_group = group_temp[1]
+
+        else:
+            non_group = part
+
+        non_group = non_group.strip(',')
+        non_groups = non_group.split(',')
+        for one_piece in non_groups:
+            if len(one_piece) > 0:
+                out.append(one_piece)
+
+    return out
+
+def parse_options():
+    'Obtain the name of the directory containing the target nodes.tsv and variables.tsv files - store this directory name in args.dir'
+    global args
+
+    parser = argparse.ArgumentParser(description="Introduce variables and nodes files to generate dictionary schemas")
+    parser.add_argument("-d", "--directory", dest="dir", required=True, help="Directory containing target nodes.tsv and variables.tsv files")
+    parser.add_argument("-n", "--namespace", dest="namespace", required=True, help="Namespace for this dictionary - e.g., niaid.bionimbus.org")
+
+    args = parser.parse_args()
 
 def mkdir(directory):
 
@@ -90,7 +162,7 @@ def write_file(node, content):
 
     with open(out_file, 'w') as output:
         output.write(content)
-        output.write('\n')
+        # output.write('\n')
 
         # Write requirements in schema
         link_map = build_link_map(node)
@@ -173,37 +245,6 @@ def write_file(node, content):
                         output.write('    $ref: "_definitions.yaml#/to_one"\n')
                     else:
                         output.write('    $ref: "_definitions.yaml#/to_many"\n')
-
-def parse_entry(input_str):
-
-    if '[' not in input_str:
-        out = input_str.split(',')
-        return out
-
-    out = []
-
-    temp = input_str.split('[')
-
-    for part in temp:
-
-        if ']' in part:
-            group_temp = part.split(']')
-            group = group_temp[0]
-            entry = group.split(',')
-            out.append(entry)
-
-            non_group = group_temp[1]
-
-        else:
-            non_group = part
-
-        non_group = non_group.strip(',')
-        non_groups = non_group.split(',')
-        for one_piece in non_groups:
-            if len(one_piece) > 0:
-                out.append(one_piece)
-
-    return out
 
 def build_link_map(node):
 
@@ -302,39 +343,6 @@ def return_link_block(node):
     link_block = '\n'.join(blocks)
 
     return link_block
-
-def create_node_schema(node):
-
-    content = content_template
-
-    # Get links
-    link_block = return_link_block(node)
-
-    # Add links to schema template
-    content = content.replace('<link>', ''.join(link_block))
-
-    # Fill node properties in schema
-    for prop in nodes[node][0]:
-        if prop not in all_link_props:
-            content = content.replace(prop, nodes[node][0][prop])
-
-    # Write output
-    write_file(node, content)
-
-def create_schemas():
-    global content_template, link_template, group_template, group_link_template, nodes, variables, args
-
-    mkdir('../output_yaml')
-
-    mkdir('../output_yaml/' + args.dir + '_dict')
-
-    nodes, variables = get_data(args.dir)
-
-    content_template, link_template, group_template = get_templates()
-
-    for node in nodes:
-
-        create_node_schema(node)
 
 if __name__ == "__main__":
 

@@ -3,7 +3,7 @@ summary_socio_demographic	Socio Demographic Summary	clinical	Summary of socio-de
 diagnosis	Diagnosis	clinical	Data from the investigation	subjects	diagnoses	describes	subject	many_to_one	TRUE
 imaging_study	Imaging Study	clinical	tests performed with a variety of techniques that produce pictures of the inside of a patient's body.	subjects,follow_ups	imaging_studies	performed_on,performed_at	subject,follow_up	many_to_one,one_to_one	TRUE,FALSE
 imaging_report	Imaging Report	clinical	Documentation and communication of the results of a image study	imaging_study	imaging_reports	describes	imaging_study	one_to_one	TRUE
-imaging_file	Imaging File	data_file	Data file containing raw imaging data	imaging_study	imaging_files	data_for	imaing_file	many_to_one	TRUE
+imaging_file	Imaging File	data_file	Data file containing raw imaging data	imaging_study	imaging_files	data_for	imaging_file	many_to_one	TRUE
 summary_tb_result	TB Result Summary	clinical	Summary of tuberculosis test values obtained from microscopy or other laboratory tests required by a medical professional and performed at one of the recurrent patient visit	subjects	summary_tb_results	performed_on	subject	one_to_one	TRUE
 tb_result	TB Result	clinical	Tuberculosis test Values obtained from laboratory tests	subjects	tb_results	performed_on	subject	many_to_one	TRUE
 treatment	Treatment	clinical	Record of the administration and intention of therapeutic agents provided to a patient to alter the course of a pathologic process.	diagnoses	treatments	describes	diagnosis	many_to_one	TRUE
