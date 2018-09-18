@@ -1,8 +1,9 @@
 # dictionary-creator
 
-`dict_creator.py` is a Python script which generates new nodes in any data dictionary in YAML format. The script parses two spreadsheets, `nodes.tsv` and `variables.tsv`, to generate the YAML files. Running the script requires only a single argument, which is the name of the folder containing the target `nodes.tsv` and `variables.tsv` files:
+`dict_creator.py` is a Python script which generates new nodes in any data dictionary in YAML format. The script parses two spreadsheets, `nodes.tsv` and `variables.tsv`, to generate the YAML files. Running the script requires two arguments:
 
 * `-d/--directory`: Name of directory in `dictionary_creator/input_tsv/` which contains target `nodes.tsv` and `variables.tsv` files
+* `-n/--namespace`: Namespace of the dictionary - e.g., niaid.bionimbus.org
 
 The folder structure is as follows:
 * `code/` contains the script and a folder containing configuration files, such as YAML templates specifying the schema format.
@@ -12,7 +13,7 @@ The folder structure is as follows:
 Usage example (called from within directory `code/`):
 
 ```
-python dict_creator.py -d examples
+python dict_creator.py -d examples -n niaid.bionimbus.org
 ```
 
 The list of variables is collected in a TSV named `variables.tsv` with the following columns (headers):
