@@ -12,8 +12,6 @@ def parse_options():
     parser = argparse.ArgumentParser(description="Introduce variables and nodes files to generate dictionary schemas")
     parser.add_argument("-d", "--directory", dest="dir", required=True, help="Directory containing target nodes.tsv and variables.tsv files")
 
-    # parser.add_argument("--separator", default='","', help="Separator used for list of options")
-
     args = parser.parse_args()
 
 def read_tsv(filename):
@@ -82,10 +80,7 @@ def get_templates():
     with open('config/group_template.yaml', 'r') as groupFile:
         link_group = groupFile.read()
 
-    with open('config/group_link_template.yaml', 'r') as groupLinkFile:
-        group_link = groupLinkFile.read()
-
-    return content, link, link_group, group_link
+    return content, link, link_group
 
 def write_file(node, content):
     # encapsulate a lot of these writing segments into functions
@@ -232,11 +227,15 @@ def build_link_map(node):
 
 def build_link(link_map, map_place, link_group=False, group_place=None):
 
-    if link_group:
-        out = group_link_template
+    out = link_template
 
-    else:
-        out = link_template
+    if link_group:
+        old_lines = out.split('\n')
+        new_lines = []
+        for line in old_lines[:-1]:
+            new_line = '    ' + line + '\n'
+            new_lines.append(new_line)
+        out = ''.join(new_lines)
 
     for link_prop in single_link_props:
 
@@ -331,7 +330,7 @@ def create_schemas():
 
     nodes, variables = get_data(args.dir)
 
-    content_template, link_template, group_template, group_link_template = get_templates()
+    content_template, link_template, group_template = get_templates()
 
     for node in nodes:
 

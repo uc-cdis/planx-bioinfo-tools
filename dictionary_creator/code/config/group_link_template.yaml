@@ -1,6 +1,0 @@
-      - name: <link_name>
-        backref: <backref>
-        label: <label>
-        target_type: <target>
-        multiplicity: <multiplicity>
-        required: <link_required>

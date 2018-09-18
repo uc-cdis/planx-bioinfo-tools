@@ -1,43 +1,98 @@
 Node	Field	Description	Type	Options	Required	Term
-laboratory_test	test_type	Classification type for this test	enum	"Abnormal Laboratory Test","Blood Test Panel","Metabolomics"	No	
-laboratory_test	test_method	Methodology followed to perform this laboratory test	enum	"ELISA","ESSI-MRM Profiling","Flow Cytometry","Enzyme Activity Assay","PS-MRM Profiling","SAVE Imaging","qRT-PCR","Expression Analysis"	No	
-laboratory_result	test_analyte_type	Type of the collected	enum	"3-methoxytyramine","Alanine Aminotransferase","Alpha-synuclein","Alpha-tocopherol 4 Weeks After Treatment","Alpha-tocopherol Baseline","Alpha-tocopherol On Treatment","Amyloid-Beta","Anti-Alpha-synuclein Antibody","Biopterin","Blood Urea Nitrogen","Chloride","Circulating Brain-Enriched miRNA","CRP40 Expression","Dihydroxyphenylacetic Acid","Dopamine-3-sulfate","Dopamine","GBA Enzymatic Activity","Hemoglobin","Homovanillic Acid","Homovanillol","Immune Markers","Inflammatory Cytokines","LRRK2 Enzymatic Activity","Lysosomal Enzyme Activity","Met-Enkephelin","Metabolites","MRM Combination","mtDNA85","N-acetylspermidine","Neopterin","Phosphorylated Tau Protein (p-tau)","Red Blood Cells","RNA","Ser(P)-1292 LRRK2","Somatostatin","Total Glucose","Total Protein","Total Tau Protein (t-tau)","Urate Purine","White Blood Cells","Alanine Aminotransferase (ALT)","Carbon Dioxide","Creatinine","Hematocrit","Hemoglobin","Platelet","Potassium","Red Blood Cells","Sodium","White Blood Cells","Tocopherol"	No	
-laboratory_test	test_sample_type	Type of the collected sample	enum	"Cerebrospinal Fluid","Plasma","Saliva","Serum","Whole Blood","Urine"	No	
-laboratory_result	test_units	Units used for this value	enum	"mM","nM","copies/µL","cells/µl","Cell Count","pg/mL","ng/mL","mg/mL","µg/mL","Units of Activity","katal","µmol/g/h"	No	
-laboratory_result	test_result	Laboratory Test Result	enum	"Positive","Negative","Normal","Abnormal","Too Low","Too High","Yes","No","Clinically Significant Abnormal","Yes","No"	No	
-laboratory_test	test_status	Test Status	enum	"Active","Inactive"	No	
-laboratory_test	abnormal_test_action_taken	Action Taken Following Abnormal Laboratory Results	enum	"Observe","Reduction In Dosage","Change In Dosing Schedule","Discontinuation of Experimental Drugs"	No	
-laboratory_test	abnormal_test_exp_meds	Abnormal Laboratory Test Related To Experimental Medication	enum	"Probably Not Related","Possibly Related","Definitely Related","Probably Related"	No	
-laboratory_test	abnormal_test_nonexp_meds	Abnormal Laboratory Test Related To Non-Experimental Medication	enum	"Probably Not Related","Possibly Related","Definitely Related","Probably Related"	No	
-laboratory_test	abnormal_test_severity	Severity of the Abnormal Laboratory Test	enum	"Mild","Moderate","Severe"	No	
-laboratory_test	acceptable_sample	Is this sample acceptable?	enum	"Yes","No"	No	
-complication	symptom	Symptom of the complication	enum	"Vomiting","Nausea","Significant Back Pain","Orthostatic Light Head","Anxiety","Headache","Other"	No	
-complication	hospitalization_required	Foregoing Complication Requiring Hospitalization	enum	"Yes","No"	No	
-complication	lasting_over_7_days	Foregoing Complication Lasting For More Than 7 Days	enum	"Yes","No"	No	
-complication	associated_procedure	Procedure associated to this complication	enum	"Lumbar Puncture","Blood Draw"	No	
-laboratory_test	needle_gauge	Needle Size	enum	"22","20","19","18","Other"	No	
-laboratory_test	reason_sample_unnacceptable	Reason why the sample was unacceptable	enum	"Inadequate Flow","Blood In Sample","Deviations From Collection","Other","More Than One"	No	
-laboratory_result	test_value	Value measured from this laboratory test 	number		No	
-laboratory_result	slope	Slope	number		No	
-laboratory_test	test_name	Laboratory Test Name	string		No	
-laboratory_test	days_to_sample_collection	Days from Index Date to the Sample CollectionDate	integer		No	
-laboratory_test	days_to_abnormal_test	Days to an abnormal Laboratory Test	integer		No	
-laboratory_test	year_of_abnormal_test	Year of the Abnormal Laboratory Test	integer		No	
-laboratory_test	year_of_test_form	Year Of Form 6003 for Abnormal Laboratory Test	integer		No	
-laboratory_test	test_code	Laboratory Test Code	string		No	
-laboratory_result	high_range	Laboratory Test High Range	number		No	
-laboratory_result	low_range	Laboratory Test Low Range	number		No	
-laboratory_result	blood_test_result_flag	Blood Chemistry And Hematology Test Result Flag	string		No	
-laboratory_test	days_to_test	Days From Index Date To Laboratory Test Date	integer		No	
-laboratory_result	lab_result_changed	Result Has Changed From The Value Reported On The 1st Visit (DELTA)	string		No	
-laboratory_result	test_out_of_range_alert	Out Of Range Alert in a laboratory test value	string		No	
-laboratory_test	test_panel	Laboratory Test Panel	string		No	
-laboratory_test	text_if_repeated	Laboratory text If Repeated	string		No	
-complication	lumbar_puncture_code	Lumbar Puncture Code	string		No	
-laboratory_test	lumbar_puncture_hour	Lumbar Puncture Time (Hour)	integer		No	
-laboratory_test	lumbar_puncture_year	Lumbar Puncture Year	integer		No	
-laboratory_test	comments	Blood Chemistry And Hematology Test Specific Comments	string		No	
-laboratory_test	which_visit_being_performed	Blood Chemistry And Hematology Test: Which Visit Being Performed	string		No	
-laboratory_test	year_tests_obtained	Year Laboratory Tests Obtained	integer		No	
-laboratory_result	metabolite_below_limit_of_detection	Non-Targeted Global Metabolomic Profiling Data Info Test Name - Below LOD	string		No	
-laboratory_result	metabolite_test_run	Non-Targeted Global Metabolomic Profiling Data Info  (Median Scaled wo Imputes) Test Run First Or Second	string		No	
+summary_socio_demographic	number_of_daily_contacts	Number of daily contacts an individual with TB has	integer		No	
+diagnosis	lung_localization	Pulmonary tuberculosis (PTB) and extrapulmonary TB (EPTB): PTB and EPTB diagnosed at the same time. A patient with both pulmonary and extrapulmonary TB should be classified as a case of PTB. Extrapulmonary tuberculosis (EPTB) refers to any bacteriologically confirmed or clinically diagnosed case of TB involving organs other than the lungs, e.g. pleura, lymph nodes, abdomen, genitourinary tract, skin, joints and bones, meninges. Pulmonary tuberculosis (PTB) refers to any bacteriologically confirmed or clinically diagnosed case of TB involving the lung parenchyma or the tracheobronchial tree. Miliary TB is classified as PTB because there are lesions in the lungs. Tuberculous intra-thoracic lymphadenopathy (mediastinal and/or hilar) or tuberculous pleural effusion, without radiographic abnormalities in the lungs, constitutes a case of extrapulmonary TB. A patient with both pulmonary and extrapulmonary TB should be classified as a case of PTB. 	enum	"Pulmonary and Extrapulmonary","Pulmonary"," Extrapulmonary"	No	
+imaging_study	x_ray_count	Count of X-rays	integer		No	
+imaging_study	ct_count	Count of CT Scan images	integer		No	
+imaging_study	image_body_site	Location of image in both lungs, left long or right lung. 	enum	"Both lungs","Left lung","Right lung"	No	
+imaging_report	dissemination	Diffuse pulmonary nodules detected (yes or no)	enum	"Yes","No"	No	
+imaging_report	lungcavity_size	Size of lung cavity.	string		No	
+imaging_report	mediastinum_vessels_maldevelopment	Anomaly Of Mediastinum Vessels Develop detected (yes or no)	boolean		No	
+imaging_report	affect_pleura	changes in the pleura	boolean		No	
+imaging_report	shadow_pattern	Pattern of shadows. Options include Nodule, node and infiltrate; nodule less than 10 mm; Node more than 10 mm;  Nodule and node; Infiltrate(s)	string		No	
+imaging_report	affect_level	Affect localized in Medium and Lower Lobi, total lung, lower lobus, medium lobus, upper and lower lobbi, upper and medium lobbi, upper lobus	enum	"Upper Lobus","Upper and Medium Lobbi","Upper and Lower Lobbi","Medium Lobus","Lower Lobus","Medium and Lower Lobbi"	No	
+imaging_report	pneumothorax	Pneumothorax detected (yes or no)	boolean		No	
+imaging_report	plevritis	pleural effusion detected (yes or no)	boolean		No	
+imaging_report	affected_segments	Segments affected.	string		No	
+imaging_report	nodi_calcinatum	Nodi Calcinatum detected (yes or no)	boolean		No	
+imaging_report	process_prevalence	Prevalence of process in more than or equal to 2 segments, or in less than 2 segments.	string		No	
+imaging_report	pulmonaryartery_thromboembolism	Thromboembolism Of The Pulmonary Artery detected (yes or no)	enum	"Yes","No","Not Reported"	No	
+imaging_report	post_tb_residuals	Post-tuberculosis changes in the lung	enum	"Yes"," No","Not Reported","No, Yes"	No	
+imaging_report	lung_capacity_decrease	reduced lung volumes	enum	"Yes"," No"," Not Reported","No, Yes"	No	
+imaging_report	bronchial_obstruction	bronchial obstruction syndrome disorders	enum	"Yes"," No"," Not Reported"," No, Yes"	No	
+imaging_report	lung_maldevelopment	Anomaly of lung develop detected (yes or no)	boolean		No	
+imaging_report	accumulation_of_contrast	More than 30HU of contrast accumulated, less than 10-30HU of contrast accumulated, or no constrast accumulated	enum	"No","less10-13","more30"	No	
+imaging_report	limfoadenopatia	In general 10 mm is considered the upper limit for normal nodes (short transverse diameter	boolean		No	
+imaging_report	total_cavernum	More than two cavities, two lung cavities, 1 cavity, or no cavities	string		No	
+imaging_report	abnormal_volume_percentage	Overall percent of abnormal volume. Pleural effusion should be excluded. This is a professional judgment number in addition to the volume that can be calculated	string		No	
+imaging_report	hemithorax_pleuraleffusion_percentage	indicate % of hemithorax involved (0-100%)	string		No	
+imaging_report	bilateral_pleuraleffusion	indicate if pleural effusion is bilateral	string		No	
+imaging_report	non_tb_abnormalities	Non TB Abnormality detected (yes or no)	string		No	
+imaging_report	mediastinal_lymphnodes	Mediastinal lymph nodes present	string		No	
+imaging_report	rater	Type of rater, eg: radiologist, general practioner, other	enum	"General practitioner","Radiologist","Other"	No	
+imaging_report	collapse	Lung collapse detected	string		No	
+imaging_report	small_cavities	Cavity size: <3cm. Collect % of the sextant that is covered by cavities of this size	string		No	
+imaging_report	medium_cavities	Cavity size: 3-5 cm. Collect % of the sextant that is covered by cavities of this size	string		No	
+imaging_report	large_cavities	Cavity size: >5cm. Collect % of the sextant that is covered by cavities of this size	string		No	
+imaging_report	multi_sextant_cavity	Indicate if any Large cavity belongs to a multi-sextant cavity	string		No	
+imaging_report	multi_cavities	Indicate if multiple cavities can be seen	string		No	
+imaging_report	infiltrate	Does infiltrate exist (yes or no)	string		No	
+imaging_report	infiltrate_low_density	Infiltrate Low density	string		No	
+imaging_report	infiltrate_medium_density	Infiltrate Medium density	string		No	
+imaging_report	infiltrate_high_density	Infiltrate High density	string		No	
+imaging_report	small_nodules	Nodule size: <5mm. Collect % of the sextant that is covered by nodules of this size	string		No	
+imaging_report	medium_nodules	Nodule size: 15-5mm. Collect % of the sextant that is covered by nodules of this size	string		No	
+imaging_report	large_nodules	Nodule size:15-30mm. Collect % of the sextant that is covered by nodules of this size	string		No	
+imaging_report	huge_nodules	Nodule size: >30mm. Tuberculoma. Collect % of the sextant that is covered by nodules of this size	string		No	
+imaging_report	nodule_calcified	Nodule that is calcified or partially-calcified	string		No	
+imaging_report	nodule_non_calcified	Nodule that is non-calcified	string		No	
+imaging_report	cluster_nodes	Nodules that are clustered - several nodules 2mm-5mm apart	string		No	
+imaging_report	multiple_nodes	Single or multiple nodules	string		No	
+imaging_report	low_density_nodes	Low/ground glass (active fresh nodules)	string		No	
+imaging_report	medium_density_nodes	Medium (stabilized fibrotic nodules)	string		No	
+imaging_report	high_density_nodes	High (calcified nodules, typically sequella)	string		No	
+imaging_file	image_quality	Good, poor, or average image quality	enum	"Good image quality","Average image quality","Poor image quality","Not Reported"	No	
+summary_tb_result	culture	Result of culture. Examples include positive growth of mycobacterium, more than 200 colonies, not done, study in progress, results not entered, nonspecific microflora, and more	enum	"Negative","Unknown result","Study in progress","Not done","Nonspecific microflora","MOTT","1 to 19","Positive","20 to 100","100 to 200","More than 200"	No	
+summary_tb_result	microscopy	Result of microscopy. Examples include 10-99 acid-resistant bacter in 1 field of view when stained by Ziehl-Nielsen, 1 to 9 in 1, 10 to 99 in 100, and more.	string		No	
+tb_result	test_type	Type of DST test	enum	"bactec","dst","le","hain","genexpert"	No	
+tb_result	drug	Resistance to drug tested for DST test	enum	"isoniazid","amikacin","amoxicillin_clavulanate","capreomycin","cycloserine","ethambutol","fluoroquinolones',"kanamycin","levofloxacin","moxifloxacin","mycobutin","ofloxacin","p_aminosalicylic_acid","prothionamide","pyrazinamide","rifampicin","streptomycin"	No	
+tb_result	response	Response to DST test	enum	"not reported","S","R","I"	No	
+treatment	treatment_span	Span of treatment	integer		No	
+treatment	regimen_count	Count of regimens	integer		No	
+treatment	treatment_status	Status of treatment.	string		No	
+summary_drug_use	h	Yes / No if Isoniazid was included in the regimen	boolean		No	
+summary_drug_use	r	Yes / No if Rifampicin was included in the regimen	boolean		No	
+summary_drug_use	s	Yes / No if Streptomycin was included in the regimen	boolean		No	
+summary_drug_use	e	Yes / No if Ethambutol was included in the regimen	boolean		No	
+summary_drug_use	ofx	Yes / No if Ofloxacin was included in the regimen	boolean		No	
+summary_drug_use	cm	Yes / No if Capreomycin was included in the regimen	boolean		No	
+summary_drug_use	am	Yes / No if Amikacin was included in the regimen	boolean		No	
+summary_drug_use	km	Yes / No if Kanamycin was included in the regimen	boolean		No	
+summary_drug_use	z	Yes / No if Pyrazinamide was included in the regimen	boolean		No	
+summary_drug_use	lfx	Yes / No if Levoflaxcin was included in the regimen	boolean		No	
+summary_drug_use	mfx	Yes / No if Moxifloxacin was included in the regimen	boolean		No	
+summary_drug_use	pas	Yes / No if p-aminosalicylic acid was included in the regimen	boolean		No	
+summary_drug_use	pto	Yes / No if Prothionamide was included in the regimen	boolean		No	
+summary_drug_use	cs	Yes / No if cycloserine was included in the regimen	boolean		No	
+summary_drug_use	amx_clv	Yes / No if Amoxicillin-clavulanate was included in the regimen	boolean		No	
+summary_drug_use	mb	Yes / No if Mycobutin was included in the regimen	boolean		No	
+summary_drug_use	dld	Yes / No if Delamandid was included in the regimen	boolean		No	
+summary_drug_use	bdq	Yes / No if Bedaquiline was included in the regimen	boolean		No	
+summary_drug_use	ipm_cln	Yes / No if Imipenem-cilastatin was included in the regimen	boolean		No	
+summary_drug_use	lzd	Yes / No if Linezolid was included in the regimen	boolean		No	
+summary_drug_use	cfz	Yes / No if Clofazimine was included in the regimen	boolean		No	
+summary_drug_use	clr	Yes / No if Clarithromycin was included in the regimen	boolean		No	
+summary_drug_use	fq	Yes / No if Fluoroquinolones were included in the regimen	boolean		No	
+summary_drug_use	ag_cp	Yes / No if aminoglycosides - injectible agents were included in the regimen	boolean		No	
+summary_drug_use	trd	Yes / No if Terizidone was included in the regimen	boolean		No	
+summary_drug_use	art	Yes / No if Antiretroviral therapy (a treatment of people infecte with human immunodeficiency virus using anti HIV-drugs) was included in the regimen	boolean		No	
+summary_drug_use	cotrimoxazol	Yes / No if Co-trimoxazole preventive therapy was included in the regimen	boolean		No	
+summary_socio_demographic	ex_prisoner	Social risk factors for a patient (yes or no) as ex prisoner	boolean		No	
+sequencing_result	Mycobacterium_tuberculosis_lineage	Classification determined by spoligotype using the lorikeet spoligotype analysis software.	enum	"Beijing","T5-RUS1","T1","Unknown"	No	
+sequencing_result	octal_spoligotype	Octal spoligotype determined by the lorikeet spoligotype analysis software.	string		No	
+sample	ncbi_bioproject	Record identifier assigned by NCBI for entry in the BioProject database.	string		No	
+sample	ncbi_biosample	Record identifier assigned by NCBI for entry in the BioSample database.	string		No	
+summary_mutation_panel	gene_name	Name of gene	string		No	
+summary_mutation_panel	high_confidence	No': Nonsynonymous SNPs that do not have high confidence of association with drug resistance as determined by analysis performed by ReSeqTB or are not listed in ReSeqTB. 'Yes': Nonsynonymous SNPs with high confidence of association with drug resistance as determined by analysis performed by ReSeqTB. 'Null': Synonymous SNPs associated with drug resistance in the literature but not entered in ReSeqTB.	boolean		No	
+summary_mutation_panel	hain	Genomic single-nucleotide polymorphisms that are tested by the Hain Genotype MTBDRplus and MTBDRsl assays. The value will be 'Yes' if a patient's genomic sequence had a variant in a SNP that is identified by a Hain assay.	boolean		No	
+summary_mutation_panel	genexpert	Xpert MTB / RIF test to carry out the detection of the presence of Mycobacterium tuberculosis in a sample of diagnostic material and resistance to rifampicin in less than two hours.	boolean		No	
+demographic	bmi	The body mass divided by the square of the body height expressed in units of kg/m^2.	number		No	
