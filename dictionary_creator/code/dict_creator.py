@@ -146,8 +146,11 @@ def check_row(row, filename):
         # check correctly corresponding entries for groups
         length = lengths.pop()
 
+        n_groups = 0
+
         for i in range(length):
             if type(parsed_row['<link_name>'][i]) is list:
+                n_groups += 1
                 prev_field = ''
                 for field in all_link_props:
                     if field not in ['<link_group_required>', '<group_exclusive>','<backref>']:
@@ -158,6 +161,10 @@ def check_row(row, filename):
                         if len(lengths) > 1:
                             raise InputError(row, 'ERROR: Field - ' + field + ' - does not correspond with field - ' + prev_field)
                         prev_field = field
+
+        for field in ['<link_group_required>', '<group_exclusive>']:
+            if len(parsed_row[field]) != n_groups:
+                raise InputError(row, 'ERROR: Link group field - ' + field + ' - does not correspond with the number of link groups designated in other fields.')
 
     # check variables.tsv rows
     elif filename == var_file:
@@ -181,6 +188,7 @@ def parse_entry(input_str, field):
 
     if '[' not in input_str:
         out = input_str.split(',')
+        out = [k for k in out if k != '']
         return out
 
     out = []
