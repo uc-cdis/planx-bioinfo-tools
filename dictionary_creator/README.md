@@ -18,13 +18,13 @@ python dict_creator.py -d examples -n niaid.bionimbus.org
 
 The list of variables is collected in a TSV named `variables.tsv` with the following columns (headers):
 
-* `Node`: Schema file (node/category) where the variable belongs.
-* `Field`: Name for this variable.
-* `Description`: Description provided for this variable in the dictionary.
-* `Type`: Type of the variable. Typically, `integer`, `number`, `enum`, `string`.
-* `Options`: If Type is `enum`, list of possible values for this variable. Both `|` or `","` separators can be used.
-* `Required`: Yes/No depending on whether this variable will be required or not in the dictionary.
-* `Term`: (OPTIONAL) Associated standard vocabulary term associated to this variable. E.g. CDISC term.
+* `<node>`: Schema file (node/category) where the variable belongs.
+* `<field>`: Name for this variable.
+* `<description>`: Description provided for this variable in the dictionary.
+* `<type>`: Type of the variable. Typically, `integer`, `number`, `enum`, `string`.
+* `<options>`: If Type is `enum`, list of possible values for this variable. Both `|` or `","` separators can be used.
+* `<required>`: Yes/No depending on whether this variable will be required or not in the dictionary.
+* `<term>`: (OPTIONAL) Associated standard vocabulary term associated to this variable. E.g. CDISC term.
 
 Links are specified in another TSV named `nodes.tsv` with the following columns (headers):
 
