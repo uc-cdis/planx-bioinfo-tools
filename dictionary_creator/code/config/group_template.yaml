@@ -1,0 +1,4 @@
+  - exclusive: <group_exclusive>
+    required: <link_group_required>
+    subgroup:
+<subgroup>

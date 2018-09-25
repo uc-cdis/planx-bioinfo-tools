@@ -3,7 +3,7 @@ $schema: "http://json-schema.org/draft-04/schema#"
 id: "<node>"
 title: <title>
 type: object
-namespace: http://www.gen3.org
+namespace: <namespace>
 category: <category>
 program: '*'
 project: '*'

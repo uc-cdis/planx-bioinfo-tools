@@ -1,4 +1,0 @@
-<node>	<title>	<category>	<description>	<link_name>	<backref>	<label>	<target>	<multiplicity>	<link_required>
-laboratory_test	Laboratory Test	Biomarkers	Collection of parameters associated to the Laboratory Test 	cases,samples	laboratory_tests,laboratory_tests	performed_on,data_from	case,sample	many_to_one,one_to_one	true,false
-laboratory_result	Laboratory Result	Biomarkers	Measurements obtained for the specific Laboratory Test	laboratory_tests	laboratory_results	measured_from	laboratory_test	one_to_one	true
-complication	Complication	Biomarkers	Complications associated to the Laboratory Test	laboratory_tests	complications	related_to	laboratory_test	many_to_one	true
