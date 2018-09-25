@@ -5,9 +5,8 @@ from pandas import read_table
 
 # make this cleaner, or create another config file and put these things there
 all_link_props = ['<link_name>', '<backref>', '<label>', '<target>', '<multiplicity>', '<link_required>', '<link_group_required>', '<group_exclusive>']
-single_link_props = ['<link_name>', '<label>', '<target>', '<multiplicity>', '<link_required>']
-req_var_fields = ['<field>', '<type>', '<node>', '<required>', '<description>']
 req_link_fields = ['<node>', '<title>', '<category>', '<description>'] + all_link_props
+req_var_fields = ['<field>', '<type>', '<node>', '<required>', '<description>']
 
 def parse_options():
     '''Obtain the name of the directory containing the target nodes.tsv and variables.tsv files - store this directory name in args.dir'''
@@ -304,15 +303,16 @@ def build_link(link_map, map_place, link_group=False, group_place=None):
             new_lines.append(new_line)
         out = ''.join(new_lines)
 
-    for link_prop in single_link_props:
+    for link_prop in all_link_props:
+        if link_prop not in ['<link_group_required>', '<group_exclusive>','<backref>']:
 
-        if link_group:
-            link_prop_val = link_map[link_prop][map_place][group_place]
+            if link_group:
+                link_prop_val = link_map[link_prop][map_place][group_place]
 
-        else:
-            link_prop_val = link_map[link_prop][map_place]
+            else:
+                link_prop_val = link_map[link_prop][map_place]
 
-        out = out.replace(link_prop, link_prop_val)
+            out = out.replace(link_prop, link_prop_val)
 
     out = out.replace('<backref>', link_map['<backref>'][0])
 
