@@ -1,12 +1,18 @@
 import argparse
 import json
 import os
+import yaml
 from pandas import read_table
 
-# make this cleaner, or create another config file and put these things there
-all_link_props = ['<link_name>', '<backref>', '<label>', '<target>', '<multiplicity>', '<link_required>', '<link_group_required>', '<group_exclusive>']
-req_link_fields = ['<node>', '<title>', '<category>', '<description>'] + all_link_props
-req_var_fields = ['<field>', '<type>', '<node>', '<required>', '<description>']
+class InputError(Exception):
+    '''A class to represent input errors on the nodes.tsv and variables.tsv sheets.'''
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
+
+        print '\n' + self.message + '\n'
+        print json.dumps(self.expression, indent=2)
+        print ''
 
 def parse_options():
     '''Obtain the name of the directory containing the target nodes.tsv and variables.tsv files - store this directory name in args.dir'''
@@ -20,15 +26,15 @@ def parse_options():
 
 def create_schemas():
     '''Generates dictionary YAML files from nodes.tsv and variables.tsv contained in target directory.'''
-    global content_template, link_template, group_template, nodes, variables
+    global content_template, link_template, group_template, req_link_fields, req_var_fields, link_props, nodes, variables
 
     mkdir('../output_yaml')
 
     mkdir('../output_yaml/' + args.dir + '_dict')
 
-    nodes, variables = get_data(args.dir)
+    content_template, link_template, group_template, req_link_fields, req_var_fields, link_props = load_config()
 
-    content_template, link_template, group_template = get_templates()
+    nodes, variables = get_data(args.dir)
 
     for node in nodes:
 
@@ -49,7 +55,7 @@ def get_data(directory):
 
     return load_tsv(nodes_file), load_tsv(var_file)
 
-def get_templates():
+def load_config():
     '''Load template data (as strings) for schema creation from the YAML template config files.'''
     # Read schema template
     with open('config/yaml_template.yaml', 'r') as schemaFile:
@@ -63,7 +69,13 @@ def get_templates():
     with open('config/group_template.yaml', 'r') as groupFile:
         link_group = groupFile.read()
 
-    return content, link, link_group
+    # Read headers
+    headerFile = yaml.load(open('config/headers.yaml'))
+    req_link_fields = headerFile['req_link_fields']
+    req_var_fields = headerFile['req_var_fields']
+    link_props = req_link_fields[4:]
+
+    return content, link, link_group, req_link_fields, req_var_fields, link_props
 
 def create_node_schema(node):
     '''Creates a dictionary YAML file for input node.'''
@@ -80,7 +92,7 @@ def create_node_schema(node):
 
     # Fill node properties in schema
     for prop in nodes[node][0]:
-        if prop not in all_link_props:
+        if prop not in link_props:
             content = content.replace(prop, nodes[node][0][prop])
 
     # Write output
@@ -110,15 +122,13 @@ def load_tsv(filename):
 def check_row(row, filename):
     '''Function for inspecting rows in a TSV to check for errors - blank entries or entries which do not correctly correspond.'''
     # can be cleaned up
-    # lots of repetition - write a few functions, and/or take advantage of list comprehension
     if filename == nodes_file:
 
         # check for any blank fields
         for field in req_link_fields:
-            if field not in ['<link_group_required>', '<group_exclusive>', '<backref>'] and row[field] == '':
+            if field not in ['<link_group_required>', '<group_exclusive>'] and row[field] == '':
                 raise InputError(row, 'ERROR: Blank field - ' + field)
 
-        # use build_link_map() here - already wrote this function!
         parsed_row = row.copy()
 
         lengths = set()
@@ -126,7 +136,7 @@ def check_row(row, filename):
 
         # check correctly corresponding entries in general, for number of entries in each cell
         prev_field = ''
-        for field in all_link_props:
+        for field in link_props:
             parsed_row[field] = parse_entry(parsed_row[field], field)
 
             if field not in ['<link_group_required>', '<group_exclusive>', '<backref>']:
@@ -151,7 +161,7 @@ def check_row(row, filename):
             if type(parsed_row['<link_name>'][i]) is list:
                 n_groups += 1
                 prev_field = ''
-                for field in all_link_props:
+                for field in link_props:
                     if field not in ['<link_group_required>', '<group_exclusive>','<backref>']:
                         if type(parsed_row[field][i]) is not list:
                             raise InputError(row, 'ERROR: Field - ' + field + ' - does not correspond with field - ' + prev_field)
@@ -220,23 +230,13 @@ def parse_entry(input_str, field):
 
     return out
 
-class InputError(Exception):
-    '''A class to represent input errors on the nodes.tsv and variables.tsv sheets.'''
-    def __init__(self, expression, message):
-        self.expression = expression
-        self.message = message
-
-        print '\n' + self.message + '\n'
-        print json.dumps(self.expression, indent=2)
-        print ''
-
 def build_link_map(node):
     '''Return a dictionary containing link data for input node.'''
 
     link_map = {}
 
-    for i in range(len(all_link_props)):
-        prop = all_link_props[i]
+    for i in range(len(link_props)):
+        prop = link_props[i]
         input_str = nodes[node][0][prop]
         if len(input_str) > 0:
             link_map[prop] = parse_entry(input_str, prop)
@@ -303,7 +303,7 @@ def build_link(link_map, map_place, link_group=False, group_place=None):
             new_lines.append(new_line)
         out = ''.join(new_lines)
 
-    for link_prop in all_link_props:
+    for link_prop in link_props:
         if link_prop not in ['<link_group_required>', '<group_exclusive>','<backref>']:
 
             if link_group:
@@ -320,7 +320,6 @@ def build_link(link_map, map_place, link_group=False, group_place=None):
 
 def write_file(node, content):
     '''Write the output dictionary YAML file.'''
-    # encapsulate a lot of these writing segments into functions
     global nodes, variables, args
 
     out_file = '../output_yaml/' + args.dir + '_dict/' + node + '.yaml'
