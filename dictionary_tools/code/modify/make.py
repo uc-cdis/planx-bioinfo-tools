@@ -1,28 +1,22 @@
 import yaml
 # this is a submodule to be called and referred to by the main 'modify' script
 
-# handle the global bits!!!
-# fix it so we don't have name issues, conflicts, with main script
-
 # previous main function in dict_creator.py
 # not being used now, but preserved for reference
 def create_schemas():
     '''Generates dictionary YAML files from nodes.tsv and variables.tsv contained in target directory.'''
     global content_template, link_template, group_template, req_link_fields, req_var_fields, link_props, nodes, variables
 
-    mkdir('../../output/make') # covered
+    mkdir('../../output/make')
 
-    mkdir('../../output/make/' + args.dir + '_out') # covered
+    mkdir('../../output/make/' + args.dir + '_out')
 
-    # covered
     content_template, link_template, group_template, req_link_fields, req_var_fields, link_props = load_config()
 
-    # covered
     # nodes is all_changes_map[node]['link']
     # variables is all_changes_map[node]['variable']
     nodes, variables = get_data(args.dir)
 
-    # covered
     for node in nodes:
         # a node is 'sample', 'case', etc.
         create_node_schema(node) # covered
@@ -59,25 +53,22 @@ def create_node_schema(node, args, all_changes_map, out_path):
     content = content_template # good
 
     # Populate namespace
-    content = content.replace('<namespace>', args.namespace) # good
+    content = content.replace('<namespace>', args.namespace)
 
     # Get links
-    link_block = return_link_block(node, all_changes_map) # should be good
+    link_block = return_link_block(node, all_changes_map)
 
     # Add links to schema template
-    content = content.replace('<link>', link_block) # looks good
+    content = content.replace('<link>', link_block)
 
     # Fill node fields in schema
     # e.g., title, category, description
     for node_field in all_changes_map[node]['link'][0]:
-        # something may need to be revised (config, or here)
-        # to handle the new headers/columns in the nodes.tsv file
         if node_field not in link_props:
             content = content.replace(node_field, all_changes_map[node]['link'][0][node_field])
-    # above block is good, barring comments about editing config
 
     # Write output
-    write_file(node, content, all_changes_map, out_path) # should be good! need to fix out_path though
+    write_file(node, content, all_changes_map, out_path)
 
 def build_link_map(node, all_changes_map):
     '''Return a dictionary containing link data for input node.'''
@@ -116,7 +107,6 @@ def parse_entry(input_str, field=None):
             group = group_temp[0]
             entry = group.split(',')
 
-            # remove empty strings in order to enable error checking later on in check_row()
             out_entry = [k.strip() for k in entry if k.strip() != '']
 
             out.append(out_entry)
@@ -240,7 +230,7 @@ def get_required_list(node, all_changes_map):
 
     return sorted(req)
 
-# this can definitely be cleaned up a bit 
+# this can definitely be cleaned up a bit
 def write_file(node, content, all_changes_map, out_path):
     '''Write the output dictionary YAML file.'''
 

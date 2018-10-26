@@ -7,28 +7,6 @@ from collections import OrderedDict
 from pandas import read_table
 from copy import deepcopy
 
-'''
-Notes:
-
-- First thing I should do is write a 'how-to-use dictionary_tools' document - modify (make) - check - compare - search
-A main document describing the whole tool kit, plus one document for each tool individually
-
-- Pretty sure the 'headers.yaml' config file is not being used at all now. Search 'req_var_fields' and 'req_link_fields'
-FACT - it's being used to generate 'link_props'
-
-- Last thing to handle in this script, at this very moment, is the 'ignore_files' issue, which is almost entirely aesthetic
-Can probably write a little function to move over the files we want to move over
-
-- Something to do moving forward, is to make the script much more robust with regards to processing string input from the TSV,
-i.e. with .strip() and .lower(), and maybe some encoding business
-
-- There are some things to check out in make.py, about the required issue
-
-- Create checks within the script for trying to delete a property that's not there, or modifying a property that's not there, or adding a property that's already there, etc.
-
-- Lastly, create TSV sheets that cover every case, and test this script (haha oh my), then debugdebugdebug
-'''
-
 class InputError(Exception):
     '''A class to represent input errors on the nodes.tsv and variables.tsv sheets.'''
     def __init__(self, expression, message):
@@ -301,8 +279,7 @@ def handle_node(node):
 
         elif all_changes_map[node]['action'] == 'update':
             print 'Modifying node - ' + node + '\n'
-
-            modify_schema(node) # still working on this function
+            modify_schema(node)
 
         else: # for debugging purposes
             print '\nHey here is a problem: ' + all_changes_map[node]['action']
@@ -329,14 +306,11 @@ def make_schema(node):
 def modify_schema(node):
     schema_text, schema_dict = get_schema(node)
 
-    # done
     schema_text = modify_namespace(schema_text, schema_dict)
 
-    # done
     # if no changes, schema_text and schema_dict are returned untouched
     schema_text, schema_dict = modify_links(schema_text, schema_dict)
 
-    # done
     # if no changes, schema_dict is returned untouched
     schema_dict = modify_properties(schema_dict)
 
@@ -429,7 +403,6 @@ def modify_links(schema_text, schema_dict):
         updated_link_block = make.return_link_block(node, all_changes_map)
 
         # update the 'links' entry in schema_dict
-        # if this line works I'm going to be quite happy and pleased with myself, and things in general
         schema_dict['links'] = yaml.load(updated_link_block)
 
         # update 'links' block in schema_text
@@ -644,9 +617,6 @@ def write_property(pair, out_file):
             pair[1].pop(item)
 
     # write enum
-    # presently not doing this,
-    # but if we'd like, we can also alphabetize the enum lists
-    # currently not putting enum val's in quotes, but can do this
     if 'enum' in pair[1]:
         out_file.write('    enum:\n')
         for option in sorted(pair[1]['enum']):
@@ -657,15 +627,10 @@ def write_property(pair, out_file):
         print 'WARNING: unaddressed items for this property!! - ' + pair[0]
         print json.dumps(pair[1], indent=2)
 
-# see note here
 if __name__ == "__main__":
 
-    # MUST check to see if I am writing the correct/updated 'required' list
-    # pretty sure I'm not, because I think at the moment it is being copied
-    # directly from the original schema_text
-
     parse_options()
-    load_make_config() # get templates etc. - some config may need to be changed, due to addition of new headers/columns
+    load_make_config()
     get_all_changes_map()
     modify_dictionary()
     # call to COMPARE module, to compare resulting out_dict to input_dict, to report changes
