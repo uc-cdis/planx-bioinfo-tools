@@ -1,0 +1,22 @@
+# headers for the nodes.tsv file
+req_link_fields:
+  - '<node>'
+  - '<title>'
+  - '<category>'
+  - '<description>'
+  - '<link_name>'
+  - '<backref>'
+  - '<label>'
+  - '<target>'
+  - '<multiplicity>'
+  - '<link_required>'
+  - '<link_group_required>'
+  - '<group_exclusive>'
+
+# required headers for the variables.tsv
+req_var_fields:
+  - '<field>'
+  - '<type>'
+  - '<node>'
+  - '<required>'
+  - '<description>'
