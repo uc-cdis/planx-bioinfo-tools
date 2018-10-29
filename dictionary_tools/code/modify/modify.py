@@ -6,6 +6,7 @@ import make # module that contains functionality from original dict_creator.py s
 from collections import OrderedDict
 from pandas import read_table
 from copy import deepcopy
+from shutil import copy as copy_file
 
 class InputError(Exception):
     '''A class to represent input errors on the nodes.tsv and variables.tsv sheets.'''
@@ -17,12 +18,7 @@ class InputError(Exception):
         print json.dumps(self.expression, indent=2)
         print ''
 
-# not processing these files/folders in the schemas directory
-# maybe just 'move' these over?
-# find a better way to put this in the code - doesn't look good here, it's just kind of floating
-ignore_files = ['projects', 'README.md', '_definitions.yaml', '_settings.yaml', '_terms.yaml', '.DS_Store']
-
-# first function called in main script
+# first function called in setup()
 def parse_options():
     '''Obtain path_to_schemas, namespace value, name of directory containing target nodes and variables TSV files, and name of output dictionary.'''
     global args
@@ -37,9 +33,52 @@ def parse_options():
 
     return args
 
-# second function called in main script
+# second function called in setup()
+def create_output_path():
+    '''Create path to the output dictionary: dictionary_tools/output/modify/<out_dict_name>'''
+    global out_path
+
+    if args.out_dict_name:
+        out_dict_name = args.out_dict_name
+    else:
+        out_dict_name = datetime.strftime(datetime.now(), 'out_dict_%m.%d_%H.%M')
+
+    out_path = '../../output/modify/' + out_dict_name + '/'
+
+    mkdir(out_path)
+
+# called in create_output_path()
+def mkdir(directory):
+    '''Create directory if it does not already exist.'''
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+# can revise or clean up the req_link_fields, req_var_fields, link_props issue
+# third function called in setup()
+def load_make_config():
+    '''Load templates used for creating new nodes and constructing links section text-blocks.'''
+    global content_template, link_template, group_template, req_link_fields, req_var_fields, link_props
+    content_template, link_template, group_template, req_link_fields, req_var_fields, link_props = make.load_config()
+
+# fourth function called in setup()
 def get_all_changes_map():
-    # happens immediately following call to parse_options()
+    '''
+    Aggregates information from nodes and variables input TSV sheets into one data structure.
+
+    Result is a dictionary with node names (e.g., 'sample', 'case') as keys, and the values are dictionaries:
+
+    {
+    'action': 'add'/'update'/'delete',
+    'link': [{<row>}],
+    'variable': [{<row_1>}, {<row_2>}, ..., {<row_k>}]
+    }
+
+    Where 'link' maps to the list of rows corresponding to the node in the nodes.tsv file,
+    and 'variable' maps to the list of rows corresponding to the node in the variables.tsv file.
+
+    The dictionaries which correspond to rows in the TSV sheets have the headers from the sheet as keys,
+    and the values are the row's values for that header/column.
+    '''
     global all_changes_map
 
     nodes, variables = get_data(args.input_tsv)
@@ -52,8 +91,6 @@ def get_all_changes_map():
         action = 'update' # action is always update, unless field <node_action> is specified as 'add' or 'delete' in nodes.tsv
 
         # determine if the node_action is add or delete
-        # if add or delete, the node should only have one row corresponding to it, in nodes.tsv
-        # include this check in check_row()
         if nodes.get(node):
             for node_action in ['add', 'delete']:
                 if nodes[node][0]['<node_action>'] == node_action:
@@ -202,69 +239,75 @@ def check_row(row, filename):
             if row['<options_action>'] in ['add', 'delete', 'replace'] and row['<options>'] == '':
                 raise InputError(row, 'ERROR: Field <options_action> is populated but field <options> is blank')
 
-# third function called in main script
+# second function called in main script, after setup()
 def modify_dictionary():
-    global path_to_schemas, out_path
+    '''Iterates through the node list and passes each node into the handle_node() processing pipeline.'''
+    node_list = get_node_list() # this is a list of all the nodes we need to process
+
+    for node in node_list:
+        # node is 'sample', 'case', etc.
+        handle_node(node)
+
+# called in modify_dictionary()
+def get_node_list():
+    '''Returns the list of all nodes that we need to consider:
+    1) Nodes from the input dictionary, and
+    2) Nodes listed in the input TSV sheets
+    '''
+    input_dict = set(get_input_dict()) # files from input dictionary
+
+    ignore_files = set(['projects', 'README.md', '_definitions.yaml', '_settings.yaml', '_terms.yaml', '.DS_Store'])
+
+    handle_ignore_files(ignore_files)
+
+    # get just the node names, without file extensions
+    input_nodes = [k[:-5] for k in input_dict.difference(ignore_files)]
+
+    # pool these node names with those in the input_tsv sheets (in all_changes_map), remove duplicates, convert back to a list
+    node_list = list(set(input_nodes + list(all_changes_map.keys())))
+
+    return sorted(node_list)
+
+# see here - directory 'projects' issue
+# called in get_node_list()
+def handle_ignore_files(ignore_files):
+    '''Copies the ignore files (if they exist in the input dictionary) over from input dictionary to the output dictionary.'''
+    for file_name in ignore_files:
+        in_file = path_to_schemas + file_name
+
+        # this filters out non-file entities, e.g., directories - see directory 'projects'
+        if os.path.isfile(in_file):
+            out_file = out_path + file_name
+            copy_file(in_file, out_file)
+
+# called in get_node_list()
+def get_input_dict():
+    '''Returns a list containing all the filenames from the input dictionary.'''
+    global path_to_schemas
 
     # path from args, relative to dictionary_tools/
-    # e.g. input/dictionaries/gdcdictionary/gdcdictionary/schemas
-    # OR input/dictionaries/gdcdictionary/gdcdictionary/schemas/
-
+    # e.g. input/dictionaries/gdcdictionary/gdcdictionary/schemas/
     path_to_schemas = '../../' + args.path_to_schemas
 
     if path_to_schemas[-1] != '/':
         path_to_schemas += '/'
 
-    # input/dictionaries/gdcdictionary/gdcdictionary/schemas/
-
     input_dict = os.listdir(path_to_schemas)
 
-    if args.out_dict_name:
-        out_dict_name = args.out_dict_name
-    else:
-        out_dict_name = datetime.strftime(datetime.now(), 'out_dict_%m.%d_%H.%M.%S')
-
-    out_path = '../../output/modify/' + out_dict_name + '/'
-
-    mkdir('../../output')
-
-    mkdir('../../output/modify')
-
-    mkdir(out_path)
-
-    for schema_file in sorted(list(set(input_dict + list(all_changes_map.keys())))):
-        # revise this bit later on, after deciding how to handle these non-schema files
-        # I think they should just whole-sale be copied over
-        if schema_file not in ignore_files:
-            # we don't put a conditional here
-            # we 'handle' every schema, because no matter what
-            # we're going to populate the namespace with the value passed in the command line call
-
-            if schema_file[-5:] == '.yaml': # if it comes from the input_dict
-                node = schema_file[:-5]
-            else:                           # if it comes from the all_changes_map
-                node = schema_file
-
-            # node is 'sample', 'case', etc.
-            handle_node(node)
-
-        else:
-            pass
-            # keep_file(schema_file) or something like that
-
-# called in modify_dictionary()
-def mkdir(directory):
-    '''Create input directory if it does not already exist.'''
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-# called in modify_dictionary()
-def load_make_config():
-    global content_template, link_template, group_template, req_link_fields, req_var_fields, link_props
-    content_template, link_template, group_template, req_link_fields, req_var_fields, link_props = make.load_config()
+    return input_dict
 
 # the workhorse of modify_dictionary()
 def handle_node(node):
+    '''Main pipeline for processing nodes.
+    Each node is handled first on whether or not we need to process it at all,
+    and then if we need to process it, if we are adding, updating, or deleting this node.
+    The first check is made by seeing if the node appears in all_changes_map,
+    and if it does, then we read the 'action' value associated with that node
+    to determine what action to take: add/update/delete.
+
+    If the node does not appear in all_changes_map, then we keep that schema
+    with no changes except to populate the namespace with the value from args.
+    '''
     print '\n~~~~~ ' + node + ' ~~~~~'
 
     if node in all_changes_map:
@@ -290,8 +333,9 @@ def handle_node(node):
 
 # called in handle_node() to keep (w no changes besides updating namespace) a schema
 def keep_schema(node):
-    # no changes to be made
-    # update namespace and write file
+    '''No changes are specified for this node, but we always update the namespace.
+    Here we load the schema, make the namespace change, and then write the file.
+    '''
     schema_text, schema_dict = get_schema(node)
 
     schema_text = modify_namespace(schema_text, schema_dict)
@@ -300,6 +344,13 @@ def keep_schema(node):
 
 # called in handle_node() to create new schema
 def make_schema(node):
+    '''This is a new node which needs to be created, so we refer to the make.py module,
+    which contains the functionality from the old dict_creator.py script.
+    We pass this node into the make.create_node_schema() pipeline which
+    results in the creation of the YAML file for the new node.
+
+    See the make.py module for details.
+    '''
     make.create_node_schema(node, args, all_changes_map, out_path)
 
 # called in handle_node()
@@ -318,7 +369,7 @@ def modify_schema(node):
 
 # called in modify_schema() and keep_schema()
 def modify_namespace(schema_text, schema_dict):
-    '''Update namespace in schema_text'''
+    '''Update namespace in schema_text.'''
     if 'namespace' in schema_dict:
         schema_text = schema_text.replace(schema_dict['namespace'], args.namespace)
 
@@ -330,6 +381,10 @@ def modify_namespace(schema_text, schema_dict):
 # property required issue handled here
 # called in modify_schema()
 def modify_properties(schema_dict):
+    '''Takes the schema dictionary as input,
+    makes all the property changes for the given node as indicated in all_changes_map (which is all the information from variables.tsv),
+    and returns the appropriately modified schema dictionary.
+    '''
     node = schema_dict['id']
 
     if all_changes_map[node]['variable']:
@@ -353,6 +408,9 @@ def modify_properties(schema_dict):
 
 # called in modify_properties()
 def build_prop_entry(schema_dict, row):
+    '''Creates and returns the new or updated property entry
+    corresponding to the given row in the variables.tsv sheet.
+    '''
     if row['<field_action>'] == 'update':
         entry = deepcopy(schema_dict['properties'][row['<field>']])
 
@@ -627,10 +685,15 @@ def write_property(pair, out_file):
         print 'WARNING: unaddressed items for this property!! - ' + pair[0]
         print json.dumps(pair[1], indent=2)
 
-if __name__ == "__main__":
-
+# first function called in main script
+def setup():
     parse_options()
+    create_output_path()
     load_make_config()
     get_all_changes_map()
+
+if __name__ == "__main__":
+
+    setup()
     modify_dictionary()
     # call to COMPARE module, to compare resulting out_dict to input_dict, to report changes
