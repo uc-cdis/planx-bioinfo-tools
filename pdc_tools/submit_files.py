@@ -48,7 +48,7 @@ if __name__== "__main__":
             i = 0
             while i < len(data):
                 # submitting items one by one in case one is not valid
-                for item in data[i:i + step]:
+                for item in data[i:i + STEP]:
                     response = submit_json(item)
                     code = response['code']
                     if code != 200:
@@ -61,8 +61,8 @@ if __name__== "__main__":
                             break
                 if code != 200 and BREAK_IF_ERROR:
                     break
-                i += step
-                print('', i, len(data))
+                i += STEP
+                print('{} / {}'.format(i if i < len(data) else len(data), len(data)))
         if code != 200:
             for inv in invalid:
                 print(inv)
