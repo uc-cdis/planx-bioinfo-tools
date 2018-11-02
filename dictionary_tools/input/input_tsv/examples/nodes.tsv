@@ -1,0 +1,5 @@
+<node>	<node_action>	<title>	<category>	<description>	<link_name>	<backref>	<label>	<target>	<multiplicity>	<link_required>	<link_group_required>	<group_exclusive>
+new_node_test	add	New Node Test	test	This is a node created to test the ‘make’ functionality of the ‘modify’ script.	samples	new_node_tests	linked_to	sample	many_to_many	TRUE
+aliquot	update				[subjects,samples],follow_ups	aliquots	[performed_on,performed_on],performed_at	[subject,sample],follow_up	[one_to_one,one_to_one],one_to_one	[FALSE,FALSE],True	TRUE	TRUE
+subject	update				projects	subjects	associated_with	project	many_to_one	TRUE
+acknowledgement	delete											
