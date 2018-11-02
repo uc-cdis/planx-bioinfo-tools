@@ -21,7 +21,7 @@ def parse_options():
 
     parser = argparse.ArgumentParser(description="Obtain path_to_schemas, namespace value, name of directory containing target nodes and variables TSV files, and name of output dictionary.")
     parser.add_argument("-p", "--path_to_schemas", dest="path_to_schemas", required=True, help="Path to input schemas, relative to directory dictionary_tools.")
-    parser.add_argument("-n", "--namespace", dest="namespace", required=True, help="Desired namespace for this dictionary - e.g., niaid.bionimbus.org")
+    parser.add_argument("-n", "--namespace", dest="namespace", required=True, help="Desired namespace for the output dictionary - e.g., niaid.bionimbus.org")
     parser.add_argument("-i", "--input_tsv", dest="input_tsv", required=True, help="Name of directory containing target nodes and variables TSV files.")
     parser.add_argument("-o", "--out_dict_name", dest="out_dict_name", required=False, help="Name of output dictionary.")
 
