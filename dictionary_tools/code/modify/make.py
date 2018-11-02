@@ -1,25 +1,25 @@
+# This is a submodule to be imported by the main 'modify' script
+# This module contains the (extended) functionality from the original dict_creator.py script
 import yaml
-# this is a submodule to be called and referred to by the main 'modify' script
+import os
+from pandas import read_table
+from copy import deepcopy
 
-# previous main function in dict_creator.py
-# not being used now, but preserved for reference
-def create_schemas():
-    '''Generates dictionary YAML files from nodes.tsv and variables.tsv contained in target directory.'''
-    global content_template, link_template, group_template, req_link_fields, req_var_fields, link_props, nodes, variables
+class InputError(Exception):
+    '''A class to represent input errors on the nodes.tsv and variables.tsv sheets.'''
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
 
-    mkdir('../../output/make')
+        print '\n' + self.message + '\n'
+        print json.dumps(self.expression, indent=2)
+        print ''
 
-    mkdir('../../output/make/' + args.dir + '_out')
-
-    content_template, link_template, group_template, req_link_fields, req_var_fields, link_props = load_config()
-
-    # nodes is all_changes_map[node]['link']
-    # variables is all_changes_map[node]['variable']
-    nodes, variables = get_data(args.dir)
-
-    for node in nodes:
-        # a node is 'sample', 'case', etc.
-        create_node_schema(node) # covered
+# called in modify.create_output_path()
+def mkdir(directory):
+    '''Create directory if it does not already exist.'''
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
 def load_config():
     '''Load template data (as strings) for schema creation from the YAML template config files.'''
@@ -37,15 +37,195 @@ def load_config():
 
     # Read headers
     headerFile = yaml.load(open('config/headers.yaml'))
-    req_link_fields = headerFile['req_link_fields']
-    req_var_fields = headerFile['req_var_fields']
-    link_props = req_link_fields[4:]
+    link_props = headerFile['link_properties']
 
-    return content, link, link_group, req_link_fields, req_var_fields, link_props
+    return content, link, link_group, link_props
 
 def run_load_config():
-    global content_template, link_template, group_template, req_link_fields, req_var_fields, link_props
-    content_template, link_template, group_template, req_link_fields, req_var_fields, link_props = load_config()
+    global content_template, link_template, group_template, link_props
+    content_template, link_template, group_template, link_props = load_config()
+
+# called in modify.get_all_changes_map()
+def get_data(directory):
+    '''Returns data from the target nodes.tsv and variables.tsv files as two separate dictionaries - one dictionary for each file.'''
+    global nodes_file, var_file
+
+    path = '../../input/input_tsv/' + directory + '/'
+
+    nodes_file = path + 'nodes.tsv'
+    var_file = path + 'variables.tsv'
+
+    return load_tsv(nodes_file), load_tsv(var_file)
+
+# called in get_data()
+def load_tsv(filename):
+    '''Reads the TSV file and returns the data in a dictionary format,
+    where the keys are nodes and the values are lists of dictionaries,
+    where each dictionary corresponds to a row for that node in the TSV.
+    '''
+    out = {}
+    data_frame = read_table(filename, na_filter=False)
+    temp_dict = data_frame.to_dict('records')
+
+    for row in temp_dict:
+
+        check_row(row, filename)
+
+        node = row['<node>']
+        if node in out:
+            out[node].append(row)
+        else:
+            out[node] = [row]
+
+    return out
+
+# called in modify_properties()
+def build_prop_entry(schema_dict, row):
+    '''Creates and returns the new or updated property entry
+    corresponding to the given row in the variables.tsv sheet.
+    '''
+    if row['<field_action>'] == 'update':
+        entry = deepcopy(schema_dict['properties'][row['<field>']])
+
+    elif row['<field_action>'] == 'add':
+        entry = {}
+
+    else:
+        print 'Handle this unforeseen <field_action>! - ' + row['<field_action>'] + '\n'
+
+    if row['<description>']:
+        entry['description'] = row['<description>']
+        entry.pop('term', None)
+
+    elif row['<term>']:
+        entry['term'] = {'$ref': row['<term>']}
+        entry.pop('description', None)
+
+    if row['<type>']:
+        if row['<type>'] != 'enum':
+            entry['type'] = row['<type>']
+            entry.pop('enum', None)
+        elif row['<type>'] == 'enum' and row['<field_action>'] != 'update':
+            entry['enum'] = parse_entry(row['<options>'])
+            entry.pop('type', None)
+
+    if row['<field_action>'] == 'update' and row['<options>'] != '':
+        # 'add' is the default <options_action>
+        if row['<options_action>'] in ['', 'add'] and not row['<type>']:
+            entry['enum'].extend(parse_entry(row['<options>']))
+
+        elif row['<options_action>'] == 'delete':
+            del_list = parse_entry(row['<options>'])
+            for val in del_list:
+                entry['enum'].remove(val)
+
+        elif row['<options_action>'] == 'replace' or row['<type>'] == 'enum':
+            entry['enum'] = parse_entry(row['<options>'])
+            entry.pop('type', None)
+
+    return entry
+
+# called in load_tsv()
+def check_row(row, filename):
+    '''Function for inspecting rows in a TSV to check for errors - blank entries or entries which do not correctly correspond.'''
+    # can be cleaned up
+
+    # check nodes.tsv rows
+    if filename == nodes_file:
+
+        for field in ['<node>', '<node_action>']:
+            if not row[field]:
+                raise InputError(row, 'ERROR: Blank field - ' + field)
+
+        if row['<node_action>'] in ['add', 'update']:
+
+            if row['<node_action>'] == 'add':
+                for field in ['<title>', '<category>', '<description>']:
+                    if not row[field]:
+                        raise InputError(row, 'ERROR: Blank field - ' + field)
+
+            # check for any blank fields
+            for field in ['<link_name>', '<backref>', '<label>', '<target>', '<multiplicity>', '<link_required>']:
+                if not row[field]:
+                    raise InputError(row, 'ERROR: Blank field - ' + field)
+
+            parsed_row = row.copy()
+
+            lengths = set()
+            group_lengths = set()
+
+            # check correctly corresponding entries in general, for number of entries in each cell
+            prev_field = ''
+            for field in link_props:
+                parsed_row[field] = parse_entry(str(parsed_row[field]), field)
+
+                if field not in ['<link_group_required>', '<group_exclusive>', '<backref>']:
+                    lengths.add(len(parsed_row[field]))
+                    if len(lengths) > 1:
+                        raise InputError(row, 'ERROR: Field - ' + field + ' - does not correspond with field - ' + prev_field)
+
+                elif field in ['<link_group_required>', '<group_exclusive>']:
+                    group_lengths.add(len(parsed_row[field]))
+                    if len(group_lengths) > 1:
+                        raise InputError(row, 'ERROR: Field - ' + field + ' - does not correspond with field - ' + prev_field)
+
+                if field != '<backref>':
+                    prev_field = field
+
+            # check correctly corresponding entries for groups
+            length = lengths.pop()
+
+            n_groups = 0
+
+            for i in range(length):
+                if type(parsed_row['<link_name>'][i]) is list:
+                    n_groups += 1
+                    prev_field = ''
+                    for field in link_props:
+                        if field not in ['<link_group_required>', '<group_exclusive>','<backref>']:
+                            if type(parsed_row[field][i]) is not list:
+                                raise InputError(row, 'ERROR: Field - ' + field + ' - does not correspond with field - ' + prev_field)
+
+                            lengths.add(len(parsed_row[field][i]))
+                            if len(lengths) > 1:
+                                raise InputError(row, 'ERROR: Field - ' + field + ' - does not correspond with field - ' + prev_field)
+                            prev_field = field
+
+            for field in ['<link_group_required>', '<group_exclusive>']:
+                if len(parsed_row[field]) != n_groups:
+                    raise InputError(row, 'ERROR: Link group field - ' + field + ' - does not correspond with the number of link groups designated in other fields.')
+
+    # check variables.tsv rows
+    elif filename == var_file:
+
+        # for add/update/delete, <field> and <node> must always be specified
+        for prop in ['<field>', '<node>']:
+            if row[prop] == '':
+                raise InputError(row, 'ERROR: Blank field - ' + prop)
+
+        if row['<field_action>'] in ['', 'add']:
+            # check for any blank fields
+            for prop in ['<type>', '<required>']:
+                if row[prop] == '':
+                    raise InputError(row, 'ERROR: Blank field - ' + prop)
+
+            # check if type enum then options field populated
+            if row['<type>'] == 'enum' and row['<options>'] == '':
+                raise InputError(row, 'ERROR: Type enum requires - <options> - field to be populated')
+
+            # in the end, each property must have a term or (exclusive) description given
+            # it is not an error, but it is a warning, when there is no term or description given
+            if row['<description>'] == '' and row['<term>'] == '':
+                print 'WARNING: No description or term $ref given for field - ' + row['<field>']
+
+        elif row['<field_action>'] == 'update':
+            if set([row['<description>'], row['<type>'], row['<options_action>'], row['<options>'], row['<required>'], row['<term>']]) == set(['']):
+                raise InputError(row, 'ERROR: Field <field_action> is - update - but all other fields are blank')
+
+            # <options> populated and <options_action> blank implies 'add' in <options_action>
+
+            if row['<options_action>'] in ['add', 'delete', 'replace'] and row['<options>'] == '':
+                raise InputError(row, 'ERROR: Field <options_action> is populated but field <options> is blank')
 
 def create_node_schema(node, args, all_changes_map, out_path):
     '''Creates a dictionary YAML file for input node.'''
@@ -68,7 +248,7 @@ def create_node_schema(node, args, all_changes_map, out_path):
             content = content.replace(node_field, all_changes_map[node]['link'][0][node_field])
 
     # Write output
-    write_file(node, content, all_changes_map, out_path)
+    write_new_schema(node, content, all_changes_map, out_path)
 
 def build_link_map(node, all_changes_map):
     '''Return a dictionary containing link data for input node.'''
@@ -231,7 +411,7 @@ def get_required_list(node, all_changes_map):
     return sorted(req)
 
 # this can definitely be cleaned up a bit
-def write_file(node, content, all_changes_map, out_path):
+def write_new_schema(node, content, all_changes_map, out_path):
     '''Write the output dictionary YAML file.'''
 
     out_file = out_path + node + '.yaml'
@@ -255,11 +435,19 @@ def write_file(node, content, all_changes_map, out_path):
 
         for row in all_changes_map[node]['variable']:
 
-            # Add description
+
             output.write('\n')
             output.write('  %s:\n' % row['<field>'])
-            output.write('    description: >\n')
-            output.write('      %s\n' % row['<description>'])
+
+            # Add description if given
+            if row['<description>']:
+                output.write('    description: >\n')
+                output.write('      %s\n' % row['<description>'])
+
+            # Else, add term ref if given
+            elif row['<term>'] != '':
+                output.write('    term:\n')
+                output.write('      $ref: "%s"\n' % row['<term>'])
 
             # Add type
             if row['<type>'] == 'enum':
@@ -269,12 +457,6 @@ def write_file(node, content, all_changes_map, out_path):
 
             else:
                 output.write('    type: %s\n' % row['<type>'])
-
-            # Add ontology term if existing
-            if row['<term>'] != '':
-                output.write('    term:\n')
-                output.write('       termDef:\n')
-                output.write('          cde_id: %s\n' % row['<term>'])
 
         link_map = build_link_map(node, all_changes_map)
 
