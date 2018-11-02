@@ -212,6 +212,7 @@ def modify_properties(schema_dict):
     node = schema_dict['id']
 
     if all_changes_map[node]['variable']:
+        print ' - Updating Property List -\n'
         for row in all_changes_map[node]['variable']:
             print '\t' + row['<field_action>'] + ' - ' + row['<field>'] + '\n'
 
@@ -246,6 +247,7 @@ def modify_links(schema_text, schema_dict):
     # if there are changes to be made
     # None (False) if no changes, else it is a list containing a single row from nodes.tsv
     if all_changes_map[node]['link']:
+        print ' - Updating Links -\n'
 
         # remove old links from property list and required list if there
         schema_dict = remove_old_links(schema_dict)
@@ -431,9 +433,10 @@ def write_file(schema_text, schema_dict):
         if '$ref' in ordered_properties:
             ref_list = ordered_properties.popitem(last=False)[1]
             out_file.write('  $ref: "%s"\n' % ref_list)
-
+        '''
         else:
             print 'No $ref property list!'
+        '''
 
         link_names = get_link_names(schema_dict)
         links = []
@@ -493,8 +496,10 @@ def write_property(pair, out_file):
     # write type
     # presently NOT handling the case where type is a list
     if 'type' in pair[1]:
+        '''
         if type(pair[1]['type']) is list:
             print 'Type is a list, not a string - ' + pair[0]
+        '''
         out_file.write('    type: %s\n' % pair[1]['type']) #.strip().encode("utf-8") if string, not on list
         pair[1].pop('type')
 
