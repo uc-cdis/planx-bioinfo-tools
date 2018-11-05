@@ -4,6 +4,7 @@ import yaml
 import argparse
 import make
 from collections import OrderedDict
+from datetime import datetime
 from shutil import copy as copy_file
 
 # first function called in main script - before modify_dictionary()
