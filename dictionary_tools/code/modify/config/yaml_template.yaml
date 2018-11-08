@@ -10,7 +10,7 @@ project: '*'
 description: >
   <description>
 additionalProperties: false
-submittable: true
+submittable: <submittable>
 validators: null
 
 systemProperties:
@@ -19,7 +19,7 @@ systemProperties:
   - state
   - created_datetime
   - updated_datetime
-
+  <data_file_properties>
 links:
 <link>
 

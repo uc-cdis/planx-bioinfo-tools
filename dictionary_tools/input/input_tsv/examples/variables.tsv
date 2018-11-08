@@ -1,23 +1,23 @@
 <node>	<field_action>	<field>	<description>	<type>	<options_action>	<options>	<required>	<term>
-aligned_reads	add	test_integer_property	This integer property is intended to test the ‘add property’ functionality of the ‘modify’ module.	integer			Yes
-aligned_reads	add	test_string_property	This string property is intended to test the ‘add property’ functionality of the ‘modify’ module.	string			No
-aligned_reads	add	test_enum_property	This enum property is intended to test the ‘add property’ functionality of the ‘modify’ module.	enum		val_1,val_2	No
-aligned_reads	add	test_term_property		string			yes	_terms.yaml#/test_property
-aligned_reads	add	test_bool_property	This boolean property is intended to test the ‘add property’ functionality of the ‘modify’ module.	boolean			no
+aligned_reads	add	test_integer_property	This integer property is intended to test the ‘add property’ functionality of the ‘modify’ module.	integer			TRUE
+aligned_reads	add	test_string_property	This string property is intended to test the ‘add property’ functionality of the ‘modify’ module.	string			FALSE
+aligned_reads	add	test_enum_property	This enum property is intended to test the ‘add property’ functionality of the ‘modify’ module.	enum		val_1,val_2	FALSE
+aligned_reads	add	test_term_property		string			TRUE	_terms.yaml#/test_property
+aligned_reads	add	test_bool_property	This boolean property is intended to test the ‘add property’ functionality of the ‘modify’ module.	boolean			FALSE
 aligned_reads	delete	total_reads
 aligned_reads	delete	platform
 aligned_reads	update	average_insert_size		test_type
 aligned_reads	update	proportion_reads_mapped	This is a test description. This property should not have a term reference.
 aligned_reads	update	data_category			add	test_val_1, test_val_2
 aligned_reads	update	data_category			delete	Raw Sequencing Data
-aligned_reads	update	experimental_strategy			replace	test_val_one, test_val_two, test_val_three	No
-aligned_reads	update	average_base_quality					Yes
+aligned_reads	update	experimental_strategy			replace	test_val_one, test_val_two, test_val_three	FALSE
+aligned_reads	update	average_base_quality					TRUE
 aligned_reads	update	fabricated_property						_terms.yaml#/test_property
-aligned_reads	update	mean_coverage	This is a test description. This property should not have a term reference.	enum		test_val_1, test_val_2	Yes
-new_node_test		test_string_property	This is a test string property. Note this property is required.	string			yes
-new_node_test		test_enum_property	This is a test enum property. Note this property is not required.	enum		val_1,val_2, yes	no
-new_node_test		test_integer_property		integer			No	_terms.yaml#/test_property
-subject	update	primary_site		enum		site_a, site_b	yes	_terms.yaml#/test_property
-subject	add	test_string_property	This string property is intended to test the ‘add property’ functionality of the ‘modify’ module.	string			No
-subject	add	test_enum_property	This enum property is intended to test the ‘add property’ functionality of the ‘modify’ module.	enum		val_1,val_2	No
+aligned_reads	update	mean_coverage	This is a test description. This property should not have a term reference.	enum		test_val_1, test_val_2	TRUE
+new_node_test		test_string_property	This is a test string property. Note this property is required.	string			TRUE
+new_node_test		test_enum_property	This is a test enum property. Note this property is not required.	enum		val_1,val_2, yes	FALSE
+new_node_test		test_integer_property		integer			FALSE	_terms.yaml#/test_property
+subject	update	primary_site		enum		site_a, site_b	TRUE	_terms.yaml#/test_property
+subject	add	test_string_property	This string property is intended to test the ‘add property’ functionality of the ‘modify’ module.	string			FALSE
+subject	add	test_enum_property	This enum property is intended to test the ‘add property’ functionality of the ‘modify’ module.	enum		val_1,val_2	FALSE
 subject	delete	strain						

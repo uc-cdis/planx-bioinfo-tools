@@ -21,7 +21,7 @@ def parse_options():
     global args
 
     parser = argparse.ArgumentParser(description="Obtain path_to_schemas, namespace value, name of directory containing target nodes and variables TSV files, and name of output dictionary.")
-    parser.add_argument("-p", "--path_to_schemas", dest="path_to_schemas", required=True, help="Path to input schemas, relative to directory dictionary_tools.")
+    parser.add_argument("-p", "--path_to_schemas", dest="path_to_schemas", required=False, help="Path to input schemas, relative to directory dictionary_tools.")
     parser.add_argument("-n", "--namespace", dest="namespace", required=True, help="Desired namespace for the output dictionary - e.g., niaid.bionimbus.org")
     parser.add_argument("-i", "--input_tsv", dest="input_tsv", required=True, help="Name of directory containing target nodes and variables TSV files.")
     parser.add_argument("-o", "--out_dict_name", dest="out_dict_name", required=False, help="Name of output dictionary.")
@@ -226,10 +226,10 @@ def modify_properties(schema_dict):
                 if row['<field>'] in schema_dict['required']:
                     schema_dict['required'].remove(row['<field>'])
 
-            if row['<required>'].lower() == 'yes' and row['<field>'] not in schema_dict['required']:
+            if str(row['<required>']).lower().strip() == 'true' and row['<field>'] not in schema_dict['required']:
                 schema_dict['required'].append(row['<field>'])
 
-            elif row['<required>'].lower() == 'no' and row['<field>'] in schema_dict['required']:
+            elif str(row['<required>']).lower().strip() == 'false' and row['<field>'] in schema_dict['required']:
                 schema_dict['required'].remove(row['<field>'])
 
     return schema_dict
@@ -274,14 +274,18 @@ def get_node_list():
     1) Nodes from the input dictionary, and
     2) Nodes listed in the input TSV sheets
     '''
-    input_dict = set(get_input_dict()) # files from input dictionary
+    if args.path_to_schemas:
+        input_dict = set(get_input_dict()) # files from input dictionary
 
-    ignore_files = set(['projects', 'README.md', '_definitions.yaml', '_settings.yaml', '_terms.yaml', '.DS_Store'])
+        ignore_files = set(['projects', 'README.md', '_definitions.yaml', '_settings.yaml', '_terms.yaml', '.DS_Store'])
 
-    handle_ignore_files(ignore_files)
+        handle_ignore_files(ignore_files)
 
-    # get just the node names, without file extensions
-    input_nodes = [k[:-5] for k in input_dict.difference(ignore_files)]
+        # get just the node names, without file extensions
+        input_nodes = [k[:-5] for k in input_dict.difference(ignore_files)]
+
+    else:
+        input_nodes = []
 
     # pool these node names with those in the input_tsv sheets (in all_changes_map), remove duplicates, convert back to a list
     node_list = list(set(input_nodes + list(all_changes_map.keys())))

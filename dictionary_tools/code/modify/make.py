@@ -69,7 +69,13 @@ def load_tsv(filename):
 
     for row in temp_dict:
 
-        check_row(row, filename)
+        # suppressing this functionality at the moment
+        # so we can list required variables
+        # that do not appear in the property list
+        # not exactly sure how to handle this case right now
+        # this is a TEMPORARY solution
+
+        # check_row(row, filename)
 
         node = row['<node>']
         if node in out:
@@ -94,7 +100,7 @@ def build_prop_entry(schema_dict, row):
         print 'Handle this unforeseen <field_action>! - ' + row['<field_action>'] + '\n'
 
     if row['<description>']:
-        entry['description'] = row['<description>']
+        entry['description'] = row['<description>'].strip()
         entry.pop('term', None)
 
     elif row['<term>']:
@@ -244,8 +250,23 @@ def create_node_schema(node, args, all_changes_map, out_path):
     # Fill node fields in schema
     # e.g., title, category, description
     for node_field in all_changes_map[node]['link'][0]:
-        if node_field not in link_props:
-            content = content.replace(node_field, all_changes_map[node]['link'][0][node_field])
+        if node_field not in link_props and node_field != '<submittable>': # make this cleaner, revise this later, after demo
+            content = content.replace(node_field, all_changes_map[node]['link'][0][node_field].strip())
+
+    # a quick patch for demo to work - revise and clean later
+    # if field specified, take that value - else, default is true
+    if str(all_changes_map[node]['link'][0]['<submittable>']):
+        submittable = str(all_changes_map[node]['link'][0]['<submittable>']).lower().strip()
+    else:
+        submittable = 'true'
+
+    content = content.replace('<submittable>', submittable)
+
+    if '_file' in all_changes_map[node]['link'][0]['<category>'].lower().strip():
+        dfprops = '- file_state\n  - error_type\n'
+        content = content.replace('<data_file_properties>', dfprops)
+    else:
+        content = content.replace('<data_file_properties>', '')
 
     # Write output
     write_new_schema(node, content, all_changes_map, out_path)
@@ -405,18 +426,30 @@ def get_required_list(node, all_changes_map):
                     req.append(link_name)
 
     for row in all_changes_map[node]['variable']:
-        if row['<required>'].lower() == 'yes':
+        if str(row['<required>']).lower().strip() == 'true':
             req.append(row['<field>'])
 
-    return sorted(req)
+    return sorted(list(set(req))) # in case there are duplicates (i.e., type or submitter_id)
 
 # this can definitely be cleaned up a bit
+# encapsulate sections/blocks into functions
 def write_new_schema(node, content, all_changes_map, out_path):
     '''Write the output dictionary YAML file.'''
 
     out_file = out_path + node + '.yaml'
 
     with open(out_file, 'w') as output:
+
+        # encapsulate this bit into a function
+        if '_file' in all_changes_map[node]['link'][0]['<category>'].lower().strip():
+            ref_props = '_definitions.yaml#/data_file_properties'
+
+        elif all_changes_map[node]['link'][0]['<category>'].lower().strip() == 'analysis':
+            ref_props = '_definitions.yaml#/workflow_properties'
+
+        else:
+            ref_props = '_definitions.yaml#/ubiquitous_properties'
+
         output.write(content)
 
         # Write requirements in schema
@@ -429,34 +462,46 @@ def write_new_schema(node, content, all_changes_map, out_path):
         # Write variables in schema
         output.write('\n')
         output.write('properties:\n')
-        # maybe revise this next line
-        # not every node has ubiquitous_properties (? - ask)
-        output.write('  $ref: "_definitions.yaml#/ubiquitous_properties"\n')
+
+
+
+        output.write('  $ref: "%s"\n' % ref_props)
 
         for row in all_changes_map[node]['variable']:
+            # make this a better condition - basically if there is any content in the row besides required
+            if row['<description>'] or row['<term>'] or row['<type>'] or row['<options>']:
 
 
-            output.write('\n')
-            output.write('  %s:\n' % row['<field>'])
+                output.write('\n')
+                output.write('  %s:\n' % row['<field>'])
 
-            # Add description if given
-            if row['<description>']:
-                output.write('    description: >\n')
-                output.write('      %s\n' % row['<description>'])
+                # Add description if given
+                if row['<description>']:
+                    output.write('    description: >\n')
+                    output.write('      %s\n' % row['<description>'].strip())
 
-            # Else, add term ref if given
-            elif row['<term>'] != '':
-                output.write('    term:\n')
-                output.write('      $ref: "%s"\n' % row['<term>'])
+                # Else, add term ref if given
+                elif row['<term>'] != '':
+                    output.write('    term:\n')
+                    output.write('      $ref: "%s"\n' % row['<term>'])
 
-            # Add type
-            if row['<type>'] == 'enum':
-                output.write('    enum:\n')
-                for option in sorted(parse_entry(row['<options>'])):
-                    output.write('      - "%s"\n' % option)
+                # Add type
+                if row['<type>'] == 'enum':
+                    output.write('    enum:\n')
+                    for option in sorted(parse_entry(row['<options>'])):
+                        output.write('      - "%s"\n' % option)
 
-            else:
-                output.write('    type: %s\n' % row['<type>'])
+                else:
+                    # I don't really like having to handle this case
+                    # why are some (very few!) types lists, with one option as null?
+                    if ',' in row['<type>']:
+                        temp = row['<type>'][1:-1].replace('\'', '')
+                        type_list = parse_entry(temp)
+                        output.write('    type:\n')
+                        for option in type_list:
+                            output.write('      - "%s"\n' % str(option))
+                    else:
+                        output.write('    type: %s\n' % row['<type>'])
 
         link_map = build_link_map(node, all_changes_map)
 

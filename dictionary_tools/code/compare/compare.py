@@ -3,6 +3,7 @@ import os
 import yaml
 import argparse
 from collections import OrderedDict
+from datetime import datetime
 
 # not processing these files/folders
 ignore_schemas = ['projects', 'README.md', '_definitions.yaml', '_settings.yaml', '_terms.yaml']
@@ -18,7 +19,10 @@ def parse_options():
     parser = argparse.ArgumentParser(description="Obtain paths to the two dictionaries to compare, where paths are relative to dictionary_tools.")
     parser.add_argument("-a", dest="dict_a", required=True, help="Path to one set of dictionary files, relative to dictionary_tools.")
     parser.add_argument("-b", dest="dict_b", required=True, help="Path to other set of dictionary files, relative to dictionary_tools.")
-    parser.add_argument("-n", "--nodes", dest="nodes", type=csv_list, help="Comma separated list of nodes to compare.")
+    parser.add_argument("-o", dest="out_name", required=False, help="Name of output summary JSON file.")
+
+    # parser.add_argument("-n", "--nodes", dest="nodes", type=csv_list, help="Comma separated list of nodes to compare.")
+    # the above feature is not yet supported in the script - but this is a simple extension
 
     args = parser.parse_args()
 
@@ -71,11 +75,11 @@ def keys_analysis(da, db, parent_out):
         # eliminate repetition in code here, a and b blocks are symmetric
         if len(unique_keys_a) > 0:
             for key in sorted(unique_keys_a):
-                parent_out.update({key: {'A': da[key], 'B': None}})
+                parent_out.update({key: {'A': da[key], 'B': '<key_missing>'}})
 
         if len(unique_keys_b) > 0:
             for key in sorted(unique_keys_b):
-                parent_out.update({key: {'A': None, 'B': db[key]}})
+                parent_out.update({key: {'A': '<key_missing>', 'B': db[key]}})
 
 def compare_schema(schema_file):
     node = schema_file[:-5]
@@ -95,28 +99,44 @@ def compare_schema(schema_file):
         compare_val(key, schema_a, schema_b, 'yaml', master_out['comparison_results'][node])
 
 def compare_val(key, da, db, level, parent_out):
+    # maybe there's a way to modify this function so that it doesn't append empty comparisons..
     val_a = da[key]
     val_b = db[key]
 
     # only reporting lists which differ in content - not reported if same content but different order
+    '''
+    try:
+        flag_1 = type(val_a) is list and compare_list(val_a, val_b) == 0
+    except:
+        print 'key: ' + key
+        print 'val_a, val_b'
+        print val_a, val_b
+        raise Exception("Here's a problem")
+    '''
     flag_1 = type(val_a) is list and compare_list(val_a, val_b) == 0
     flag_2 = type(val_a) is str and val_a.strip() != val_b.strip()
     flag_3 = type(val_a) not in [list, str] and val_a != val_b
+    flag_4 = val_a is None and val_b is None
 
-    if True in [flag_1, flag_2, flag_3]:
+    if True in [flag_1, flag_2, flag_3] and not flag_4:
         if level == 'property':
             # master
             parent_out.update({key: {'A': val_a, 'B': val_b}})
 
         elif level == 'property_list':
-            parent_out[key] = {}
 
-            keys_analysis(val_a, val_b, parent_out[key])
+            if key == '$ref':
+                parent_out.update({key: {'A': val_a, 'B': val_b}})
 
-            common_prop_keys = sort_sets(val_a, val_b, dict)[0]
+            else:
+                parent_out[key] = {}
 
-            for prop_key in sorted(common_prop_keys):
-                compare_val(prop_key, val_a, val_b, 'property', parent_out[key])
+                keys_analysis(val_a, val_b, parent_out[key])
+
+                common_prop_keys = sort_sets(val_a, val_b, dict)[0]
+
+                for prop_key in sorted(common_prop_keys):
+                    compare_val(prop_key, val_a, val_b, 'property', parent_out[key])
 
         elif level == 'yaml':
             if key == 'properties':
@@ -190,12 +210,30 @@ def compare_schemas():
 def handle_master_out():
     # print json.dumps(master_out, indent=2, ensure_ascii=False)
 
-    mkdir('../../output/compare')
+    # recursively remove empty dictionaries
+    clean_dict(master_out)
 
-    report_file_name = '../../output/compare/master_out.json'
+    out_path = '../../output/compare/'
+
+    mkdir(out_path)
+
+    if args.out_name:
+        report_file_name = out_path + args.out_name + '.json'
+    else:
+        report_file_name = out_path + datetime.strftime(datetime.now(), 'results_%m.%d_%H.%M') + '.json'
 
     with open(report_file_name, 'w') as out_file:
         out_file.write(json.dumps(master_out, indent=2))
+
+def clean_dict(d, parent=None, parent_key=None):
+    '''Recursively remove empty dictionaries from a dictionary of nested dictionary.'''
+    for key in d.keys():
+        if d[key] == {}:
+            d.pop(key)
+        elif type(d[key]) is dict:
+            clean_dict(d[key], d, key)
+    if d == {}:
+        parent.pop(parent_key)
 
 if __name__ == "__main__":
 
