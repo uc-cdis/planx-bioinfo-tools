@@ -173,9 +173,16 @@ def get_variables(node, schema):
             handle_var(node, var, var_block, req_vars)
 
 def handle_req_var(node, req_var):
+    # make this and other instances like it come from a template which is created once
     row = {'<node>': node,
+           '<field_action>': None,
            '<field>': req_var,
-           '<required>': 'True'
+           '<description>': None,
+           '<type>': None,
+           '<options>': None,
+           '<options_action>': None,
+           '<required>': 'True',
+           '<term>': None
            }
 
     master_out['variables'].append(row)
@@ -188,11 +195,14 @@ def handle_var(node, var, var_block, req_vars):
     # these get their type listed as 'enum' presently, which is incorrect
 
     # presently ignoring <field_action> and <options_action> since these will be blank columns
+    # definitely make this a template in another function or something
     row = {'<node>': node,
+           '<field_action>': None,
            '<field>': var,
            '<description>': var_block.get('description'),
            '<type>': var_block.get('type', 'enum'), # some property type entries are lists - see acknowledgement.yaml#/properties/submitter_id
            '<options>': list_to_str(var_block.get('enum')), # not sure if this will work - will probably have to convert list into string list
+           '<options_action>': None,
            '<required>': var in req_vars,
            '<term>': var_block.get('term', {'$ref': None})['$ref']
            }
