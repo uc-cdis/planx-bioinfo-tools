@@ -61,13 +61,13 @@ with open(args.file, 'r') as file:
                 itime = datetime.datetime.now()
                 response = requests.put(project_url, data=data, headers={'content-type': 'text/tab-separated-values', 'Authorization': 'bearer '+ auth.json()['access_token']}) 
                 etime = datetime.datetime.now()
-                print "Submitted (" + str(total) + "): " + str(response) + " " + str(etime-itime)
+                print ("Submitted (" + str(total) + "): " + str(response) + " " + str(etime-itime))
                 output.write("Submitted (" + str(total) + "): " + str(response))
                 output.write(response.text)
                 if "200" not in str(response):
-                   print "Submission failed. Stopping..."
+                   print ("Submission failed. Stopping...")
                    break
-                # print data
+                # print (data)
                 data = header + "\r"
 
 response = requests.put(project_url, data=data, headers={'content-type': 'text/tab-separated-values', 'Authorization': 'bearer '+ auth.json()['access_token']})
