@@ -39,10 +39,11 @@ if not os.path.exists(args.output):
     os.makedirs(args.output)
 
 # if there are multiple dots, splitext splits at the last one (so splitext('file.jpg.zip') gives ('file.jpg', '.zip')
-outfile = args.output + "submission_output_" + os.path.splitext(args.file)[0] + ".txt"
+arg_filename = args.file.replace("./", "")
+outfile = args.output + "submission_output_" + os.path.splitext(arg_filename)[0] + ".txt"
 i = 2
 while os.path.isfile(outfile):
-    outfile = args.output + "submission_output_" + os.path.splitext(args.file)[0] + "_" + str(i) + ".txt"
+    outfile = args.output + "submission_output_" + os.path.splitext(arg_filename)[0] + "_" + str(i) + ".txt"
     i += 1
 output = open(outfile, 'w')
 
