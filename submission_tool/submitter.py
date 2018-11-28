@@ -40,7 +40,6 @@ if not os.path.exists(args.output):
 
 # if there are multiple dots, splitext splits at the last one (so splitext('file.jpg.zip') gives ('file.jpg', '.zip')
 arg_filename = args.file.replace("./", "")
-print(arg_filename)
 outfile = args.output + "submission_output_" + os.path.splitext(arg_filename)[0] + ".txt"
 i = 2
 while os.path.isfile(outfile):
