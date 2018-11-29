@@ -39,7 +39,7 @@ if not os.path.exists(args.output):
     os.makedirs(args.output)
 
 # if there are multiple dots, splitext splits at the last one (so splitext('file.jpg.zip') gives ('file.jpg', '.zip')
-arg_filename = args.file.replace("./", "")
+arg_filename = os.path.basename(args.file)
 outfile = args.output + "submission_output_" + os.path.splitext(arg_filename)[0] + ".txt"
 i = 2
 while os.path.isfile(outfile):
@@ -57,10 +57,13 @@ with open(args.file, 'r') as file:
             data = data + line + "\r"
             count = count + 1
             total = total + 1
-            if count > args.length:
+            if count >= args.length:
                 count = 1
                 itime = datetime.datetime.now()
-                response = requests.put(project_url, data=data, headers={'content-type': 'text/tab-separated-values', 'Authorization': 'bearer '+ auth.json()['access_token']}) 
+
+                req = requests.Request(method='PUT', url=project_url, headers={'content-type': 'text/tab-separated-values', 'Authorization': 'bearer '+ auth.json()['access_token']}, data=data)
+                prepared = req.prepare()
+                response = requests.Session().send(prepared)
                 etime = datetime.datetime.now()
                 print ("Submitted (" + str(total) + "): " + str(response) + " " + str(etime-itime))
                 output.write("Submitted (" + str(total) + "): " + str(response))
