@@ -477,7 +477,7 @@ def write_property(pair, out_file):
         pair[1].pop('systemAlias')
 
     # write term
-    if 'term' in pair[1]:
+    if 'term' in pair[1] and '$ref' in pair[1]['term']:
         out_file.write('    term:\n')
         out_file.write('      $ref: "%s"\n' % pair[1]['term']['$ref'].strip().encode("utf-8"))
         pair[1].pop('term')
