@@ -5,6 +5,11 @@ import os
 from pandas import read_table
 from copy import deepcopy
 
+'''
+12/4/18
+See modify.py for notes regarding new syntax
+'''
+
 class InputError(Exception):
     '''A class to represent input errors on the nodes.tsv and variables.tsv sheets.'''
     def __init__(self, expression, message):
@@ -99,13 +104,17 @@ def build_prop_entry(schema_dict, row):
     else:
         print 'Handle this unforeseen <field_action>! - ' + row['<field_action>'] + '\n'
 
+    # previously was working with the notion
+    # that a property could only ever have a term OR a description (exlusively one or the other)
+    # now that's not true, so we are no longer popping the other if we add one
+
     if row['<description>']:
         entry['description'] = row['<description>'].strip()
-        entry.pop('term', None)
+        # entry.pop('term', None)
 
-    elif row['<term>']:
-        entry['term'] = {'$ref': row['<term>']}
-        entry.pop('description', None)
+    elif row['<terms>']:
+        entry['terms'] = parse_entry(row['<terms>'])
+        # entry.pop('description', None)
 
     if row['<type>']:
         if row['<type>'] != 'enum':
@@ -221,11 +230,11 @@ def check_row(row, filename):
 
             # in the end, each property must have a term or (exclusive) description given
             # it is not an error, but it is a warning, when there is no term or description given
-            if row['<description>'] == '' and row['<term>'] == '':
+            if row['<description>'] == '' and row['<terms>'] == '':
                 print 'WARNING: No description or term $ref given for field - ' + row['<field>']
 
         elif row['<field_action>'] == 'update':
-            if set([row['<description>'], row['<type>'], row['<options_action>'], row['<options>'], row['<required>'], row['<term>']]) == set(['']):
+            if set([row['<description>'], row['<type>'], row['<options_action>'], row['<options>'], row['<required>'], row['<terms>']]) == set(['']):
                 raise InputError(row, 'ERROR: Field <field_action> is - update - but all other fields are blank')
 
             # <options> populated and <options_action> blank implies 'add' in <options_action>
@@ -469,7 +478,7 @@ def write_new_schema(node, content, all_changes_map, out_path):
 
         for row in all_changes_map[node]['variable']:
             # make this a better condition - basically if there is any content in the row besides required
-            if row['<description>'] or row['<term>'] or row['<type>'] or row['<options>']:
+            if row['<description>'] or row['<terms>'] or row['<type>'] or row['<options>']:
 
 
                 output.write('\n')
@@ -480,10 +489,19 @@ def write_new_schema(node, content, all_changes_map, out_path):
                     output.write('    description: >\n')
                     output.write('      %s\n' % row['<description>'].strip())
 
-                # Else, add term ref if given
-                elif row['<term>'] != '':
-                    output.write('    term:\n')
-                    output.write('      $ref: "%s"\n' % row['<term>'])
+                '''
+                # NEW SYNTAX
+                # Currently suppressing terms function for make.py
+                # Until we decide to convert all the dictionaries to the new syntax
+                # Want to avoid have conflicting syntax(es) existing alongside each other
+
+                # Else, add term refs if given
+                elif row['<terms>'] != '':
+                    term_list = parse_entry(row['<terms>'])
+                    output.write('    terms:\n')
+                    for term in term_list:
+                        output.write('      - $ref: "_terms.yaml#/%s"\n' % row['<terms>'])
+                '''
 
                 # Add type
                 if row['<type>'] == 'enum':

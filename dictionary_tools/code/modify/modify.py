@@ -7,6 +7,41 @@ from collections import OrderedDict
 from datetime import datetime
 from shutil import copy as copy_file
 
+'''
+12/4/18
+Suppressing writing term ref's in make.py
+Preserving pre-existing term ref's in modify,
+but suppressing functionality to add new term ref's in modify.
+
+Reason:
+
+Still currently maintaining the "old syntax"
+At some point we need to convert all the existing PlanX dictionaries to the new syntax
+This involves converting old term syntax to new term syntax which supports multiple ref's
+This script can perform the conversion
+Uncomment the commented sections in this script and make.py
+To write terms with the new syntax
+We will need to add a small bit of code
+To actually convert pre-existing term refs to the new syntax
+But that should only take a few lines
+
+Search 'terms syntax' to find the place in this script to extend
+
+Search 'new syntax' to find the place in make.py to uncomment
+
+TSV Template Update:
+
+The old <term> column is now <terms>,
+and the column should be populated with a csv list of keys in _terms.yaml
+E.g., "A, B, C"
+Where A, B, and C are entry titles (keys) in _terms.yaml
+And this would get tranlsated to:
+    terms:
+        - $ref: "_terms.yaml#/A"
+        - $ref: "_terms.yaml#/B"
+        - $ref: "_terms.yaml#/C"
+'''
+
 # first function called in main script - before modify_dictionary()
 def setup():
     '''Performs all the necessary preparation work so that we can run modify_dictionary().'''
@@ -476,11 +511,24 @@ def write_property(pair, out_file):
         out_file.write('    systemAlias: %s\n' % pair[1]['systemAlias'].strip().encode("utf-8"))
         pair[1].pop('systemAlias')
 
-    # write term
+    # eventually we need to convert all the old terms syntax to new terms syntax
+    # that conversion can happen right HERE
+
+    # write term - OLD SYNTAX
     if 'term' in pair[1]:
         out_file.write('    term:\n')
         out_file.write('      $ref: "%s"\n' % pair[1]['term']['$ref'].strip().encode("utf-8"))
         pair[1].pop('term')
+
+    '''
+    # NEW SYNTAX
+    # write terms
+    if 'terms' in pair[1]:
+        out_file.write('    terms:\n')
+        for term in pair[1]['terms']:
+            out_file.write('      - $ref: "_terms.yaml#/%s"\n' % term.strip().encode("utf-8"))
+        pair[1].pop('terms')
+    '''
 
     # write description
     if 'description' in pair[1]:
