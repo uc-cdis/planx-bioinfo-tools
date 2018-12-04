@@ -511,11 +511,16 @@ def write_property(pair, out_file):
         out_file.write('    systemAlias: %s\n' % pair[1]['systemAlias'].strip().encode("utf-8"))
         pair[1].pop('systemAlias')
 
+<<<<<<< HEAD
     # eventually we need to convert all the old terms syntax to new terms syntax
     # that conversion can happen right HERE
 
     # write term - OLD SYNTAX
     if 'term' in pair[1]:
+=======
+    # write term
+    if 'term' in pair[1] and '$ref' in pair[1]['term']:
+>>>>>>> 11fb524e821bfddc5f7576159df554cf6fda0b4b
         out_file.write('    term:\n')
         out_file.write('      $ref: "%s"\n' % pair[1]['term']['$ref'].strip().encode("utf-8"))
         pair[1].pop('term')
