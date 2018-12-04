@@ -1,0 +1,558 @@
+Variable ID	Variable	Description	Type	Units	Minimum	Maximum	Coded values	Comment
+phv00169061.v7.p2	SUBJID	Subject ID, GTEx Public Donor ID	string					Subject ID, GTEx Public Donor ID
+phv00174086.v6.p2	COHORT	Cohort	string				Organ Donor (OPO)	Cohort The study subgroup that the participant belongs to. This indicates whether the participant was a postmortem donor, an organ donor, or a surgical donor.
+							Postmortem
+							Surgical Donor
+phv00169062.v7.p2	SEX	Sex	integer, encoded value				1=Male	Sex The Donor's Identification of sex based upon self-report, family/next of kin, or medical record abstraction.
+							2=Female
+phv00169063.v7.p2	AGE	Age	integer	Years				Age Elapsed time since birth in years.
+phv00169064.v7.p2	RACE	Race	integer, encoded value				1=Asian	Race Report of Donor's race as repoted by Donor, family/next of kin, or medical record abstraction. These classification categories, taken from the NIH, refer to geographically based categories that humans share, either by common history, nationality, or geographic distribution.
+							2=Black or African American
+							3=White
+							4=American Indian or Alaska Native
+							98=Not Reported
+							99=Unknown
+phv00169065.v7.p2	ETHNCTY	Ethnicity	integer, encoded value				0=Not Hispanic or Latino	Ethnicity Classification categories of human, taken from NIH, based on the social group a person belongs to, and either identifies with or is identified with by others, as a result of a complex of cultural, biological, geographical and other factors such as linguistic, dietary and religion traditions; ancestry, background, allegiance, or association; and physical characteristics traditionally associated with race.
+							1=Hispanic or Latino
+							97=CEPH
+							98=Not Reported
+							99=Unknown
+phv00169066.v7.p2	HGHT	Height	decimal					Height The height of Donor in inches as repoted by Donor, family/next of kin, or medical record abstraction.
+phv00169067.v7.p2	HGHTU	Height Units	string					Height The height of Donor in inches as repoted by Donor, family/next of kin, or medical record abstraction.
+phv00169068.v7.p2	WGHT	Weight	decimal					Weight The weight of Donor in pounds as repoted by Donor, family/next of kin, or medical record abstraction.
+phv00169069.v7.p2	WGHTU	Weight Units	string					Weight The weight of Donor in pounds as repoted by Donor, family/next of kin, or medical record abstraction.
+phv00169070.v7.p2	BMI	BMI	decimal					BMI Autocalculated field of BMI: general indicator of the body fat an individual is carrying based upon the ratio of weight to height. BMI = 703 * weight in pounds/height in inches squared.
+phv00169071.v7.p2	INCEXC	Eligible For Study	string					Donor Eligible A verification field of whether the Donor has met the overall eligibility criteria for GTEx collection based on answers to eligibility questions. All Eligibility conditions require confirmation from the donor procurement team (staff team where tissue collection and data abstraction takes place) and must be met in order for donor to eligible.
+phv00169072.v7.p2	TRISCH	Ischemic Time	string					GTEX Procedure Start Time Interval between actual death, presumed death, or cross clamp application and the start of the GTEx Procedure (Unit is part of element text in Hours and Minutes).
+phv00169073.v7.p2	TRISCHD	Ischemic Time (Minutes)	decimal	Minutes				GTEX Procedure Start Time Interval between actual death, presumed death, or cross clamp application and the start of the GTEx Procedure (Unit is Minutes).
+phv00169074.v7.p2	TRCHSTIN	Time of Chest Incision	string					Chest Incision Time Interval between actual death, presumed death, or cross clamp application and the time of chest incision (Unit is part of element text in Hours and Minutes).
+phv00169075.v7.p2	TRCHSTIND	Time of Chest Incision (Minutes)	decimal	Minutes				Chest Incision Time Interval between actual death, presumed death, or cross clamp application and the time of chest incision (Unit is Minutes).
+phv00169076.v7.p2	TRCCLMP	Time Cross Clamp Applied	string					Clamp/Ligature Time Interval between actual death, presumed death, or cross clamp application and the time of heart cross-clamp (Unit is part of element text in Hours and Minutes).
+phv00169077.v7.p2	TRCCLMPD	Time Cross Clamp Applied (Minutes)	decimal	Minutes				Time Cross Clamp Applied (Minutes) Timepoint at which the blood supply to the aorta for organ donor collection, or artery supplying blood to the knee for surgical collections is externally closed by a surgical clamp.
+phv00169078.v7.p2	TRORGNS	Received organ transplant	string					Organs/Tissues Donated If the Donor was an Organ Donor, which Organs were donated.
+phv00169079.v7.p2	TRAMP	Amputation	integer, encoded value				0=No	Amputation Type Amputation type for leg, above the knee or below the knee.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169080.v7.p2	TRCRTMP	Core Body Temperature	decimal					Core Body Temperature The temperature of the donor's body, with different methods of colletion based on donor type (postmortem or OPO). Postmortem donor temperature collection is via the liver. Organ donor temperature collection is through the anesthesia probe. Tissue donor temperature collection is via the liver or rectal.
+phv00169081.v7.p2	TRCRTMPU	Core Body Temperature - Units of measurement	string					Temperature Scale (Fahrenheit or Celcius) The temperature scale (Fahrenheit or Celcius) used when entering core body temperature.
+phv00169082.v7.p2	TRCRTMPL	Core Body Temperature - Location of measurment	string					Temperature Obtained Via The method for obtaining core body temperature.
+phv00169083.v7.p2	TRTPTREF	Tissue Recovery Time Point Reference	string				Actual Death	Tissue Recovery Time Point Reference Indicates whether the tissue ischemic time begins at the donor's actual death, presumed death, or when the cross clamp was applied in the case of surgical donors.
+							Cross Clamp Applied
+							Presumed Death
+phv00169084.v7.p2	TRVNTSR	On ventilator less than 24 hours	string					Did site receive verbal confirmation of ventilator status <24 hours prior to collection start? Verification from the site that the Donor was ventilated (on life support) for <24 hours prior to the estimated procurement start time.
+phv00174087.v6.p2	TRDNISCH	Total Ischemic time for a donor	decimal	Minutes				Donor Ischemic Time Interval between actual death, presumed death, or cross clamp application and first tissue stabilization; A single donor-level ischemic time point at which the first tissue was collected for that donor.
+phv00169085.v7.p2	DTHPRNINT	Death Pronounced Interval	string					Date and time pronounced dead Interval between Date and time pronounced dead and observed/witnessed death (years)
+phv00169086.v7.p2	DTHTPTREF	Death Time Point Reference	string				Actual Death	Death Time Point Reference Indicates whether the postmortem interval begins at the donor's actual death or presumed death.
+							Presumed Death
+phv00169087.v7.p2	DTHATPSY	Autopsy Performed By Coroner Or ME	integer, encoded value				0=No	Did Coroner / ME Perform an Autopsy? [determination that] a postmortem examination of the body [was performed] that includes an examination of the internal organs and structures after dissection to determine the cause of death and the nature of pathological changes.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169088.v7.p2	DTHRFG	Body Refrigerated	integer, encoded value				0=No	Was the body refrigerated at any time before procurement? Report by the site procurement team on whether the Donor's body was refrigerated where refrigerated (temperature range of refrigeration not defined).
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169089.v7.p2	DTHCERT	Death Certificate Available	integer, encoded value				0=No	Is death certificate available Whether the death certificate is available to the collection team at the time of determination of eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169090.v7.p2	DTHVNT	Donor On A Ventilator Immediately Prior To Death	integer, encoded value				0=No	Was donor on a ventilator immediately prior to Death [Assertion that donor was assisted by] a medical device that facilitates breathing immediately prior to death.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169091.v7.p2	DTHFUCOD	First Underlying Cause Of Death	string					First underlying Cause of Death A disease or injury, leading to the cause of death listed in immediate_cause_of_death.
+phv00169092.v7.p2	DTHHRDY	Hardy Scale	integer, encoded value				0=Ventilator Case	Death Classification: 4-point Hardy Scale Death classification based on the 4-point Hardy Scale: 1) Violent and fast death Deaths due to accident, blunt force trauma or suicide, terminal phase estimated at < 10 min. 2) Fast death of natural causes Sudden unexpected deaths of people who had been reasonably healthy, after a terminal phase estimated at < 1 hr (with sudden death from a myocardial infarction as a model cause of death for this category) 3) Intermediate death Death after a terminal phase of 1 to 24 hrs (not classifiable as 2 or 4); patients who were ill but death was unexpected 4) Slow death Death after a long illness, with a terminal phase longer than 1 day (commonly cancer or chronic pulmonary disease); deaths that are not unexpected 0) Ventilator Case All cases on a ventilator immediately before death.
+							1=Violent and fast death
+							2=Fast death of natural causes
+							3=Intermediate death
+							4=Slow death
+phv00169093.v7.p2	DTHCOD	Immediate Cause Of Death	string					Immediate Cause of Death The final disease, injury, or complication directly causing death.
+phv00169094.v7.p2	DTHFUCODDU	Interval Of Onset To Death For First Underlying Cause Unit	string					Approximate Interval: Onset to Death Units Interval units from first underlying cause of death to death.
+phv00169095.v7.p2	DTHFUCODD	Interval Of Onset To Death For First Underlying Cause	integer					Approximate Interval: Onset to Death Interval from first underlying cause of death to death.
+phv00169096.v7.p2	DTHCODDU	Interval Of Onset To Death For Immediate Cause Unit	string					Approximate Interval: Onset to Death Interval from immediate cause of death to death.
+phv00169097.v7.p2	DTHCODD	Interval Of Onset To Death For Immediate Cause	integer					Approximate Interval: Onset to Death Interval from immediate cause of death to death.
+phv00169098.v7.p2	DTHLUCODDU	Interval Of Onset To Death For Last Underlying Cause Unit	string					Approximate Interval: Onset to Death Units Interval units from last underlying cause of death to death.
+phv00169099.v7.p2	DTHLUCODD	Interval Of Onset To Death For Last Underlying Cause	integer					Approximate Interval: Onset to Death Interval from last underlying cause of death to death.
+phv00169100.v7.p2	DTHLUCOD	Last Underlying Cause Of Death	string					Last Underlying Cause of Death The disease or injury that initiated the chain of events that led directly and inevitably to death listed in immediate_cause_of_death.
+phv00169101.v7.p2	DTHMNNR	Manner Of Death	string					Manner of Death An adverse event resulting in death.
+phv00169102.v7.p2	DTHRFGDU	Number Of Hours In Refrigeration Unit	string					if yes, estimate number of hours in refrigeration The period of time during which body was refrigerated (hours)
+phv00169103.v7.p2	DTHRFGD	Number Of Hours In Refrigeration	decimal					if yes, estimate number of hours in refrigeration The period of time during which body was refrigerated (hours)
+phv00169104.v7.p2	DTHDTRMN	Person Who Determined Date Time Of Death	string					If death occurred outside of hospital, who determined date/time of death Type of person who provided the time of death.
+phv00169105.v7.p2	DTHPLCE	Place Of Death	string					Place of Death Location where death occurred.
+phv00169106.v7.p2	DTHVNTDU	Time Interval On Ventilator Unit	string					If yes, specify duration units [Units for period of time that donor was assisted by] a medical device that facilitates breathing prior to death.
+phv00169107.v7.p2	DTHVNTD	Time Interval On Ventilator	integer					If yes, specify duration [Period of time that donor was assisted by] a medical device that facilitates breathing prior to death.
+phv00169108.v7.p2	DTHWTNS	Witnessed Death	integer, encoded value				0=No	Date and time of actual (witnessed) death Whether the death was observed by a witness.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00182513.v5.p2	DTHCLS	Classification of death based on ICD-10 coding	string					Additional cause of death coding generated by LDACC The parent classification of the ICD-10 code in the DTHICD10 variable.
+phv00182514.v5.p2	DTHTYP	Specific cause of death based on ICD-10 coding	string					Additional cause of death coding generated by LDACC The specific cause of death indicated by the ICD-10 code in the DTHICD10 variable.
+phv00182515.v5.p2	DTHCAT	Category of death based on ICD-10 coding	string					Additional cause of death coding generated by LDACC A logical grouping of causes of death based on the ICD-10 code in the DTHICD10 variable. This variable is most suited for use as a covariate in analyses.
+phv00182516.v5.p2	DTHICD10	ICD-10 Code for cause of death	string					Additional cause of death coding generated by LDACC An ICD-10 code assigned based on the responses provided in the DTHCOD, DTHFUCOD, and DTHLUCOD variables.
+phv00169109.v7.p2	LBCMVTAB	CMV Total Ab	integer, encoded value				0=Negative	CMV Total Ab Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the presence of a genus of the family herpesviridae, subfamily betaherpesvirinae, infecting the salivary glands, liver, spleen, lungs, eyes, and other organs, in which they produce characteristically enlarged cells with intranuclear inclusions.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169110.v7.p2	LBEBVGAB	EBV IgG Ab	integer, encoded value				0=Negative	EBV IgG Ab Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the amount of immunoglobulin G present in a sample.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169111.v7.p2	LBEBVMAB	EBV IgM Ab	integer, encoded value				0=Negative	EBV IgM Ab Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the amount of immunoglobulin M present in a sample.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169112.v7.p2	LBHBCABM	HBcAb IgM	integer, encoded value				0=Negative	HBcAb-IgM Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the amount of Hepatitis B virus core antibody and the amount of immunoglobulin M present in a sample.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169113.v7.p2	LBHBCABT	HBcAb Total	integer, encoded value				0=Negative	HBcAb (Total; IgG+IgM) Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the amount of Hepatitis B virus core antibody present in a sample.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169114.v7.p2	LBHBSAB	HBsAb	integer, encoded value				0=Negative	HBsAb Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the surface antibody reaction of a sample to the Hepatitis B virus.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169115.v7.p2	LBHBSAG	HBsAg	integer, encoded value				0=Negative	HBsAg Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the presence of hepatitis B virus surface antigen.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169116.v7.p2	LBHCV1NT	HCV 1 NAT	integer, encoded value				0=Negative	HCV_1_NAT Requested results from any local serology panel, dictated by the local institution (not the project). Any of various amplification and detection strategies applied to detection of virus contamination in donor blood, specifically small, enveloped, positive sense single strand RNA virus in the family Flaviviridae.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169117.v7.p2	LBHBHCVAB	HCV Ab	integer, encoded value				0=Negative	HCV Ab Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the presence of a small, enveloped, positive sense single strand RNA virus in the family Flaviviridae and protein made by B lymphocytes in response to a foreign substance (antigen).
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169118.v7.p2	LBHIV1NT	HIV 1 NAT	integer, encoded value				0=Negative	HIV-1 NAT Requested results from any local serology panel, dictated by the local institution (not the project). Any of various amplification and detection strategies applied to detection of virus contamination in donor blood, specifically the virus isolated and recognized as the etiologic agent of AIDS.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169119.v7.p2	LBHIVAB	HIV I II Ab	integer, encoded value				0=Negative	HIV I/II Ab Requested results from any local serology panel, dictated by the local institution (not the project). Test performed using HIV antibodies produced by B-cells, human immunodeficiency virus (HIV) antibodies that react with HIV antigens.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169120.v7.p2	LBHIVO	HIV I II Plus O Antibody	integer, encoded value				0=Negative	HIV I/II Plus O Antibody Requested results from any local serology panel, dictated by the local institution (not the project). Test performed using HIV antibodies produced by B-cells, human immunodeficiency virus (HIV) antibodies that determine the amount of HIV-1 group O antibody present in a sample.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169121.v7.p2	LBPRRVDRL	PRR VDRL	integer, encoded value				0=Negative	PRR/VDRL Requested results from any local serology panel, dictated by the local institution (not the project). A variety of serologic tests for syphilis.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169122.v7.p2	LBRPR	RPR	integer, encoded value				0=Negative	RPR Requested results from any local serology panel, dictated by the local institution (not the project). Test performed to determine the antibodies produced by cellular damage caused by Treponema pallidum present in a sample.
+							1=Positive
+							96=Indeterminate
+							97=Not Performed
+phv00169123.v7.p2	MHABNWBC	Abnormal Wbc	integer, encoded value				0=No	Abnormal WBC Did the Donor have a history of Abnormal WBC at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169124.v7.p2	MHALS	Amyotropic Lateral Sclerosis	integer, encoded value				0=No	ALS Amyotropic Lateral Sclerosis (Lou Gehrig's Disease) Does the donor have a history of Amyotropic Lateral Sclerosis (Lou Gehrig's disease). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169125.v7.p2	MHALZDMT	Alzheimer's OR Dementia	integer, encoded value				0=No	Alzheimer's OR Dementia Dementia: Loss of intellectual abilities interfering with an individual's social and occupational functions. Causes include Alzheimer's disease, brain injuries, brain tumors, and vascular disorders. Alzheimer's Disease:A progressive, neurodegenerative disease characterized by loss of function and death of nerve cells in several areas of the brain leading to loss of cognitive function such as memory and language.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169126.v7.p2	MHALZHMR	Alzheimer's	integer, encoded value				0=No	Alzheimer's Disease Does the Donor have a History of Alzheimer's Disease. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169127.v7.p2	MHARTHTS	Arthritis	integer, encoded value				0=No	Arthritis An inflammatory process affecting a joint. Causes include infection, autoimmune processes, degenerative processes, and trauma. Signs and symptoms may include swelling around the affected joint and pain.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169128.v7.p2	MHASCITES	Ascites	integer, encoded value				0=No	Ascites Did the Donor have a history of Ascites at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169129.v7.p2	MHASTHMA	Asthma	integer, encoded value				0=No	Asthma A chronic respiratory disease manifested as difficulty breathing due to the narrowing of bronchial passageways.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169130.v7.p2	MHBCTINF	Bacterial Infections (including septicemia (bacteria in the blood), meningococcal disease, staphylococcal infection, streptococcus, sepsis)	integer, encoded value				0=No	Bacterial Infections An acute infectious disorder caused by gram positive or gram negative bacteria. Representative examples include pneumococcal, streptococcal, salmonella and meningeal infections.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169131.v7.p2	MHBLDDND	Past Blood Donations Denied	integer, encoded value				0=No	Has blood donation been denied in the past, specify below: Has the donor ever volunteered to donate blood and been denied? Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169132.v7.p2	MHBLDDNDR	Blood Donation Denial Reason	string					If Yes, Reason: If donor ever volunteered to donate blood and been denied, the reason. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+phv00169133.v7.p2	MHBLDOCNT	Received Blood Transfusion In Another Country	integer, encoded value				0=No	Blood transfusion received in another country Did the donor ever receive a blood transfusion in a country other than the United States. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169134.v7.p2	MHCANCER5	Cancer Diagnosis 5y	integer, encoded value				0=No	Cancer diagnosis within the preceding 5 years (regardless of treatment and location) Diagnosis of cancer within the preceding 5 years of death (regardless of treatment and location). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169135.v7.p2	MHCANCERC	Current Diagnosis Of Cancer	integer, encoded value				0=No	Current diagnosis of cancer (regardless of treatment and location) Did the donor have a diagnosis of cancer at time of death (regardless of treatment and location). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169136.v7.p2	MHCANCERNM	History Of Non Metastatic Cancer	integer, encoded value				0=No	Is there a history of non-metastatic cancer? Verification of whether the donor has ever been diagnosed with metastatic cancer as provided by the primary history source.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169137.v7.p2	MHCLLULTS	Cellulites	integer, encoded value				0=No	Cellulites Did the Donor have a history of Cellulites at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169138.v7.p2	MHCLRD	Chronic Lower Respiratory Disease	integer, encoded value				0=No	Chronic Lower Respiratory Disease Chronic Lower Respiratory Disease (CLRD) (chronic bronchitis, emphysema, asthma))
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169139.v7.p2	MHCOCAINE5	Cocaine Use In 5y	integer, encoded value				0=No	Cocaine use in the past 5 years Did the Donor use cocaine in the past 5 years. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169140.v7.p2	MHCOPD	Chronic Respiratory Disease (Chronic Obstructive Pulmonary Syndrome (COPD) OR Chronic Lower Respiratory Disease (CLRD) (chronic bronchitis, emphysema, asthma))	integer, encoded value				0=No	Chronic Respiratory Disease A chronic and progressive lung disorder characterized by the loss of elasticity of the bronchial tree and the air sacs, destruction of the air sacs wall, thickening of the bronchial wall, and mucous accumulation in the bronchial tree. The pathologic changes result in the disruption of the air flow in the bronchial airways. Signs and symptoms include shortness of breath, wheezing, productive cough, and chest tightness. The two main types of chronic obstructive pulmonary disease are chronic obstructive bronchitis and emphysema.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169141.v7.p2	MHCOUGHU	Unexplained Cough	integer, encoded value				0=No	Unexplained persistent cough and/or shortness of breath Does the history, physical examination, medical records, or autopsy report show unexplained persistent cough and/or shortness of breath. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169142.v7.p2	MHCVD	Cerebrovascular Disease (stroke, TIA, embolism, aneurysm, other circulatory disorder affecting the brain)	integer, encoded value				0=No	Cerebrovascular Disease Disorder resulting from inadequate blood flow in the vessels that supply the brain. Representative examples include cerebrovascular ischemia, cerebral embolism, and cerebral infarction.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169143.v7.p2	MHDLYSIS	Dialysis Treatment	integer, encoded value				0=No	Dialysis treatment (long term greater than 1 month @ 3 times per week) Did the donor have dialysis treatment for at least three times a week, for at lease one month prior to death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169144.v7.p2	MHDMNTIA	Dementia With Unknown Cause	integer, encoded value				0=No	Dementia with unknown cause (not from a previous CVA, infection, head trauma, or brain tumor) Does the Donor have a history of Dementia with unknown cause (not from a previous cerebralvascular accident, infection, head trauma, or brain tumor). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169145.v7.p2	MHDPRSSN	Major depression (unipolar depression, major depressive disorder)	integer, encoded value				0=No	Depression A mood disorder having a clinical course involving one or more episodes of serious psychological depression that last two or more weeks each, do not have intervening episodes of mania or hypomania, and are characterized by a loss of interest or pleasure in almost all activities and by some or all of disturbances of appetite, sleep, or psychomotor functioning, a decrease in energy, difficulties in thinking or making decisions, loss of self-esteem or feelings of guilt, and suicidal thoughts or attempts.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169146.v7.p2	MHDTND72H	In Detention Center 72h	integer, encoded value				0=No	Spending >72 hours in a correction/detention center in the last 12 months Did the Donor Spend >72 hours in a correction/detention center in the last 12 months. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169147.v7.p2	MHENCEPHA	Active Encephalitis	integer, encoded value				0=No	Active encephalitis At time of death, did the donor have active encephalitis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169148.v7.p2	MHEURO5	In Europe 5y Since 1980	integer, encoded value				0=No	Living in Europe for 5 or more years cumulatively since 1980 Did the Donor live in Europe for 5 or more years cumulatively since 1980. Provided by Primary History Source. Question asked as part of eligibility survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169149.v7.p2	MHFLU	Influenza (acute viral infection including avian influenza)	integer, encoded value				0=No	Influenza An acute viral infection of the respiratory tract, occurring in isolated cases, in epidemics, or in pandemics; it is caused by serologically different strains of viruses (influenza viruses) designated A, B, and C, has a 3-day incubation period, and usually lasts for 3 to 10 days. It is marked by inflammation of the nasal mucosa, pharynx, and conjunctiva; headache; myalgia; often fever, chills, and prostration; and occasionally involvement of the myocardium or central nervous system.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169150.v7.p2	MHFNGINF	Fungal Infections	integer, encoded value				0=No	Fungal Infections Did the Donor have a history of Fungal Infections at time of deathProvided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169151.v7.p2	MHFVRU	High Unexplained Fever	integer, encoded value				0=No	High Unexplained Fever Did the Donor have a history of High Unexplained Fever at time of death. Provided by Primary History Source. Question asked as part of an informaitonal eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169152.v7.p2	MHGENCMT	General Comments	string					General Comments Any comments the person filling out the eligibility form wishes to make concerning the eligibility of the Donor.
+phv00169153.v7.p2	MHGNRR12M	Gonorrhea Infection In 12m	integer, encoded value				0=No	Current infection or treatment in the last 12 months for gonorrhea At time of death did the Donor have an infection of or treatment in the last 12 months for gonorrhea. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169154.v7.p2	MHHEPBCT	Hepatitis B	integer, encoded value				0=No	Hepatitis B Was the donor living in close physical contact with someone in the last 12 months who has been diagnosed with Hepatitis B. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169155.v7.p2	MHHEPCCT	Hepatitis C	integer, encoded value				0=No	Hepatitis C Was the donor living in close physical contact with someone in the last 12 months who has been diagnosed with Hepatitis C. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169156.v7.p2	MHHEROIN	Heroin Use	integer, encoded value				0=No	Heroin use - EVER - by any route Did the Donor use Heroin - EVER - by any route. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169157.v7.p2	MHHGH	Received Human Growth Hormone	integer, encoded value				0=No	Received human growth hormone Has the Donor ever received human growth hormone. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169158.v7.p2	MHHIVCT	HIV	integer, encoded value				0=No	HIV Was the donor living in close physical contact with someone in the last 12 months who has been diagnosed with HIV. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169159.v7.p2	MHHIVNT	Not Able To Be Tested For HIV	integer, encoded value				0=No	Was not able to be tested for HIV infection because of hemodilution where no pre-transfused specimen is available Was the Donor ever not able to be tested for HIV infection because of hemodilution where no pre-transfused specimen was available. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169160.v7.p2	MHHMPHLIA	Hemophilia (Information)	integer, encoded value				0=No	Hemophilia and/or clotting disorders requiring treatment with human-derived clotting factors Did the Donor have Hemophilia and/or clotting disorders requiring treatment with human-derived clotting factors. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169161.v7.p2	MHHMPHLIAB	Hemophilia (Potential Exposure: Sexual Activity)	integer, encoded value				0=No	Hemophilia and/or clotting disorders requiring treatment with human-derived clotting factors Did the Donor have Hemophilia and/or clotting disorders requiring treatment with human-derived clotting factors. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169162.v7.p2	MHHRTATT	Heart attack, acute myocardial infarction, acute coronary syndrome	integer, encoded value				0=No	Heart attack, acute myocardial infarction, acute coronary syndrome Gross necrosis of the myocardium, as a result of interruption of the blood supply to the area, as in coronary thrombosis.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169163.v7.p2	MHHRTDIS	Ischemic Heart Disease (coronary artery disease (CAD), coronary heart disease, ischemic cardiomyopathy)	integer, encoded value				0=No	Ischemic Heart Disease (coronary artery disease (CAD), coronary heart disease, ischemic cardiomyopathy) A disorder of cardiac function caused by insufficient blood flow to the muscle tissue of the heart. The decreased blood flow may be due to narrowing of the coronary arteries, to obstruction by a thrombus, or less commonly, to diffuse narrowing of arterioles and other small vessels within the heart. Severe interruption of the blood supply to the myocardial tissue may result in necrosis of cardiac muscle (myocardial infarction).
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169164.v7.p2	MHHRTDISB	Heart Disease	integer, encoded value				0=No	Heart Disease (Idiopathic) Does the Donor have a history of Heart Disease (Idiopathic). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169165.v7.p2	MHHTN	Hypertension	integer, encoded value				0=No	Hypertension Pathological increase in blood pressure; a repeatedly elevated blood pressure exceeding 140 over 90 mmHg.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169166.v7.p2	MHINFLNE	Infected Lines	integer, encoded value				0=No	Infected Lines Did the Donor have a history of Infected Lines at time of death Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169167.v7.p2	MHIVDRG5	Intravenous Drug Abuse In 5y	integer, encoded value				0=No	Does the donor have a history of intravenous drug abuse in the last 5 years? Eligibility condition. Verification of whether the donor has a history of intravenous drug abuse in the last 5 years (prior to procedure start date/time) as provided by the primary history source.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169168.v7.p2	MHJAKOB	Creutzfeldt Jakob Relatives	integer, encoded value				0=No	Creutzfeldt-Jakob or risk factors/blood relatives being diagnosed Does the Donor have a history or risk factors for Creutzfeldt-Jakob disease or blood relatives who have been diagnosed with Creutzfeldt-Jakob disease. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169169.v7.p2	MHLAPTHU	Unexplained Lymphadenopathy	integer, encoded value				0=No	Unexplained lymphadenopathy lasting more than one month Does the history, physical examination, medical records, or autopsy report show unexplained lymphadenopathy lasting more than one month. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169170.v7.p2	MHLUPUS	Systemic Lupus	integer, encoded value				0=No	Systemic Lupus Does the Donor have a history of Systemic Lupus. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169171.v7.p2	MHLVRDIS	Liver Disease (liver abscess, failure, fatty liver syndrome, inherited liver insufficiency, acute/chronic hepatic insufficiency, necrobacillosis, rupture)	integer, encoded value				0=No	Liver Disease (liver abscess, failure, fatty liver syndrome, inherited liver insufficiency, acute/chronic hepatic insufficiency, necrobacillosis, rupture) A non-neoplastic or neoplastic disorder that affects the liver parenchyma and intrahepatic bile ducts. Representative examples of non-neoplastic disorders include hepatitis, cirrhosis, cholangitis, and polycystic liver disease. Representative examples of neoplastic disorders include hepatocellular adenoma, hepatocellular carcinoma, intrahepatic cholangiocarcinoma, lymphoma, and angiosarcoma.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169172.v7.p2	MHMENINA	Active Meningitis	integer, encoded value				0=No	Active meningitis At time of death, did the donor have active meningitis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169173.v7.p2	MHMS	Multiple Sclerosis	integer, encoded value				0=No	MS Multiple Sclerosis Does the Donor have a history of Multiple Sclerosis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169174.v7.p2	MHMSXWMA	Men Sex With Men (Information)	integer, encoded value				0=No	Men who have sex with men Is the Donor a male that has had sex with other men. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169175.v7.p2	MHMSXWMB	Men Sex With Men (Potential Exposure: Sexual Activity)	integer, encoded value				0=No	Men who have sex with men Is the Donor a male that has had sex with other men. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169176.v7.p2	MHNEPH	Nephritis, Nephrotic Syndrome and/or Nephrosis	integer, encoded value				0=No	Nephritis, Nephrotic Syndrome and/or Nephrosis Nephritis: Inflammation of the kidney. It is a focal or diffuse proliferative or destructive process which may involve the glomerulus, tubule, or interstitial renal tissue. Nephrotic Syndrome: A collection of symptoms that include severe edema, proteinuria, and hypoalbuminemia; it is indicative of renal dysfunction. Nephrosis: diseases of the kidney characterized by purely degenerative lesions of the renal tubules without an inflammatory component.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169177.v7.p2	MHNGHTSWT	Night Sweats	integer, encoded value				0=No	Night sweats Does the history, physical examination, medical records, or autopsy report show night sweats. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169178.v7.p2	MHNPHYS4W	No Physical Activity 4 Weeks	integer, encoded value				0=No	No physical activity defined as bed bound for greater than 4 weeks At the time of death, was the donor "bed bound" with no physical activity for greater than 4 weeks prior to date/time of donor collection. Provided by Primary History Source. Question asked as part of eligibility survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169179.v7.p2	MHNRTHEUR	Resided On Northern European Military Base	integer, encoded value				0=No	Resided on a Northern European military base for 6 months from 1980-1990 or elsewhere in Europe from 1980-1996 Did the Donor reside on a Northern European military base for 6 months from 1980-1990 or elsewhere in Europe from 1980-1996. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169180.v7.p2	MHOPNWND	Open Wounds	integer, encoded value				0=No	Open Wounds Did the Donor have a history of open wounds at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169181.v7.p2	MHOPPINF	Opportunistic Infections	integer, encoded value				0=No	Opportunistic infections Does the history, physical examination, medical records, or autopsy report show opportunistic infections. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169182.v7.p2	MHORGNTP	Received Tissue Organ Transplant	integer, encoded value				0=No	Received a human and/or animal tissue and/or organ transplant or xenotransplant. If yes, specify in comments below: Did the donor ever recieve a human and/or animal tissue and/or organ transplant or xenotransplant. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169183.v7.p2	MHOSTMYLTS	Osteomyelitis	integer, encoded value				0=No	Osteomyelitis Does the donor show signs of Osteomyelitis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169184.v7.p2	MHPLLABS	Prescription Pill Abuse	integer, encoded value				0=No	Prescription pill use that are not prescribed to the donor Does the Donor have a history of prescription pill use that are not prescribed to the donor. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169185.v7.p2	MHPNMIAB	Pneumonia	integer, encoded value				0=No	Pneumonia Did the Donor have a history of Pneumonia at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169186.v7.p2	MHPNMNIA	Pneumonia (acute respiratory infection affecting the lungs)	integer, encoded value				0=No	Pneumonia (acute respiratory infection affecting the lungs) An acute, acute and chronic, or chronic inflammation focally or diffusely affecting the lung parenchyma, due to infections (viruses, fungi, mycoplasma, or bacteria), treatment (e.g. radiation), or exposure (inhalation) to chemicals. Symptoms include cough, shortness of breath, fevers, chills, chest pain, headache, sweating, and weakness.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169187.v7.p2	MHPRCNP	Non Professional Piercing	integer, encoded value				0=No	Non-professional piercing Does the Donor have signs of non-professional piercing. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169188.v7.p2	MHPRKNSN	Parkinson's Disease	integer, encoded value				0=No	Parkinson's Disease A progressive degenerative disorder of the central nervous system characterized by loss of dopamine producing neurons in the substantia nigra and the presence of Lewy bodies in the substantia nigra and locus coeruleus. Signs and symptoms include tremor which is most pronounced during rest, muscle rigidity, slowing of the voluntary movements, a tendency to fall back, and a mask-like facial expression.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169189.v7.p2	MHPSBLDCLT	Positive Blood Cultures	integer, encoded value				0=No	Positive Blood Cultures Did the Donor have a history of Positive Blood Cultures at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169190.v7.p2	MHRA	Rheumatoid Arthritis	integer, encoded value				0=No	Rheumatoid Arthritis Does the Donor have a history of Rheumatoid Arthritis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169191.v7.p2	MHRBSANML	Bite From Animal With Rabies	integer, encoded value				0=No	Bite from an animal suspected to have rabies in the last 12 months Did the Donor have a bite from an animal suspected to have rabies in the last 12 months. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169192.v7.p2	MHREYES	Reyes Syndrome	integer, encoded value				0=No	Reyes Syndrome Does the Donor have a history of Reyes Syndrome. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169193.v7.p2	MHRNLFLR	Renal Failure	integer, encoded value				0=No	Renal Failure Acute or chronic condition, characterized by the inability of the kidneys to adequately filter the blood substances, resulting in uremia and electrolyte imbalances. Acute renal failure is usually associated with oliguria or anuria, hyperkalemia, and pulmonary edema. Chronic renal failure is irreversible and requires hemodialysis.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169194.v7.p2	MHSARS	Diagnosis Of SARS	integer, encoded value				0=No	Diagnosis of SARS or recent contact with someone who has it Does the donor have a diagnosis of SARS or recent contact with someone who has SARS. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169195.v7.p2	MHSCHZ	Schizophrenia	integer, encoded value				0=No	Schizophrenia A major psychotic disorder characterized by abnormalities in the perception or expression of reality. It affects the cognitive and psychomotor functions. Common clinical signs and symptoms include delusions, hallucinations, disorganized thinking, and retreat from reality.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169196.v7.p2	MHSCLRDRM	Scleroderma	integer, encoded value				0=No	Scleroderma Does the Donor have a history of scleroderma. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169197.v7.p2	MHSDRGABS	Signs Of Drug Abuse	integer, encoded value				0=No	Needle tracks and/or other signs of drug abuse Does the history, physical examination, medical records, or autopsy report show signs of drug abuse (venous or skin punctures). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169198.v7.p2	MHSEPSIS	Documented Sepsis	integer, encoded value				0=No	Documented Sepsis Did the Donor have a history of documented Sepsis at time of death? Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169199.v7.p2	MHSKNSPT	Spots On Skin	integer, encoded value				0=No	Blue or purple spots on the skin or mucus membranes (typical of Kaposi's sarcoma) Does the history, physical examination, medical records, or autopsy report show blue or purple spots on the skin or mucus membranes (symptom typical of Kaposi's sarcoma). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169200.v7.p2	MHSMLPXCT	Contact With Smallpox	integer, encoded value				0=No	Contact with someone who has recently had smallpox Did the donor have contact with someone who had smallpox. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169201.v7.p2	MHSMLPXVC	Recent Smallpox Vac	integer, encoded value				0=No	Recent smallpox vaccination Did the donor have a recent smallpox vaccination (working definition >8 weeks). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169202.v7.p2	MHSRC	Primary History Source	string					Primary History Source The Primary source of information from which the data on the case report forms was obtained. If the primary history source is marked Family Report, some of the information may have been reported from the medical record.
+phv00169203.v7.p2	MHSRCDSS	Sarcoidosis	integer, encoded value				0=No	Sarcoidosis Does the Donor have a history of Sarcoidosis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169204.v7.p2	MHSRGHM	Resident Of State Run Group Home	integer, encoded value				0=No	A resident of a state run group home at time of death Was the Donor a resident of a state run group home at time of death. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169205.v7.p2	MHSTD	Sexually Transmitted Diseases	integer, encoded value				0=No	Sexually transmitted diseases Does the history, physical examination, medical records, or autopsy report show sexually transmitted diseases. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169206.v7.p2	MHSTRDLT	Long Term Steroid Use	integer, encoded value				0=No	Long term steroid use Did the donor have a history of long term steroid use (not defined, working definition >1 year). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169207.v7.p2	MHSUBABSA	Drugs For Non Medical Use In 5y (Information)	integer, encoded value				0=No	Drug injection(s) (intravenous, intramuscular, and subcutaneous) for non-medical use in the last 5 years Did the Donor have drug injection(s) (intravenous, and/or intramuscular, and/or subcutaneous) for non-medical use in the last 5 years. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169208.v7.p2	MHSUBABSB	Drugs For Non Medical Use In 5y (Potential Exposure: Sexual Activity)	integer, encoded value				0=No	Drug injection(s) (intravenous, intramuscular, and subcutaneous) for non-medical use in the last 5 years Did the Donor have drug injection(s) (intravenous, and/or intramuscular, and/or subcutaneous) for non-medical use in the last 5 years. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169209.v7.p2	MHSXMDA	Sex For Money Or Drugs (Information)	integer, encoded value				0=No	Performed sexual acts in exchange for money or drugs Has the donor ever performed sexual acts in exchange for money or drugs. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169210.v7.p2	MHSXMDB	Sex For Money Or Drugs (Potential Exposure: Sexual Activity)	integer, encoded value				0=No	Performed sexual acts in exchange for money or drugs Has the donor ever performed sexual acts in exchange for money or drugs. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169211.v7.p2	MHSYPH12M	Syphilis Infection In 12m	integer, encoded value				0=No	Current infection or treatment in the last 12 months for syphilis At time of death, did the Donor have an infection of or had treatment in the last 12 months for syphilis. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169212.v7.p2	MHSZRSU	Unexplained Seizures	integer, encoded value				0=No	Unexplained seizures Did the Donor have a history of unexplained seizures Provided by Primary History Source. Question asked as part of eligibility survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169213.v7.p2	MHT1D	Diabetes mellitus type 1 (IDDM, formerly juvenile diabetes)	integer, encoded value				0=No	Diabetes mellitus type 1 (IDDM, formerly juvenile diabetes) A metabolic disorder characterized by abnormally high blood sugar levels due to diminished production of insulin or insulin resistance/desensitization.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169214.v7.p2	MHT2D	Diabetes mellitus type II (NIDDM, adult onset diabetes)	integer, encoded value				0=No	Diabetes mellitus type II (NIDDM, adult onset diabetes) A type of diabetes mellitus that is characterized by insulin resistance or desensitization and increased blood glucose levels. This is a chronic disease that can develop gradually over the life of a patient and can be linked to both environmental factors and heredity.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169215.v7.p2	MHTBHX	TB History	integer, encoded value				0=No	TB History Did the Donor have a history of TB. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169216.v7.p2	MHTEMPU	Unexplained Temperature	integer, encoded value				0=No	Unexplained temperature >=100.5 F (38.6 C) for more than 10 days Does the history, physical examination, medical records, or autopsy report show unexplained temperature >=100.5 F (38.6 C) for more than 10 days. Provided by Primary History Source. Question asked as part of eligibility survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169217.v7.p2	MHTTCMT	Tissue Transplant Comments	string					Comments: If the donor ever recieved a human and/or animal tissue and/or organ transplant or xenotransplant, the reason why. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+phv00169218.v7.p2	MHTTOO12M	Tattoos Done In 12m	integer, encoded value				0=No	Tattoos done in the last 12 months (professionally) if done in a state that does not regulate tattoo parlors Was the Donor professionally Tattooed in the last 12 months in a state that does not regulate tattoo parlors. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169219.v7.p2	MHTTOONP	Non Professional Tattoos	integer, encoded value				0=No	Non-professional tattoos Does the donor have signs of non-professional tattoos. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169220.v7.p2	MHTXCEXP	Exposure To Toxics	integer, encoded value				0=No	Exposure to toxic substances that may have led to chronic conditions Does the donor have any known exposure to toxic substances that may have led to chronic conditions. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169221.v7.p2	MHUK8096	In Uk 3m 1980 1996	integer, encoded value				0=No	Three or more months cumulatively spent in the UK any time from 1980-1996 Did the Donor spend three or more months cumulatively in the UK any time from 1980-1996. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169222.v7.p2	MHUREMIA	Uremia (Kidney Disorder)	integer, encoded value				0=No	Uremia (Kidney Disorder) MSH Definition: A clinical syndrome associated with the retention of renal waste products or uremic toxins in the blood. It is usually the result of RENAL INSUFFICIENCY. Most uremic toxins are end products of protein or nitrogen CATABOLISM, such as UREA or CREATININE. Severe uremia can lead to multiple organ dysfunctions with a constellation of symptoms.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169223.v7.p2	MHWKNSSU	Unexplained Weakness	integer, encoded value				0=No	Unexplained weakness and fatigue described as flu-like symptoms Did the donor show signs of unexplained weakness and fatigue described as flu-like symptoms within the last 3 months. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169224.v7.p2	MHWNVCT	History Of Contact With WNV	integer, encoded value				0=No	History of contact with someone who has West Nile Virus (WNV) (including animals) Does the Donor have a have a history of contact with a person or animal diagnosed West Nile Virus (WNV). Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169225.v7.p2	MHWNVHX	History Of WNV	integer, encoded value				0=No	History of West Nile Virus (WNV) Does the donor have a history of West Nile Virus (WNV), either suspected and/or diagnosed. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169226.v7.p2	MHWTLSUA	Unexplained Weight Loss (Information)	integer, encoded value				0=No	Unexplained weight loss Does the history, physical examination, medical records, or autopsy report show unexplained weight loss. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00169227.v7.p2	MHWTLSUB	Unexplained Weight Loss (Evidence of HIV)	integer, encoded value				0=No	Unexplained weight loss Does the history, physical examination, medical records, or autopsy report show unexplained weight loss. Provided by Primary History Source. Question asked as part of an informational eligibility criteria survey and not used to determine eligibility.
+							1=Yes
+							98=Not Reported
+							99=Unknown
+phv00282605.v1.p2	DTHSEASON	Season of Death	string					Season of death
+phv00282606.v1.p2	DTHTIME	Time of Death	string	hours:minutes				Hour and Minute of death
