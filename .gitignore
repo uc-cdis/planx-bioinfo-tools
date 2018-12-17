@@ -1,0 +1,6 @@
+# Python classes
+*.pyc
+
+# DbGap Submission User Credentials
+dbgap_auto_tool/credentials.json
+
