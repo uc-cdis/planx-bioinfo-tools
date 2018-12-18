@@ -4,3 +4,6 @@
 # DbGap Submission User Credentials
 dbgap_auto_tool/credentials.json
 
+# dbGap Submission output files and output logs
+dbgap_auto_tool/output_*
+dbgap_auto_tool/output/

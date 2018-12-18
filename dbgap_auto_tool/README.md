@@ -2,7 +2,8 @@
 
 ETL tool to automate dbGap data submission to Gen3 portal:
 	
-	run dbgap_to_gen3.py to convert dbGap data to tsv files in the correct format for submission to a Gen3 portal and then submits the files in the correct order
+	Run dbgap_to_gen3.py to convert dbGap data to tsv files in the correct format for submission
+	Then use the sheepdog API to submit files to Gen3 in the correct order
 
 Usage
 
