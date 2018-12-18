@@ -76,7 +76,7 @@ def submit(file, apiurl, project, authfile, output = "./output/"):
                 try:
                     print "Getting final response from " + project_url
                     itime = datetime.datetime.now()
-                    response = requests.put(project_url, data=data, headers={"content-type": "text/tab-separated-values", "Authorization": "bearer "+ auth.json()["access_token"]}, timeout=30)
+                    response = requests.put(project_url, data=data, headers={"content-type": "text/tab-separated-values", "Authorization": "bearer "+ auth.json()["access_token"]}, timeout=45)
                     etime = datetime.datetime.now()
                 except requests.exceptions.Timeout as errt:
                     print "THIS IS A TIMEOUT!!!!!!!! \nWe are going to retry with a smaller submission size!"
