@@ -41,33 +41,52 @@ def submit(file, apiurl, project, authfile, output = "./output/"):
     output = open(outfile, 'w')
 
     with open(file, 'r') as file:
-        total = -1
-        count = 0
         header = file.readline()
-        data = header
-        for line in file:
-            # submit the data at 100 records to prevent submitting too much data
-            if count > 100:
-                # submit the data you have and set data back to just the header
-                print "Getting response from " + project_url
-                itime = datetime.datetime.now()
-                response = requests.put(project_url, data=data, headers={"content-type": "text/tab-separated-values", "Authorization": "bearer "+ auth.json()["access_token"]})
-                etime = datetime.datetime.now()
+        max_count = 100
+        end_of_file_reached = False
+        while not end_of_file_reached:
+            data = header
+            total = -1
+            count = 0
+            Timeout = False
+            print "we are using a submission size of " + str(max_count)
+            file.seek(0)
+            for line in file:
+                if count > max_count:
+                    try:
+                        # submit the data you have and set data back to just the header
+                        print "Getting response from " + project_url
+                        itime = datetime.datetime.now()
+                        response = requests.put(project_url, data=data, headers={"content-type": "text/tab-separated-values", "Authorization": "bearer "+ auth.json()["access_token"]}, timeout=45)
+                        etime = datetime.datetime.now()
+                        print "Submitted (" + str(total) + "): " + str(response) + " in time: " + str(etime-itime)
+                    except requests.exceptions.Timeout as errt:
+                        print "THIS IS A TIMEOUT!!!!!!!! \n We are going to retry with a smaller submission size!"
+                        Timeout = True
+                        max_count = max_count / 2
+                        break
+                    output.write("Submitted (" + str(total) + "): " + str(response))
+                    output.write(response.text)
+                    data = header
+                    count = 0
+                data += line + "\n"
+                total += 1
+                count += 1
+            if not Timeout and count > 0:
+                try:
+                    print "Getting final response from " + project_url
+                    itime = datetime.datetime.now()
+                    response = requests.put(project_url, data=data, headers={"content-type": "text/tab-separated-values", "Authorization": "bearer "+ auth.json()["access_token"]}, timeout=30)
+                    etime = datetime.datetime.now()
+                except requests.exceptions.Timeout as errt:
+                    print "THIS IS A TIMEOUT!!!!!!!! \nWe are going to retry with a smaller submission size!"
+                    Timeout = True
+                    max_count = max_count / 2
+                    continue
                 print "Submitted (" + str(total) + "): " + str(response) + " " + str(etime-itime)
                 output.write("Submitted (" + str(total) + "): " + str(response))
                 output.write(response.text)
-                data = header
-                count = 0
-            data += line + "\n"
-            total += 1
-            count += 1
-        print "Getting final response from " + project_url
-        itime = datetime.datetime.now()
-        response = requests.put(project_url, data=data, headers={"content-type": "text/tab-separated-values", "Authorization": "bearer "+ auth.json()["access_token"]})
-        etime = datetime.datetime.now()
-        print "Submitted (" + str(total) + "): " + str(response) + " " + str(etime-itime)
-        output.write("Submitted (" + str(total) + "): " + str(response))
-        output.write(response.text)
+                end_of_file_reached = True
 
 if __name__ == '__main__':
     args = parser.parse_args()

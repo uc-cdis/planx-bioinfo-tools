@@ -3,17 +3,17 @@ import argparse
 
 from dictionaryutils import DataDictionary, dictionary
 from dbgap_to_tsv import parse_mapping, assign_values, write_tables
-from graph import Graph
+from datasimulator import graph
 from submitter import submit
 
 def initalize_dictionary(url):
 	dictionary.init(DataDictionary(url=url))
 
 def initalize_graph(dictionary, program, project):
-	graph = Graph(dictionary, program, project)
-	graph.generate_nodes_from_dictionary()
-	graph.construct_graph_edges()
-	return graph
+	built_graph = graph.Graph(dictionary, program, project)
+	built_graph.generate_nodes_from_dictionary()
+	built_graph.construct_graph_edges()
+	return built_graph
 
 def parse_arguments():
 	parser = argparse.ArgumentParser(description="Submit data to Gen3 Commons from DbGap dictionary data")
@@ -39,11 +39,11 @@ if __name__ == '__main__':
 	project = args.project
 
 	# initalize the graph object using the dictionary, program and project
-	graph = initalize_graph(dictionary, program, project)
+	built_graph = initalize_graph(dictionary, program, project)
 
 	# once the graph is initalized we then generate the nodes and construct the graph edges
-	graph.generate_nodes_from_dictionary()
-	graph.construct_graph_edges()
+	built_graph.generate_nodes_from_dictionary()
+	built_graph.construct_graph_edges()
 
 	print "\nwe are now generating the submission order\n"
 
@@ -75,12 +75,12 @@ if __name__ == '__main__':
 			print item
 			submission_order = []
 			# we establish a node object from the graph using a node from the node_list
-			node = graph.get_node_with_name(item)
+			node = built_graph.get_node_with_name(item)
 			# if the node is within the graph then we go through with finding the submission order
 			if node:
 				print "generating submission order for node: " + node.name
 				# generating the submission order
-				graph.generate_submission_order_path_to_node(node, submission_order)
+				submission_order = built_graph.generate_submission_order_path_to_node(node)
 				for z in submission_order:
 					print z.name
 				for x in submission_order:

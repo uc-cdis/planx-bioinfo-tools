@@ -7,3 +7,6 @@ dbgap_auto_tool/credentials.json
 # dbGap Submission output files and output logs
 dbgap_auto_tool/output_*
 dbgap_auto_tool/output/
+
+# dbGap Submission source requirement files
+dbgap_auto_tool/src/
