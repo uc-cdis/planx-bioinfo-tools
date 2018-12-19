@@ -33,6 +33,7 @@ data = ""
 count = 0
 total = -1
 nline = 0
+is_csv = False
 
 # create output folder if doesn't exist
 if not os.path.exists(args.output):
@@ -40,6 +41,9 @@ if not os.path.exists(args.output):
 
 # if there are multiple dots, splitext splits at the last one (so splitext('file.jpg.zip') gives ('file.jpg', '.zip')
 arg_filename = os.path.basename(args.file)
+if arg_filename.lower().endswith(".csv"):
+    print("CSV format file found, will be converted to TSV on the run.")
+    is_csv = True
 outfile = args.output + "submission_output_" + os.path.splitext(arg_filename)[0] + ".txt"
 i = 2
 while os.path.isfile(outfile):
@@ -49,6 +53,8 @@ output = open(outfile, 'w')
 
 with open(args.file, 'r') as file:
     for line in file:
+        if is_csv:
+            line = line.replace(",", "\t")
         if nline == 0:
             header = line
             data = header + "\r"
