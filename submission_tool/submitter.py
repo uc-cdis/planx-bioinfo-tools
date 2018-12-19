@@ -19,7 +19,7 @@ parser.add_argument('-o', '--output', default="./output/", help='output path to 
 args = parser.parse_args()
 
 # Get needed URLs
-token_url   = args.apiurl + "/user/credentials/api/access_token"
+token_url   = args.apiurl + "/user/credentials/cdis/access_token"
 graphql_url = args.apiurl + "/api/v0/submission/graphql/"
 project_url = args.apiurl + "/api/v0/submission/" + args.project.replace('-', '/', 1) + '/'
 
