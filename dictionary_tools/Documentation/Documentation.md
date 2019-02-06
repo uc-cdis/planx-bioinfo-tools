@@ -7,9 +7,9 @@
 ### nodes.tsv (input):
 
 * __<node\>:__ The name of the node, this can be either a new or existing node in the dictionary.
-* __<node_action\>:__ The action to be completed by `Modify.py`. This can be to either add, update, delete the node.
+* __<node_action\>:__ The action to be completed by `Modify.py`. This can be to either add, update, or delete the node.
 * __<title\>:__  Title of the node, the front facing name.
-* __<category\>:__ The name for the group of nodes, these are usually nodes that have a common concept like: Administrative, Index File, Biospecimen, Clinical, Data File and Notation.
+* __<category\>:__ The name for the group of nodes, these are usually nodes that have a common concept like: Administrative, Index File, Biospecimen, Clinical, Data File or Notation.
 * __<description\>:__ The detailed characterization of the node.
 * __<link_name\>:__ The name of the parent node the focal node will link to. This will use the backref version of the parent node name. **(Supports node groups)**
 * __<backref\>:__ The name of the focal node as it would be referenced by a linked child node.
@@ -63,7 +63,7 @@ The setup in Example 3 is the most common case, where a link is required from on
 * __<field_action\>:__ This will tell the program that the variable in the node is either being added, deleted, or updated.
 * __<field\>:__ The name of the field in the focal node.
 * __<description\>:__ The description of the field.
-* __<type\>:__ The class of expected value for the field. The classes can be values like, integer, string, enum, and boolean.
+* __<type\>:__ The class of expected value for the field. The classes can be values like, integer, string, enum, or boolean.
 * __<options_action\>:__ When updating a field that has enumerations, this value tells the program whether the user will add, delete or replace a list of enumerations. Replace will remove the entire existing list with the new list provided.
 * __<options\>:__ The list of enumerations that will either be replaced, deleted or added.
 * __<required\>:__ A boolean response (`TRUE`/`FALSE`) as to whether this field is required in the focal node.
