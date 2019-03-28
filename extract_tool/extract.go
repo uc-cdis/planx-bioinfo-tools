@@ -98,7 +98,7 @@ func nonZero(data string) bool {
 func writeMaster(masterOut map[chrompos][]sample) {
   // fmt.Printf("\nmasterOut: %v\n", masterOut)
   temp := convertOut(masterOut)
-  jout, err := json.Marshal(temp)
+  jout, err := json.MarshalIndent(temp, "", "  ")
   if err != nil {
     log.Fatal(err)
   }
@@ -113,7 +113,7 @@ func writeMaster(masterOut map[chrompos][]sample) {
 func writeFiltered(filteredOut map[chrompos][]sample) {
   // fmt.Printf("\nfilteredOut: %v\n", filteredOut)
   temp := convertOut(filteredOut)
-  jout, err := json.Marshal(temp)
+  jout, err := json.MarshalIndent(temp, "", "  ")
   if err != nil {
     log.Fatal(err)
   }
