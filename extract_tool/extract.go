@@ -9,6 +9,7 @@ import (
   // "io/ioutil"
   "strings"
   "strconv"
+  "encoding/json"
 )
 
 type chrompos struct {
@@ -95,12 +96,46 @@ func nonZero(data string) bool {
 }
 
 func writeMaster(masterOut map[chrompos][]sample) {
-  fmt.Printf("\nmasterOut: %v\n", masterOut)
-  // outFile := os.Create("unfiltered.tsv")
+  // fmt.Printf("\nmasterOut: %v\n", masterOut)
+  temp := convertOut(masterOut)
+  jout, err := json.Marshal(temp)
+  if err != nil {
+    log.Fatal(err)
+  }
+  f, err := os.Create("unfiltered.json")
+  if err != nil {
+    log.Fatal(err)
+  }
+  defer f.Close()
+  f.Write(jout)
 }
 
 func writeFiltered(filteredOut map[chrompos][]sample) {
-  fmt.Printf("\nfilteredOut: %v\n", filteredOut)
+  // fmt.Printf("\nfilteredOut: %v\n", filteredOut)
+  temp := convertOut(filteredOut)
+  jout, err := json.Marshal(temp)
+  if err != nil {
+    log.Fatal(err)
+  }
+  f, err := os.Create("filtered.json")
+  if err != nil {
+    log.Fatal(err)
+  }
+  defer f.Close()
+  f.Write(jout)
+}
+
+func convertOut(out map[chrompos][]sample) map[string]map[string]string {
+	jout := make(map[string]map[string]string)
+	for key, val := range out {
+		k := fmt.Sprintf("%v-%v", key.chrom, key.pos)
+		v := make(map[string]string)
+		for _, obj := range val {
+			v[obj.filename] = obj.sampleData
+		}
+		jout[k] = v
+	}
+	return jout
 }
 
 // loads in file which contains preferred list of chrompos
@@ -142,7 +177,7 @@ func isPreferred(pos chrompos, prefList []chrompos) bool {
 func processFiles(paths []string, prefList []chrompos) map[chrompos][]sample {
   masterOut := makeOutput() // get master out
   // iterate through all the files
-  
+
   // try to make this run in parallel
   for _, path := range paths {
     infile, err := os.Open(path) // open file
