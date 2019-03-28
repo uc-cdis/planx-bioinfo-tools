@@ -6,7 +6,7 @@ import (
   "fmt"
   "log"
   "io"
-  "io/ioutil"
+  // "io/ioutil"
   "strings"
   "strconv"
 )
@@ -26,11 +26,29 @@ func makeOutput() map[chrompos][]sample {
   return out
 }
 
-func main() {
-  files, err := ioutil.ReadDir("./input/cases/") // get list of input files
+func getInputPaths() []string {
+  name := fmt.Sprintf("input/%v", os.Args[1])
+  infile, err := os.Open(name)
   if err != nil {
     log.Fatal(err)
   }
+  r := bufio.NewReader(infile) // instantiate reader for file
+  var out []string
+  for {
+    line, err := r.ReadString('\n') // read in line by line
+    // fmt.Printf("%#v\n", line)
+    if err == io.EOF {
+      break
+    }
+    line = strings.Trim(line, " \n\r\t")
+    out = append(out, line)
+  }
+  // fmt.Printf("%#v\n", out)
+  return out
+}
+
+func main() {
+  files := getInputPaths()
   prefList := getPreferredList() // get array of preferred chrompos pairs
   // fmt.Printf("Here is preferred list: %v\n", prefList)
   masterOut := processFiles(files, prefList) // main processing pipeline
@@ -90,34 +108,24 @@ func writeFiltered(filteredOut map[chrompos][]sample) {
 // returns array of preferred chrompos pairs
 func getPreferredList() []chrompos {
   var out []chrompos
-  infile, err := os.Open("input/preferred.txt")
+  path := fmt.Sprintf("input/%v", os.Args[2])
+  infile, err := os.Open(path)
   if err != nil {
     log.Fatal(err)
   }
   r := bufio.NewReader(infile) // instantiate reader for file
-  // Readlines until we get past all the headers etc.
   for {
-    line, err := r.ReadString('\r') // read in line by line
-    // fmt.Printf("%#v\n\n", line)
-    if err != nil {
-      log.Fatal(err)
-    }
-    tmp := strings.Split(line, "\t")
-    if tmp[0] == "#CHROM" {
-      // fmt.Printf("\nBREAK\n")
-      break
-    }
-  }
-  // here begin reading at first record in table
-  for {
-    rec, err := r.ReadString('\r')
+    rec, err := r.ReadString('\n')
     if err == io.EOF {
       break
     }
-    recItems := strings.Split(rec, "\t") // split line into array
-    pref := chrompos{chrom: recItems[0], pos: recItems[1]} // extract chrom and pos
+    recItems := strings.Split(rec, ":") // split line into array
+    c := strings.Trim(recItems[0], " \n\t\r")
+    p := strings.Trim(recItems[1], " \n\t\r")
+    pref := chrompos{chrom: c, pos: p} // extract chrom and pos
     out = append(out, pref) // append to output preferred list
   }
+  // fmt.Printf("%#v", out)
   return out
 }
 
@@ -131,16 +139,19 @@ func isPreferred(pos chrompos, prefList []chrompos) bool {
   return false
 }
 
-func processFiles(files []os.FileInfo, prefList []chrompos) map[chrompos][]sample {
+func processFiles(paths []string, prefList []chrompos) map[chrompos][]sample {
   masterOut := makeOutput() // get master out
   // iterate through all the files
-  for _, finfo := range files {
-    path := fmt.Sprintf("input/cases/%s", finfo.Name()) // construct path to input file
+  
+  // try to make this run in parallel
+  for _, path := range paths {
     infile, err := os.Open(path) // open file
     if err != nil {
       log.Fatal(err)
     }
-    processFile(finfo.Name(), infile, prefList, masterOut)
+    tmp := strings.Split(path, "/")
+    name := tmp[len(tmp)-1]
+    processFile(name, infile, prefList, masterOut)
   }
   return masterOut
 }
@@ -148,6 +159,8 @@ func processFiles(files []os.FileInfo, prefList []chrompos) map[chrompos][]sampl
 func processFile(fname string, infile *os.File, prefList []chrompos, masterOut map[chrompos][]sample) {
   // fmt.Printf("Processing file: %v\n", fname)
   r := bufio.NewReader(infile) // instantiate reader for file
+
+  // could possibly try to run this in parallel also?? maybe not
   for {
     line, err := r.ReadString('\n') // read in line by line
     if err == io.EOF {
