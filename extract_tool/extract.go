@@ -223,12 +223,16 @@ func parallelProcessFiles(paths []string, prefList []chrompos) map[chrompos][]sa
   masterOut := makeOutput()
 
   var wg sync.WaitGroup
-
+  var mu sync.Mutex
   for _, path := range paths {
     wg.Add(1) // increment WaitGroup counter
     // launch goroutine to process one file
     go func(path string) {
       defer wg.Done()  // decrement the counter when the goroutine completes
+      
+      mu.Lock()
+      defer mu.Unlock()
+
       infile, err := os.Open(path)
       defer infile.Close()
       if err != nil {
