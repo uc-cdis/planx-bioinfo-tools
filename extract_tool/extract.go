@@ -11,6 +11,7 @@ import (
   "strconv"
   "encoding/json"
   "compress/gzip"
+  "sync"
 )
 
 type chrompos struct {
@@ -19,7 +20,7 @@ type chrompos struct {
 }
 
 type sample struct {
-  filename string
+  sampleName string
   sampleData string
 }
 
@@ -53,7 +54,8 @@ func main() {
   files := getInputPaths()
   prefList := getPreferredList() // get array of preferred chrompos pairs
   // fmt.Printf("Here is preferred list: %v\n", prefList)
-  masterOut := processFiles(files, prefList) // main processing pipeline
+  // masterOut := processFiles(files, prefList) // main processing pipeline
+  masterOut := parallelProcessFiles(files, prefList) // same as processFiles but processes files concurrently
   writeMaster(masterOut)
   writeTSV(masterOut, "unfiltered.tsv")
   filteredOut := filterOut(masterOut)
@@ -134,7 +136,7 @@ func convertOut(out map[chrompos][]sample) map[string]map[string]string {
 		k := fmt.Sprintf("%v-%v", key.chrom, key.pos)
 		v := make(map[string]string)
 		for _, obj := range val {
-			v[obj.filename] = obj.sampleData
+			v[obj.sampleName] = obj.sampleData
 		}
 		jout[k] = v
 	}
@@ -142,43 +144,43 @@ func convertOut(out map[chrompos][]sample) map[string]map[string]string {
 }
 
 func writeTSV(out map[chrompos][]sample, fname string) {
-    f, err := os.Create(fname)
-    if err != nil {
-        log.Fatal(err)
-        return
+  f, err := os.Create(fname)
+  if err != nil {
+    log.Fatal(err)
+    return
+  }
+  defer f.Close()
+  w := bufio.NewWriter(f)
+  sampleNames := make(map[string]string)
+  for _, val := range out {
+    for _, obj := range val {
+      sampleNames[obj.sampleName] = ""
     }
-    defer f.Close()
-    w := bufio.NewWriter(f)
-    filenames := make(map[string]string)
-	for _, val := range out {
-        for _, obj := range val {
-            filenames[obj.filename] = ""
-        }
+  }
+  w.WriteString("chrompos.")
+  i := 0
+  snames := make([]string, len(sampleNames))
+  for samName, _ := range sampleNames {
+    snames[i] = samName
+    w.WriteString("\t")
+    w.WriteString(samName)
+    i ++
+  }
+  w.WriteString("\n")
+  for key, val := range out {
+    k := fmt.Sprintf("%v-%v", key.chrom, key.pos)
+    v := make(map[string]string)
+    for _, obj := range val {
+    	v[obj.sampleName] = obj.sampleData
     }
-    w.WriteString("chrompos.")
-    i := 0
-    fnames := make([]string, len(filenames))
-    for filename, _ := range filenames {
-        fnames[i] = filename
-        w.WriteString("\t")
-        w.WriteString(filename)
-        i ++
+    w.WriteString(k)
+    for _, samName := range snames {
+      w.WriteString("\t")
+      w.WriteString(v[samName])
     }
     w.WriteString("\n")
-	for key, val := range out {
-		k := fmt.Sprintf("%v-%v", key.chrom, key.pos)
-		v := make(map[string]string)
-		for _, obj := range val {
-			v[obj.filename] = obj.sampleData
-		}
-        w.WriteString(k)
-        for _, filename := range fnames {
-            w.WriteString("\t")
-            w.WriteString(v[filename])
-        }
-        w.WriteString("\n")
-	}
-    w.Flush()
+  }
+  w.Flush()
 }
 
 // loads in file which contains preferred list of chrompos
@@ -217,25 +219,43 @@ func isPreferred(pos chrompos, prefList []chrompos) bool {
   return false
 }
 
-func processFiles(paths []string, prefList []chrompos) map[chrompos][]sample {
-  masterOut := makeOutput() // get master out
-  // iterate through all the files
+func parallelProcessFiles(paths []string, prefList []chrompos) map[chrompos][]sample {
+  masterOut := makeOutput()
 
-  // try to make this run in parallel
+  var wg sync.WaitGroup
+
   for _, path := range paths {
-    infile, err := os.Open(path) // open file
-    if err != nil {
-      log.Fatal(err)
-    }
-    tmp := strings.Split(path, "/")
-    name := tmp[len(tmp)-1]
-    processFile(name, infile, prefList, masterOut)
+    wg.Add(1) // increment WaitGroup counter
+    // launch goroutine to process one file
+    go func(path string) {
+      defer wg.Done()  // decrement the counter when the goroutine completes
+      infile, err := os.Open(path)
+      if err != nil {
+        log.Fatal(err)
+      }
+      processFile(infile, prefList, masterOut)
+    }(path)
   }
+  wg.Wait() // wait for all files to finish processing
   return masterOut
 }
 
-func processFile(fname string, infile *os.File, prefList []chrompos, masterOut map[chrompos][]sample) {
-  // fmt.Printf("Processing file: %v\n", fname)
+/*
+func processFiles(paths []string, prefList []chrompos) map[chrompos][]sample {
+  masterOut := makeOutput()
+
+  for _, path := range paths {
+    infile, err := os.Open(path)
+    if err != nil {
+      log.Fatal(err)
+    }
+    processFile(infile, prefList, masterOut)
+  }
+  return masterOut
+}
+*/
+
+func processFile(infile *os.File, prefList []chrompos, masterOut map[chrompos][]sample) {
   r := bufio.NewReader(infile) // instantiate reader for file
   zr, err := gzip.NewReader(r)
   if err != nil {
@@ -244,6 +264,7 @@ func processFile(fname string, infile *os.File, prefList []chrompos, masterOut m
 
   r = bufio.NewReader(zr)
 
+  samName := ""
   // could possibly try to run this in parallel also?? maybe not
   for {
     line, err := r.ReadString('\n') // read in line by line
@@ -260,13 +281,16 @@ func processFile(fname string, infile *os.File, prefList []chrompos, masterOut m
       fmt.Printf("%v\t", val)
     }
     */
+    if rec[0] == "#CHROM" && samName == "" {
+      samName = strings.Trim(rec[9], " \n\t\r\"")
+    }
     pos := chrompos{chrom: rec[0], pos: rec[1]}
     // fmt.Printf("pos: %v\n", pos)
     pref := isPreferred(pos, prefList)
     if pref {
       // fmt.Printf("found a match! %v\n", pos)
       data := getData(rec)
-      sam := sample{filename: fname, sampleData: data}
+      sam := sample{sampleName: samName, sampleData: data}
       inMaster := isInMaster(pos, masterOut)
       switch {
       case inMaster:
