@@ -230,6 +230,7 @@ func parallelProcessFiles(paths []string, prefList []chrompos) map[chrompos][]sa
     go func(path string) {
       defer wg.Done()  // decrement the counter when the goroutine completes
       infile, err := os.Open(path)
+      defer infile.Close()
       if err != nil {
         log.Fatal(err)
       }
