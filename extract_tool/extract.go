@@ -10,6 +10,7 @@ import (
   "strings"
   "strconv"
   "encoding/json"
+  "compress/gzip"
 )
 
 type chrompos struct {
@@ -54,8 +55,10 @@ func main() {
   // fmt.Printf("Here is preferred list: %v\n", prefList)
   masterOut := processFiles(files, prefList) // main processing pipeline
   writeMaster(masterOut)
+  writeTSV(masterOut, "unfiltered.tsv")
   filteredOut := filterOut(masterOut)
   writeFiltered(filteredOut)
+  writeTSV(filteredOut, "filtered.tsv")
 }
 
 func filterOut(masterOut map[chrompos][]sample) map[chrompos][]sample {
@@ -138,6 +141,46 @@ func convertOut(out map[chrompos][]sample) map[string]map[string]string {
 	return jout
 }
 
+func writeTSV(out map[chrompos][]sample, fname string) {
+    f, err := os.Create(fname)
+    if err != nil {
+        log.Fatal(err)
+        return
+    }
+    defer f.Close()
+    w := bufio.NewWriter(f)
+    filenames := make(map[string]string)
+	for _, val := range out {
+        for _, obj := range val {
+            filenames[obj.filename] = ""
+        }
+    }
+    w.WriteString("chrompos.")
+    i := 0
+    fnames := make([]string, len(filenames))
+    for filename, _ := range filenames {
+        fnames[i] = filename
+        w.WriteString("\t")
+        w.WriteString(filename)
+        i ++
+    }
+    w.WriteString("\n")
+	for key, val := range out {
+		k := fmt.Sprintf("%v-%v", key.chrom, key.pos)
+		v := make(map[string]string)
+		for _, obj := range val {
+			v[obj.filename] = obj.sampleData
+		}
+        w.WriteString(k)
+        for _, filename := range fnames {
+            w.WriteString("\t")
+            w.WriteString(v[filename])
+        }
+        w.WriteString("\n")
+	}
+    w.Flush()
+}
+
 // loads in file which contains preferred list of chrompos
 // extracts chrompos pairs
 // returns array of preferred chrompos pairs
@@ -194,6 +237,12 @@ func processFiles(paths []string, prefList []chrompos) map[chrompos][]sample {
 func processFile(fname string, infile *os.File, prefList []chrompos, masterOut map[chrompos][]sample) {
   // fmt.Printf("Processing file: %v\n", fname)
   r := bufio.NewReader(infile) // instantiate reader for file
+  zr, err := gzip.NewReader(r)
+  if err != nil {
+      fmt.Println(err)
+  }
+
+  r = bufio.NewReader(zr)
 
   // could possibly try to run this in parallel also?? maybe not
   for {
@@ -201,7 +250,10 @@ func processFile(fname string, infile *os.File, prefList []chrompos, masterOut m
     if err == io.EOF {
       break
     }
-    rec := strings.Split(line, "    ") // split line to get array corresponding to record
+    rec := strings.Split(line, "\t") // split line to get array corresponding to record
+    if len(rec) < 2 {
+        continue
+    }
     /*
     fmt.Printf("---%v---\n", len(rec))
     for _, val := range rec {
