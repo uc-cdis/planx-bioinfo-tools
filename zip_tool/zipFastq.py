@@ -34,7 +34,7 @@ def iterZip(sra_list):
     print len(sra_list)
 
     then = time.time()
-    Parallel(n_jobs=30, prefer='threads')(delayed(zip)(sra) for sra in sra_list[:30])
+    Parallel(n_jobs=30, prefer='threads')(delayed(zip)(sra) for sra in sra_list)
     now = time.time()
 
     dur = now - then
