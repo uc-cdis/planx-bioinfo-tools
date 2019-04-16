@@ -7,7 +7,7 @@ def main():
 
 def mkdir(dir):
     try:
-        os.mkdirs(dir)
+        os.mkdir(dir)
     except:
         pass
 
@@ -18,6 +18,7 @@ def getSRA():
 
 def zip(sra_list):
     '''Zips pairs of fastq files.'''
+    mkdir('zipOut')
     mkdir('zipOut/objects')
     log = open('zipOut/log.txt', 'w')
     for sra in sra_list:
