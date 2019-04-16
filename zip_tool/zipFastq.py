@@ -41,7 +41,7 @@ def iterZip(sra_list):
     log['time'] = dur
 
     with open('zipOut/log.json', 'w') as f:
-        f.write(json.dump(log, indent=2))
+        f.write(json.dumps(log, indent=2))
 
 def zip(sra):
     '''Zip the two fastq's corresponding to this sra into an archive.'''
