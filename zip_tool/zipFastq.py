@@ -46,7 +46,7 @@ def iterZip(sra_list):
 def zip(sra):
     '''Zip the two fastq's corresponding to this sra into an archive.'''
     zipfile = 'zipOut/objects/{}.zip'.format(sra)
-    with ZipFile(zipfile, 'w') as z:
+    with ZipFile(zipfile, 'w', allowZip64=True) as z:
         try:
             for i in [1,2]:
                 f = 'fastqDump/{}_{}.fastq.gz'.format(sra, i) #SRR6152696_2.fastq.gz
