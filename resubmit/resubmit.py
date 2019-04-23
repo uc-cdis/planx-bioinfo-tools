@@ -1,6 +1,6 @@
 import json, subprocess
 
-def main()
+def main():
     sras = getSRAs()
     for sra in sras:
         uploadFastq(sra)
@@ -18,6 +18,6 @@ def uploadFastq(sra):
     ]
 
     subprocess.call(cmd)
-    
+
 if __name__ == '__main__':
     main()
