@@ -1,188 +1,188 @@
 Field	Description	Type	Options	Codes	Node	Variable	suffix
-SUBJID	Subject ID, GTEx Public Donor ID	string			case	submitter_id	
-COHORT	Cohort	enum	Organ Donor (OPO)|Postmortem|Surgical Donor		case	cohort_id	
-SEX	Sex	enum	Male|Female	1|2	demographic	gender	
-AGE	Age	integer			demographic	age_range	
-RACE	Race	enum	Asian|Black or African American|White|American Indian or Alaska Native|Not Reported|Unknown	1|2|3|4|98|99	demographic	race	
-ETHNCTY	Ethnicity	enum	Not Hispanic or Latino|Hispanic or Latino|CEPH|Not Reported|Unknown	0|1|97|98|99	demographic	ethnicity	
-HGHT	Height	decimal			exposure	height	
-HGHTU	Height Units	string			NA	NA	
-WGHT	Weight	decimal			exposure	weight	
-WGHTU	Weight Units	string			NA	NA	
-BMI	BMI	decimal			exposure	bmi	
-INCEXC	Eligible For Study	string			case	eligibility	
-TRISCH	Ischemic Time	string			NA	NA	
-TRISCHD	Ischemic Time (Minutes)	decimal			body_storage	ischemic_time	
-TRCHSTIN	Time of Chest Incision	string			NA	NA	
-TRCHSTIND	Time of Chest Incision (Minutes)	decimal			body_storage	chest_incision_time	
-TRCCLMP	Time Cross Clamp Applied	string			NA	NA	
-TRCCLMPD	Time Cross Clamp Applied (Minutes)	decimal			body_storage	cross_clamp_time	
-TRORGNS	Received organ transplant	string			exposure	transplanted_organ	
-TRAMP	Amputation	enum	Below the knee amputation|Above the knee amputation		exposure	amputation_type	
-TRCRTMP	Core Body Temperature	decimal			death_information	body_temperature	
-TRCRTMPU	Core Body Temperature - Units of measurement	string			death_information	body_temperature_scale	
-TRCRTMPL	Core Body Temperature - Location of measurment	string			death_information	body_temperature_location	
-TRTPTREF	Tissue Recovery Time Point Reference	enum	Actual Death|Cross Clamp Applied|Presumed Death		case	index_time	
-TRVNTSR	On ventilator less than 24 hours	string			body_storage	on_ventilator_lt_24h	
-TRDNISCH	Total Ischemic time for a donor	decimal			body_storage	total_ischemic_time	
-DTHPRNINT	Death Pronounced Interval	string			death_record	pronounced_interval	
-DTHTPTREF	Death Time Point Reference	enum	Actual Death|Presumed Death		death_information	death_index_time	
-DTHATPSY	Autopsy Performed By Coroner Or ME	enum	No|Yes|Not Reported|Unknown	0|1|98|99	body_storage	performed_autopsy	
-DTHRFG	Body Refrigerated	enum	No|Yes|Not Reported|Unknown	0|1|98|99	body_storage	refrigerated_body	
-DTHCERT	Death Certificate Available	enum	No|Yes|Not Reported|Unknown	0|1|98|99	death_information	available_death_certificate	
-DTHVNT	Donor On A Ventilator Immediately Prior To Death	enum	No|Yes|Not Reported|Unknown	0|1|98|99	death_information	on_ventilator_immediate	
-DTHFUCOD	First Underlying Cause Of Death	string			death_information	first_cause_of_death	
-DTHHRDY	Hardy Scale	enum	Ventilator Case|Violent and fast death|Fast death of natural causes|Intermediate death|Slow death	0|1|2|3|4	death_information	hardy_scale	
-DTHCOD	Immediate Cause Of Death	string			death_information	immediate_cause_of_death	
-DTHFUCODDU	Interval Of Onset To Death For First Underlying Cause Unit	string			NA	NA	
-DTHFUCODD	Interval Of Onset To Death For First Underlying Cause	integer			death_information	hours_to_death_first_cause	
-DTHCODDU	Interval Of Onset To Death For Immediate Cause Unit	string			NA	NA	
-DTHCODD	Interval Of Onset To Death For Immediate Cause	integer			death_information	hours_to_death_immediate_cause	
-DTHLUCODDU	Interval Of Onset To Death For Last Underlying Cause Unit	string			NA	NA	
-DTHLUCODD	Interval Of Onset To Death For Last Underlying Cause	integer			death_information	hours_to_death_last_cause	
-DTHLUCOD	Last Underlying Cause Of Death	string			death_information	last_cause_of_death	
-DTHMNNR	Manner Of Death	string			death_information	manner_of_death	
-DTHRFGDU	Number Of Hours In Refrigeration Unit	string			NA	NA	
-DTHRFGD	Number Of Hours In Refrigeration	decimal			body_storage	hours_in_refrigerator	
-DTHDTRMN	Person Who Determined Date Time Of Death	string			death_information	determining_person	
-DTHPLCE	Place Of Death	string			death_information	place_of_death	
-DTHVNTDU	Time Interval On Ventilator Unit	string			NA	NA	
-DTHVNTD	Time Interval On Ventilator	integer			death_information	hours_in_ventilator	
-DTHWTNS	Witnessed Death	enum	No|Yes|Not Reported|Unknown	0|1|98|99	death_information	witnessed_death	
-DTHCLS	Classification of death based on ICD-10 coding	string			NA	NA	
-DTHTYP	Specific cause of death based on ICD-10 coding	string			NA	NA	
-DTHCAT	Category of death based on ICD-10 coding	string			NA	NA	
-DTHICD10	ICD-10 Code for cause of death	string			NA	NA	
-LBCMVTAB	CMV Total Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	cmv	
-LBEBVGAB	EBV IgG Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	ebv_lgg	
-LBEBVMAB	EBV IgM Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	ebv_lgm	
-LBHBCABM	HBcAb IgM	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hbcab_lgm	
-LBHBCABT	HBcAb Total	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hbcab_total	
-LBHBSAB	HBsAb	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hbsab	
-LBHBSAG	HBsAg	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hbsag	
-LBHCV1NT	HCV 1 NAT	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hcv_1nat	
-LBHBHCVAB	HCV Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hcv_ab	
-LBHIV1NT	HIV 1 NAT	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hiv_i	
-LBHIVAB	HIV I II Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hiv_i_ii	
-LBHIVO	HIV I II Plus O Antibody	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	hiv_i_ii_plus	
-LBPRRVDRL	PRR VDRL	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	prr_vdrl	
-LBRPR	RPR	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	serology	rpr	
-MHABNWBC	Abnormal Wbc	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	abnormal_wbc_history	
-MHALS	Amyotropic Lateral Sclerosis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	als_history	
-MHALZDMT	Alzheimer's OR Dementia	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	alzheimer_or_dementia_history	
-MHALZHMR	Alzheimer's	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	alzheimer_history	
-MHARTHTS	Arthritis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	arthritis_history	
-MHASCITES	Ascites	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	ascites_history	
-MHASTHMA	Asthma	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	asthma_history	
-MHBCTINF	Bacterial Infections (including septicemia (bacteria in the blood), meningococcal disease, staphylococcal infection, streptococcus, sepsis)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	bacterial_infections_history	
-MHBLDDND	Past Blood Donations Denied	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	denied_blood_donation	
-MHBLDDNDR	Blood Donation Denial Reason	string			primary_history	denied_blood_donation_reason	
-MHBLDOCNT	Received Blood Transfusion In Another Country	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	foreign_blood_transfusion	
-MHCANCER5	Cancer Diagnosis 5y	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	five_years_diagnosed_cancer	
-MHCANCERC	Current Diagnosis Of Cancer	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	current_diagnosed_cancer	
-MHCANCERNM	History Of Non Metastatic Cancer	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	diagnosed_metastatic_cancer	
-MHCLLULTS	Cellulites	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	cellulites_history	
-MHCLRD	Chronic Lower Respiratory Disease	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	clrd_history	
-MHCOCAINE5	Cocaine Use In 5y	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	five_years_used_cocaine	
-MHCOPD	Chronic Respiratory Disease (Chronic Obstructive Pulmonary Syndrome (COPD) OR Chronic Lower Respiratory Disease (CLRD) (chronic bronchitis, emphysema, asthma))	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	copd_clrd_history	
-MHCOUGHU	Unexplained Cough	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	persistent_cough_history	
-MHCVD	Cerebrovascular Disease (stroke, TIA, embolism, aneurysm, other circulatory disorder affecting the brain)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	cerebrovascular_disease_history	
-MHDLYSIS	Dialysis Treatment	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	treated_dialysis	
-MHDMNTIA	Dementia With Unknown Cause	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	dementia_history	
-MHDPRSSN	Major depression (unipolar depression, major depressive disorder)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	depression_history	
-MHDTND72H	In Detention Center 72h	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	correctional_center_history	
-MHENCEPHA	Active Encephalitis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	active_encephalitis_at_death	
-MHEURO5	In Europe 5y Since 1980	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	five_years_lived_europe	
-MHFLU	Influenza (acute viral infection including avian influenza)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	influenza_at_death	
-MHFNGINF	Fungal Infections	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	fugal_infection_at_death	
-MHFVRU	High Unexplained Fever	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	high_fever_at_death	
-MHGENCMT	General Comments	string			NA	NA	
-MHGNRR12M	Gonorrhea Infection In 12m	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	gonorrhea_at_death	
-MHHEPBCT	Hepatitis B	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hepatitis_b_contact	
-MHHEPCCT	Hepatitis C	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hepatitis_c_contact	
-MHHEROIN	Heroin Use	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	used_heroine	
-MHHGH	Received Human Growth Hormone	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	received_growth_hormones	
-MHHIVCT	HIV	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hiv_physical_contact	
-MHHIVNT	Not Able To Be Tested For HIV	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	tested_hiv	
-MHHMPHLIA	Hemophilia (Information)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hemophilia_history	
-MHHMPHLIAB	Hemophilia (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA	
-MHHRTATT	Heart attack, acute myocardial infarction, acute coronary syndrome	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	heart_attack_history	
-MHHRTDIS	Ischemic Heart Disease (coronary artery disease (CAD), coronary heart disease, ischemic cardiomyopathy)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	ischemic_heart_history	
-MHHRTDISB	Heart Disease	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	heart_disease_history	
-MHHTN	Hypertension	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hypertension_history	
-MHINFLNE	Infected Lines	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	infected_lines_at_death	
-MHIVDRG5	Intravenous Drug Abuse In 5y	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	five_years_intravenous_drug	
-MHJAKOB	Creutzfeldt Jakob Relatives	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	creutzfeldt_jakob_history	
-MHLAPTHU	Unexplained Lymphadenopathy	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	lymphadenopathy_history	
-MHLUPUS	Systemic Lupus	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	systemic_lupus_history	
-MHLVRDIS	Liver Disease (liver abscess, failure, fatty liver syndrome, inherited liver insufficiency, acute/chronic hepatic insufficiency, necrobacillosis, rupture)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	liver_disease_history	
-MHMENINA	Active Meningitis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	active_meningitis_at_death	
-MHMS	Multiple Sclerosis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	multiple_sclerosis	
-MHMSXWMA	Men Sex With Men (Information)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	homosexual_male	
-MHMSXWMB	Men Sex With Men (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA	
-MHNEPH	Nephritis, Nephrotic Syndrome and/or Nephrosis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	kidney_inflammation_history	
-MHNGHTSWT	Night Sweats	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	night_sweats_history	
-MHNPHYS4W	No Physical Activity 4 Weeks	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	no_physical_activity_at_death	
-MHNRTHEUR	Resided On Northern European Military Base	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	resided_northern_european_military_base	
-MHOPNWND	Open Wounds	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	open_wounds_at_death	
-MHOPPINF	Opportunistic Infections	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	opportunistic_infections_history	
-MHORGNTP	Received Tissue Organ Transplant	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	received_transplant	
-MHOSTMYLTS	Osteomyelitis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	osteomyelitis_history	
-MHPLLABS	Prescription Pill Abuse	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	abused_prescription_pill	
-MHPNMIAB	Pneumonia	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	pneumonia_at_death	
-MHPNMNIA	Pneumonia (acute respiratory infection affecting the lungs)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	pneumonia_history	
-MHPRCNP	Non Professional Piercing	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	used_piercing	
-MHPRKNSN	Parkinson's Disease	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	parkinson_history	
-MHPSBLDCLT	Positive Blood Cultures	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	positive_blood_at_death	
-MHRA	Rheumatoid Arthritis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	rheumatoid_arthritis_history	
-MHRBSANML	Bite From Animal With Rabies	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	bitten_rabid_animal	
-MHREYES	Reyes Syndrome	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	reyes_syndrome_history	
-MHRNLFLR	Renal Failure	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	renal_failure_history	
-MHSARS	Diagnosis Of SARS	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	sars_diagnosed_or_contact	
-MHSCHZ	Schizophrenia	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	schizophrenia_history	
-MHSCLRDRM	Scleroderma	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	scleroderma_history	
-MHSDRGABS	Signs Of Drug Abuse	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	drug_abuse_signs	
-MHSEPSIS	Documented Sepsis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	sepsis_at_death	
-MHSKNSPT	Spots On Skin	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	skin_spots_history	
-MHSMLPXCT	Contact With Smallpox	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	smallpox_contact	
-MHSMLPXVC	Recent Smallpox Vac	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	smallpox_vaccination	
-MHSRC	Primary History Source	string			primary_history	primary_history_source	
-MHSRCDSS	Sarcoidosis	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	sarcoidosis_history	
-MHSRGHM	Resident Of State Run Group Home	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	state_run_resident_at_death	
-MHSTD	Sexually Transmitted Diseases	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	sexually_transmitted_disease_history	
-MHSTRDLT	Long Term Steroid Use	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	used_long_term_steroid	
-MHSUBABSA	Drugs For Non Medical Use In 5y (Information)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	non_medical_drug_injection_history	
-MHSUBABSB	Drugs For Non Medical Use In 5y (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA	
-MHSXMDA	Sex For Money Or Drugs (Information)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	paid_sexual_acts	
-MHSXMDB	Sex For Money Or Drugs (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA	
-MHSYPH12M	Syphilis Infection In 12m	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	syphilis_at_death	
-MHSZRSU	Unexplained Seizures	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	seizures_history	
-MHT1D	Diabetes mellitus type 1 (IDDM, formerly juvenile diabetes)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	diabetes_i_history	
-MHT2D	Diabetes mellitus type II (NIDDM, adult onset diabetes)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	diabetes_ii_history	
-MHTBHX	TB History	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	tuberculosis_history	
-MHTEMPU	Unexplained Temperature	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	unexplained_temperature_history	
-MHTTCMT	Tissue Transplant Comments	string			primary_history	transplant_reason	
-MHTTOO12M	Tattoos Done In 12m	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	had_professional_tattoos	
-MHTTOONP	Non Professional Tattoos	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	had_non_professional_tattoos	
-MHTXCEXP	Exposure To Toxics	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	toxic_substances_exposure	
-MHUK8096	In Uk 3m 1980 1996	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	three_months_uk_presence	
-MHUREMIA	Uremia (Kidney Disorder)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	uremia_history	
-MHWKNSSU	Unexplained Weakness	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	weakness_history	
-MHWNVCT	History Of Contact With WNV	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	wnv_contact	
-MHWNVHX	History Of WNV	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	wnv_history	
-MHWTLSUA	Unexplained Weight Loss (Information)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	unexplained_weight_loss	
-MHWTLSUB	Unexplained Weight Loss (Evidence of HIV)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA	
-SUBJID	Subject ID, GTEx Public Donor ID	string			demographic	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			exposure	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			body_storage	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			death_information	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			death_record	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			serology	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			primary_history	subjects.submitter_id	
-SUBJID	Subject ID, GTEx Public Donor ID	string			demographic	submitter_id	_demo
-SUBJID	Subject ID, GTEx Public Donor ID	string			exposure	submitter_id	_expo
-SUBJID	Subject ID, GTEx Public Donor ID	string			body_storage	submitter_id	_storage
-SUBJID	Subject ID, GTEx Public Donor ID	string			death_information	submitter_id	_deinfo
-SUBJID	Subject ID, GTEx Public Donor ID	string			death_record	submitter_id	_derecord
-SUBJID	Subject ID, GTEx Public Donor ID	string			serology	submitter_id	_sero
-SUBJID	Subject ID, GTEx Public Donor ID	string			primary_history	submitter_id	_prihis
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			case	submitter_id
+COHORT	Cohort	enum	Organ Donor (OPO)|Postmortem|Surgical Donor		case	cohort_id
+SEX	Sex	enum	male|female	1|2	demographic	gender
+AGE	Age	string			demographic	age_range
+RACE	Race	enum	asian|black or african american|white|american indian or alaska native|not reported|Unknown	1|2|3|4|98|99	demographic	race
+ETHNCTY	Ethnicity	enum	not hispanic or latino|hispanic or latino|CEPH|not reported|Unknown	0|1|97|98|99	demographic	ethnicity
+HGHT	Height	number			demographic	height
+HGHTU	Height Units	string			NA	NA
+WGHT	Weight	number			demographic	weight
+WGHTU	Weight Units	string			NA	NA
+BMI	BMI	number			demographic	bmi
+INCEXC	Eligible For Study	boolean			case	eligibility
+TRISCH	Ischemic Time	string			NA	NA
+TRISCHD	Ischemic Time (Minutes)	integer			body_storage	ischemic_time
+TRCHSTIN	Time of Chest Incision	string			NA	NA
+TRCHSTIND	Time of Chest Incision (Minutes)	integer			body_storage	chest_incision_time
+TRCCLMP	Time Cross Clamp Applied	string			NA	NA
+TRCCLMPD	Time Cross Clamp Applied (Minutes)	integer			body_storage	cross_clamp_time
+TRORGNS	Received organ transplant	string			case	transplanted_organ
+TRAMP	Amputation	enum	Below the knee amputation|Above the knee amputation		case	amputation_type
+TRCRTMP	Core Body Temperature	number			death_record	body_temperature
+TRCRTMPU	Core Body Temperature - Units of measurement	string			death_record	body_temperature_scale
+TRCRTMPL	Core Body Temperature - Location of measurment	string			death_record	body_temperature_location
+TRTPTREF	Tissue Recovery Time Point Reference	enum	Actual Death|Cross Clamp Applied|Presumed Death		death_record	death_index_time
+TRVNTSR	On ventilator less than 24 hours	boolean	TRUE	On ventilator < 24 hours	body_storage	on_ventilator_lt_24h
+TRDNISCH	Total Ischemic time for a donor	integer			body_storage	total_ischemic_time
+DTHPRNINT	Death Pronounced Interval	string			death_record	death_pronounced_interval
+DTHTPTREF	Death Time Point Reference	enum	Actual Death|Presumed Death		death_record	death_index_time
+DTHATPSY	Autopsy Performed By Coroner Or ME	enum	No|Yes|Unknown|Unknown	0|1|98|99	body_storage	performed_autopsy
+DTHRFG	Body Refrigerated	enum	No|Yes|Unknown|Unknown	0|1|98|99	body_storage	refrigerated_body
+DTHCERT	Death Certificate Available	enum	No|Yes|Unknown|Unknown	0|1|98|99	death_record	available_death_certificate
+DTHVNT	Donor On A Ventilator Immediately Prior To Death	boolean	FALSE|TRUE|	0|1|	death_information	on_ventilator_immediate
+DTHFUCOD	First Underlying Cause Of Death	string			death_record	first_cause_of_death
+DTHHRDY	Hardy Scale	enum	Ventilator Case|Violent and fast death|Fast death of natural causes|Intermediate death|Slow death	0|1|2|3|4	death_record	hardy_scale
+DTHCOD	Immediate Cause Of Death	string			death_record	immediate_cause_of_death
+DTHFUCODDU	Interval Of Onset To Death For First Underlying Cause Unit	string			NA	NA
+DTHFUCODD	Interval Of Onset To Death For First Underlying Cause	integer			death_record	hours_to_death_first_cause
+DTHCODDU	Interval Of Onset To Death For Immediate Cause Unit	string			NA	NA
+DTHCODD	Interval Of Onset To Death For Immediate Cause	integer			death_record	hours_to_death_immediate_cause
+DTHLUCODDU	Interval Of Onset To Death For Last Underlying Cause Unit	string			NA	NA
+DTHLUCODD	Interval Of Onset To Death For Last Underlying Cause	integer			death_record	hours_to_death_last_cause
+DTHLUCOD	Last Underlying Cause Of Death	string			death_record	last_cause_of_death
+DTHMNNR	Manner Of Death	string			death_record	manner_of_death
+DTHRFGDU	Number Of Hours In Refrigeration Unit	string			NA	NA
+DTHRFGD	Number Of Hours In Refrigeration	integer			body_storage	hours_in_refrigerator
+DTHDTRMN	Person Who Determined Date Time Of Death	enum	Coroner/Medical Examiner (ME)|Physician|Other		death_record	determining_person
+DTHPLCE	Place Of Death	string			death_record	place_of_death
+DTHVNTDU	Time Interval On Ventilator Unit	string			NA	NA
+DTHVNTD	Time Interval On Ventilator	integer			death_record	hours_in_ventilator
+DTHWTNS	Witnessed Death	boolean	FALSE|TRUE|	0|1|	death_information	witnessed_death
+DTHCLS	Classification of death based on ICD-10 coding	string			NA	NA
+DTHTYP	Specific cause of death based on ICD-10 coding	string			NA	NA
+DTHCAT	Category of death based on ICD-10 coding	string			NA	NA
+DTHICD10	ICD-10 Code for cause of death	string			NA	NA
+LBCMVTAB	CMV Total Ab	number			laboratory_results	cmv1
+LBEBVGAB	EBV IgG Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBEBVMAB	EBV IgM Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHBCABM	HBcAb IgM	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHBCABT	HBcAb Total	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHBSAB	HBsAb	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHBSAG	HBsAg	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHCV1NT	HCV 1 NAT	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHBHCVAB	HCV Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHIV1NT	HIV 1 NAT	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHIVAB	HIV I II Ab	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBHIVO	HIV I II Plus O Antibody	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBPRRVDRL	PRR VDRL	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+LBRPR	RPR	enum	Negative|Positive|Indeterminate|Not Performed	0|1|96|97	NA	NA
+MHABNWBC	Abnormal Wbc	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	abnormal_wbc_history
+MHALS	Amyotropic Lateral Sclerosis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	als_history
+MHALZDMT	Alzheimer's OR Dementia	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	alzheimer_or_dementia_history
+MHALZHMR	Alzheimer's	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	alzheimer_history
+MHARTHTS	Arthritis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	arthritis_history
+MHASCITES	Ascites	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	ascites_history
+MHASTHMA	Asthma	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	asthma_history
+MHBCTINF	"Bacterial Infections (including septicemia (bacteria in the blood), meningococcal disease, staphylococcal infection, streptococcus, sepsis)"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	bacterial_infections_history
+MHBLDDND	Past Blood Donations Denied	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	denied_blood_donation
+MHBLDDNDR	Blood Donation Denial Reason	string			primary_history	denied_blood_donation_reason
+MHBLDOCNT	Received Blood Transfusion In Another Country	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	foreign_blood_transfusion
+MHCANCER5	Cancer Diagnosis 5y	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	five_years_diagnosed_cancer
+MHCANCERC	Current Diagnosis Of Cancer	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	current_diagnosed_cancer
+MHCANCERNM	History Of Non Metastatic Cancer	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	diagnosed_metastatic_cancer
+MHCLLULTS	Cellulites	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	cellulites_history
+MHCLRD	Chronic Lower Respiratory Disease	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	clrd_history
+MHCOCAINE5	Cocaine Use In 5y	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	five_years_used_cocaine
+MHCOPD	"Chronic Respiratory Disease (Chronic Obstructive Pulmonary Syndrome (COPD) OR Chronic Lower Respiratory Disease (CLRD) (chronic bronchitis, emphysema, asthma))"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	copd_clrd_history
+MHCOUGHU	Unexplained Cough	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	persistent_cough_history
+MHCVD	"Cerebrovascular Disease (stroke, TIA, embolism, aneurysm, other circulatory disorder affecting the brain)"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	cerebrovascular_disease_history
+MHDLYSIS	Dialysis Treatment	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	treated_dialysis
+MHDMNTIA	Dementia With Unknown Cause	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	dementia_history
+MHDPRSSN	"Major depression (unipolar depression, major depressive disorder)"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	depression_history
+MHDTND72H	In Detention Center 72h	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	correctional_center_history
+MHENCEPHA	Active Encephalitis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	active_encephalitis_at_death
+MHEURO5	In Europe 5y Since 1980	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	five_years_lived_europe
+MHFLU	Influenza (acute viral infection including avian influenza)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	influenza_at_death
+MHFNGINF	Fungal Infections	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	fugal_infection_at_death
+MHFVRU	High Unexplained Fever	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	high_fever_at_death
+MHGENCMT	General Comments	string			NA	NA
+MHGNRR12M	Gonorrhea Infection In 12m	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	gonorrhea_at_death
+MHHEPBCT	Hepatitis B	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hepatitis_b_contact
+MHHEPCCT	Hepatitis C	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	hepatitis_c_contact
+MHHEROIN	Heroin Use	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	used_heroine
+MHHGH	Received Human Growth Hormone	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	received_growth_hormones
+MHHIVCT	HIV	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	hiv_physical_contact
+MHHIVNT	Not Able To Be Tested For HIV	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	tested_hiv
+MHHMPHLIA	Hemophilia (Information)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	hemophilia_history
+MHHMPHLIAB	Hemophilia (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA
+MHHRTATT	"Heart attack, acute myocardial infarction, acute coronary syndrome"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	heart_attack_history
+MHHRTDIS	"Ischemic Heart Disease (coronary artery disease (CAD), coronary heart disease, ischemic cardiomyopathy)"	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	ischemic_heart_history
+MHHRTDISB	Heart Disease	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	heart_disease_history
+MHHTN	Hypertension	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	hypertension_history
+MHINFLNE	Infected Lines	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	infected_lines_at_death
+MHIVDRG5	Intravenous Drug Abuse In 5y	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	five_years_intravenous_drug
+MHJAKOB	Creutzfeldt Jakob Relatives	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	creutzfeldt_jakob_history
+MHLAPTHU	Unexplained Lymphadenopathy	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	lymphadenopathy_history
+MHLUPUS	Systemic Lupus	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	systemic_lupus_history
+MHLVRDIS	"Liver Disease (liver abscess, failure, fatty liver syndrome, inherited liver insufficiency, acute/chronic hepatic insufficiency, necrobacillosis, rupture)"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	liver_disease_history
+MHMENINA	Active Meningitis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	active_meningitis_at_death
+MHMS	Multiple Sclerosis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	multiple_sclerosis
+MHMSXWMA	Men Sex With Men (Information)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	homosexual_male
+MHMSXWMB	Men Sex With Men (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA
+MHNEPH	"Nephritis, Nephrotic Syndrome and/or Nephrosis"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	kidney_inflammation_history
+MHNGHTSWT	Night Sweats	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	night_sweats_history
+MHNPHYS4W	No Physical Activity 4 Weeks	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	no_physical_activity_at_death
+MHNRTHEUR	Resided On Northern European Military Base	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	resided_northern_european_military_base
+MHOPNWND	Open Wounds	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	open_wounds_at_death
+MHOPPINF	Opportunistic Infections	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	opportunistic_infections_history
+MHORGNTP	Received Tissue Organ Transplant	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	received_transplant
+MHOSTMYLTS	Osteomyelitis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	osteomyelitis_history
+MHPLLABS	Prescription Pill Abuse	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	abused_prescription_pill
+MHPNMIAB	Pneumonia	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	pneumonia_at_death
+MHPNMNIA	Pneumonia (acute respiratory infection affecting the lungs)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	pneumonia_history
+MHPRCNP	Non Professional Piercing	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	used_piercing
+MHPRKNSN	Parkinson's Disease	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	parkinson_history
+MHPSBLDCLT	Positive Blood Cultures	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	positive_blood_at_death
+MHRA	Rheumatoid Arthritis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	rheumatoid_arthritis_history
+MHRBSANML	Bite From Animal With Rabies	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	bitten_rabid_animal
+MHREYES	Reyes Syndrome	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	reyes_syndrome_history
+MHRNLFLR	Renal Failure	enum	No|Yes|Unknown |Unknown	0|1|98|99	primary_history	renal_failure_history
+MHSARS	Diagnosis Of SARS	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	sars_diagnosed_or_contact
+MHSCHZ	Schizophrenia	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	schizophrenia_history
+MHSCLRDRM	Scleroderma	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	scleroderma_history
+MHSDRGABS	Signs Of Drug Abuse	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	drug_abuse_signs
+MHSEPSIS	Documented Sepsis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	sepsis_at_death
+MHSKNSPT	Spots On Skin	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	skin_spots_history
+MHSMLPXCT	Contact With Smallpox	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	smallpox_contact
+MHSMLPXVC	Recent Smallpox Vac	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	smallpox_vaccination
+MHSRC	Primary History Source	string			primary_history	primary_history_source
+MHSRCDSS	Sarcoidosis	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	sarcoidosis_history
+MHSRGHM	Resident Of State Run Group Home	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	state_run_resident_at_death
+MHSTD	Sexually Transmitted Diseases	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	sexually_transmitted_disease_history
+MHSTRDLT	Long Term Steroid Use	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	used_long_term_steroid
+MHSUBABSA	Drugs For Non Medical Use In 5y (Information)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	primary_history	non_medical_drug_injection_history
+MHSUBABSB	Drugs For Non Medical Use In 5y (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA
+MHSXMDA	Sex For Money Or Drugs (Information)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	paid_sexual_acts
+MHSXMDB	Sex For Money Or Drugs (Potential Exposure: Sexual Activity)	enum	No|Yes|Not Reported|Unknown	0|1|98|99	NA	NA
+MHSYPH12M	Syphilis Infection In 12m	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	syphilis_at_death
+MHSZRSU	Unexplained Seizures	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	seizures_history
+MHT1D	"Diabetes mellitus type 1 (IDDM, formerly juvenile diabetes)"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	diabetes_i_history
+MHT2D	"Diabetes mellitus type II (NIDDM, adult onset diabetes)"	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	diabetes_ii_history
+MHTBHX	TB History	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	tuberculosis_history
+MHTEMPU	Unexplained Temperature	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	unexplained_temperature_history
+MHTTCMT	Tissue Transplant Comments	string			primary_history	transplant_reason
+MHTTOO12M	Tattoos Done In 12m	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	had_professional_tattoos
+MHTTOONP	Non Professional Tattoos	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	had_non_professional_tattoos
+MHTXCEXP	Exposure To Toxics	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	toxic_substances_exposure
+MHUK8096	In Uk 3m 1980 1996	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	three_months_uk_presence
+MHUREMIA	Uremia (Kidney Disorder)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	uremia_history
+MHWKNSSU	Unexplained Weakness	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	weakness_history
+MHWNVCT	History Of Contact With WNV	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	wnv_contact
+MHWNVHX	History Of WNV	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	wnv_history
+MHWTLSUA	Unexplained Weight Loss (Information)	enum	No|Yes|Unknown|Unknown	0|1|98|99	primary_history	unexplained_weight_loss
+MHWTLSUB	Unexplained Weight Loss (Evidence of HIV)	enum	No|Yes|Unknown|Unknown	0|1|98|99	NA	NA
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			demographic	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			exposure	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			body_storage	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			death_information	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			death_record	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			serology	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			primary_history	subjects.submitter_id
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			demographic	submitter_id	_demo
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			exposure	submitter_id	_expo
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			body_storage	submitter_id	_storage
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			death_information	submitter_id	_deinfo
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			death_record	submitter_id	_derecord
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			serology	submitter_id	_sero
+SUBJID	"Subject ID, GTEx Public Donor ID"	string			primary_history	submitter_id	_prihis
