@@ -78,10 +78,10 @@ def convert_dict(filename):
             else:
                 idx = [i for i, j in enumerate(headers) if j == 'Coded values'][0]
                 if '=' in columns[idx]:
-                    values['Coded values'] += "|" + columns[idx].split('=')[1]
-                    values['Codes'] += "|" + columns[idx].split('=')[0]
+                    values['Coded values'] += "," + columns[idx].split('=')[1]
+                    values['Codes'] += "," + columns[idx].split('=')[0]
                 else:
-                    values['Coded values'] += "|" + columns[idx]
+                    values['Coded values'] += "," + columns[idx]
 
 
 if __name__ == "__main__":
