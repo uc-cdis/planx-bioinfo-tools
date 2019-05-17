@@ -8,11 +8,9 @@ category: data_file
 program: '*'
 project: '*'
 description: >
-  Data file containing aligned reads that are generated internally by the GDC.
+  Data file containing aligned reads that are generated internally.
 additionalProperties: false
 submittable: false
-downloadable: true
-previous_version_downloadable: false
 validators: null
 
 systemProperties:
@@ -62,6 +60,7 @@ uniqueKeys:
 
 required:
   - submitter_id
+  - type
   - file_name
   - file_size
   - md5sum
@@ -133,7 +132,16 @@ properties:
     type: integer
 
   platform:
-    $ref: "read_group.yaml#/properties/platform"
+    term:
+      $ref: "_terms.yaml#/platform"
+    enum:
+      - Illumina
+      - SOLiD
+      - LS454
+      - Ion Torrent
+      - Complete Genomics
+      - PacBio
+      - Other
 
   proportion_base_mismatch:
     term:
