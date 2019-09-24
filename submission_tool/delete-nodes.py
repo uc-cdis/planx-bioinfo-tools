@@ -7,6 +7,9 @@ import os
 CHUNK_SIZE = 20
 NUM_ENTITIES = 99999999
 
+# delete_nodes automates the process of deleting nodes from a project. The 'nodes' parameter is a list,
+# and the nodes in the list must be ordered from bottom of tree -> top of tree. This ordering is also the
+# reverse of the order in which the nodes are originally submitted.
 def delete_nodes(nodes, **kwargs):
     api_url = kwargs["api_url"]
     api_credentials = kwargs["api_credentials"]
@@ -33,7 +36,7 @@ def delete_nodes(nodes, **kwargs):
         # Remove all entities from one node by chunks
         entities = [entity["id"] for entity in data["data"][node]]
         if len(entities) == 0:
-            print("INFO: Node is already empty: '" + node + "'")
+            print("INFO: Node is already empty: '{}' \t({})".format(node, project))
 
         last = len(entities) - 1
         chunked_entities = []
@@ -45,21 +48,21 @@ def delete_nodes(nodes, **kwargs):
                 response = requests.delete(url, headers={"Authorization": "bearer " + auth.json()["access_token"]})
                 
                 if response.status_code == 200:
-                    print("Deleted " + len(chunked_entities) + " records from " + node)
+                    print("Deleted {} entities from node '{}' \t({})".format(len(chunked_entities), node, project))
                 elif response.status_code == 400: 
-                    print("ERR: while deleting records from node '" + node + "', encountered a 400-User Error message. Has this node already been deleted?")
+                    print("ERR: 400-User Error while deleting entities from node '{}' \t({})".format(node, project))
                     print("URL: " + url)
                     print(response.text)
                 elif response.status_code == 403: 
-                    print("ERR: while deleting records from node '" + node + "', encountered a 403-Unauthorized message. Are your api credentials valid?")
+                    print("ERR: 403-Unauthorized while deleting entities from node '{}' \t({})".format(node, project))
                     print("URL: " + url)
                     print(response.text)
                 elif response.status_code == 404: 
-                    print("ERR: while deleting records from node '" + node + "', encountered a 404-File Not Found message. Is the node spelled correctly? Check the submission order.")
+                    print("ERR: 404-File Not Found while deleting entities from node '{}' \t({}).".format(node, project))
                     print("URL: " + url)
                     print(response.text)
                 else:
-                    print("ERR: while deleting records from node '" + node + "', encountered an unknown error:")
+                    print("ERR while deleting records from node '{}' \t({}):".format(node, project))
                     print("URL: " + url)
                     print(response.text)
 
