@@ -7,11 +7,6 @@ import os
 CHUNK_SIZE = 20
 NUM_ENTITIES = 99999999
 
-SAFE_URL_WHITELIST = [
-    "https://qa-anvil.planx-pla.net",
-    "https://qa-dcp.planx-pla.net"
-]
-
 # delete_nodes automates the process of deleting nodes from a project. The 'nodes' parameter is a list,
 # and the nodes in the list must be ordered from bottom of tree -> top of tree. This ordering is also the
 # reverse of the order in which the nodes are originally submitted.
@@ -20,10 +15,6 @@ def delete_nodes(nodes, **kwargs):
     api_credentials = kwargs["api_credentials"]
     project = kwargs["project"]
     dry_run = kwargs.get("dry_run", False)
-
-    if api_url not in SAFE_URL_WHITELIST:
-        print("ERR: URL '{}' not in safe url whitelist.".format(api_url))
-        return
 
     # Get needed URLs
     token_url   = api_url + "/user/credentials/cdis/access_token"
@@ -59,23 +50,22 @@ def delete_nodes(nodes, **kwargs):
                 if dry_run:
                     response = requests.get(url, headers={"Authorization": "bearer " + auth.json()["access_token"]})
                 else:
-                    pass
-                    #response = requests.delete(url, headers={"Authorization": "bearer " + auth.json()["access_token"]})
-                
+                    response = requests.delete(url, headers={"Authorization": "bearer " + auth.json()["access_token"]})
+
                 if response.status_code == 200:
                     if dry_run:
                         print("DRY RUN: Would have deleted {} entities from node '{}' \t({}) \t({})".format(len(chunked_entities), node, project, api_url))
                     else:
                         print("Deleted {} entities from node '{}' \t({}) \t({})".format(len(chunked_entities), node, project, api_url))
-                elif response.status_code == 400: 
+                elif response.status_code == 400:
                     print("ERR: 400-User Error while deleting entities from node '{}' \t({}) \t({})".format(node, project, api_url))
                     print("URL: " + url)
                     print(response.text)
-                elif response.status_code == 403: 
+                elif response.status_code == 403:
                     print("ERR: 403-Unauthorized while deleting entities from node '{}' \t({}) \t({})".format(node, project, api_url))
                     print("URL: " + url)
                     print(response.text)
-                elif response.status_code == 404: 
+                elif response.status_code == 404:
                     print("ERR: 404-File Not Found while deleting entities from node '{}' \t({}) \t({}).".format(node, project, api_url))
                     print("URL: " + url)
                     print(response.text)
@@ -86,7 +76,7 @@ def delete_nodes(nodes, **kwargs):
                 total += len(chunked_entities)
                 chunked_entities = []
                 # Every 1000 requests, refresh the auth token (which expires after a certain amount of time.)
-                if total % 1000 == 0: 
+                if total % 1000 == 0:
                     auth = requests.post(token_url, json=keys)
 
 
