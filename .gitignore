@@ -10,3 +10,7 @@ dbgap_auto_tool/output/
 
 # dbGap Submission source requirement files
 dbgap_auto_tool/src/
+
+# mac dot files
+.DS_store
+.DS_Store
