@@ -8,7 +8,7 @@ python dcc_to_gen3.py -m test_manifest_SGV.1587401968197.tar.gz
 
 Arguments:
     - manifest(str, required): The manifest downloaded from the DCC portal,e.g., "/Users/christopher/Documents/Notes/ICGC/dcc_manifest.pdc.1581529402015.sh".
-    - indexd(str, not required): If a file already exists with the data commons indexd records, provide the path to that file. Otherwise, if not provided, the indexd database will be queried until it collects all file records.
+    * Note: Script should also be able to handle extracting .tar.gz files originally downloaded from dcc.icgc.org.
 
 Use the generated manifest with the gen3-client, downloaded here: https://github.com/uc-cdis/cdis-data-client/releases/latest
 
